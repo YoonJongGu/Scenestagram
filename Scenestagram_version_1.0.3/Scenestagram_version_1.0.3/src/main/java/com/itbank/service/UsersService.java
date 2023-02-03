@@ -74,4 +74,8 @@ public class UsersService {
 		
 		return usersDAO.countUserEmailPhoneNumber(param);
 	}
+
+	public UsersDTO getNickNameUser(String nick_name) {
+		return usersDAO.selectOneNickName(nick_name);
+	}
 }

@@ -39,4 +39,6 @@ public interface UsersDAO {
 
 	int countUserEmailPhoneNumber(HashMap<String, Object> param);
 
+	UsersDTO selectOneNickName(String nick_name);
+
 }

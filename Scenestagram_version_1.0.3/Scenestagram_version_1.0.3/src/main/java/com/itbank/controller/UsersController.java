@@ -25,7 +25,6 @@ import com.itbank.service.UsersService;
 public class UsersController {
 	
 	@Autowired private UsersService usersService;
-	@Autowired private UserProfile userProfile;
 	@Autowired private BCryptPasswordEncoder pwdEncoder;
 
 	private static final Logger logger = LoggerFactory.getLogger(UsersController.class); 
@@ -95,7 +94,7 @@ public class UsersController {
 	public void modify(UsersDTO dto,HttpSession session) {
 		int row = usersService.infoModify(dto);
 		System.out.println(row ==  0 ? "회원정보 수정실패" : "회원정보 수정성공");
-		session.setAttribute("login", usersService.getUser(dto.getIdx()));
+		session.setAttribute("login", usersService.getNickNameUser(dto.getNick_name()));
 	}
 	//개인정보 수정 end
 	
