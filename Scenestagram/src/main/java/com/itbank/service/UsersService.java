@@ -52,4 +52,12 @@ public class UsersService {
 	public int replacePw(UsersDTO dto) {
 		return usersDAO.updatePw(dto);
 	}
+
+	public int getUserNickName(String nickName) {
+		return usersDAO.countUserNickName(nickName);
+	}
+
+	public int getUserPhoneNumber(String phoneNumber) {
+		return usersDAO.countUserPhoneNumber(phoneNumber);
+	}
 }

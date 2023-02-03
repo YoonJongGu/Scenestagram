@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style>
 /*모든요소의 기본 마진 패딩, 사이징 초기화*/
 * {
@@ -233,25 +234,22 @@ display: none;
     margin-bottom: 6px;
 }
 
-#gender > div{
-	display: flex;
-	align-items: center;
+/* 성별 선택 */
+select[name="gender"]{
+    width: 100%;
+    height: 38px;
+    padding: 9px 0 7px 8px;
+    border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+    border-radius: 3px;
+    margin-bottom: 6px;
 }
 
-#gender > div > input{
-	height: 21px;
-	margin-bottom: 0px;
-	
+/* err문구 div */
+.login__input > div{
+	color: red;
+	font-size: 12px;
+	margin-right: auto	
 }
-
-#gender > div > span{
-	font-size: 15px;
-    color: black;
-    width: 63px;
-    display: flex;
-    align-items: center;
-}
-
 
 </style>
 </head>

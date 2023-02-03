@@ -29,5 +29,9 @@ public interface UsersDAO {
 
 	int updatePw(UsersDTO dto);
 
+	int countUserNickName(String nickName);
+
+	int countUserPhoneNumber(String phoneNumber);
+
 
 }
