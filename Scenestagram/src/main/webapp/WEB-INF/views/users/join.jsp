@@ -51,11 +51,11 @@
 	        
 	        success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
 	            if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디
-	            	flag = true
+	            	phone_number_flag = true
 	            	$('.phone_number_err').text('');
 	            } 
 	            else { // cnt가 1일 경우 -> 이미 존재하는 아이디
-	            	flag = false
+	            	phone_number_flag = false
 	               $('.phone_number_err').text('이미 사용중인 전화번호입니다.');
 	            }
 	        },
