@@ -48,7 +48,7 @@
 								영문,특수기호( ! $ @ % )의  <br>
 								조합을 포함해야 합니다.
 							</div>
-							<input type="hidden" value="" name="phone_number">
+							<input type="hidden" name="phone_number" value="">
 							<input type="password" name="pw_sub" placeholder="새 비밀번호 입력" required>
 							<input type="password" name="pw" placeholder="새 비밀번호  다시 입력" required>
 							<input type="submit" value="비밀번호 재설정">
@@ -72,8 +72,8 @@
 <script>
 	const ph_num = document.querySelector('input[name="ph_number"]')
 	
-	ph_num.onkeypress = function(event){
-		const phone_number = document.querySelector('input[name="phone_number]')
+	ph_num.onkeyup = function(event){
+		const phone_number = document.querySelector('input[name="phone_number"]')
 		phone_number.value = event.target.value
 	}
 	
