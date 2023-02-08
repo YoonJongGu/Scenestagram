@@ -27,5 +27,7 @@ public interface UsersDAO {
 
 	String findId(UsersDTO dto);
 
+	int updatePw(UsersDTO dto);
+
 
 }

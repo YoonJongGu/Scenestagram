@@ -112,5 +112,13 @@ public class UsersController {
 		
 		return mav;
 	}
+	//아이디 찾기 end
+	
+	//비밀번호 변경
+	@GetMapping("/replacePw")
+	public String replacePw(UsersDTO dto) {
+		int flag = usersService.replacePw(dto);
+		return "redirect:/";
+	}
 	
 }
