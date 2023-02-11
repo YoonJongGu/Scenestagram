@@ -66,6 +66,7 @@ public class AjaxController {
 		return userService.getUserNickName(nick_name);
 	}
 	
+	// 전화번호 중복확인
 	@PostMapping("/phoneNumberCheck")
 	public int phoneNumberCheck(String phoneNumber) {
 		return userService.getUserPhoneNumber(phoneNumber);
