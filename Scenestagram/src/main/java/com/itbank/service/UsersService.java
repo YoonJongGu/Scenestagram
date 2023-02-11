@@ -60,4 +60,8 @@ public class UsersService {
 	public int getUserPhoneNumber(String phoneNumber) {
 		return usersDAO.countUserPhoneNumber(phoneNumber);
 	}
+	
+	public List<UsersDTO> usersSearch(String search) {
+		return usersDAO.usersSearch(search);
+	}
 }

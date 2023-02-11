@@ -33,5 +33,7 @@ public interface UsersDAO {
 
 	int countUserPhoneNumber(String phoneNumber);
 
+	List<UsersDTO> usersSearch(String search);
+
 
 }

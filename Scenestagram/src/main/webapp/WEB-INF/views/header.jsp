@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link type="text/css" rel="stylesheet" href="${cpath }/resources/css/testStyle.css">
 
 <style>
 /*모든요소의 기본 마진 패딩, 사이징 초기화*/

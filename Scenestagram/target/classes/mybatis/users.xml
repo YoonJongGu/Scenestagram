@@ -98,4 +98,9 @@
 	<select id="countUserPhoneNumber" parameterType="string" resultType="int">
 		SELECT COUNT(*) FROM users WHERE phone_number= #{phoneNumber}
 	</select>
+	
+	<!-- 검색 -->
+	<select id="usersSearch" parameterType="string" resultType="users">
+		select * from users where introduce like '%${search}%'
+	</select>
 </mapper>
