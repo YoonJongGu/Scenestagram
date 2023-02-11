@@ -99,6 +99,7 @@ public class AjaxController {
 
 		return row;
 	}
+
 	// 아이디 중복확인
 	@PostMapping("/nickNameCheck")
 	public int nickNameCheck(String nick_name) {
