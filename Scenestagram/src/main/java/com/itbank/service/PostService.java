@@ -52,6 +52,7 @@ public class PostService {
 		return fileName;
 	}
 	
+	// 해시태그를 찾아서 없으면 추가해주고 전체 해시태그의 idx를 담은 ArrayList를 반환한다 
 	private ArrayList<Integer> searchHash(String content) {	
 		// 본문에서 해쉬태그를 찾아서 hashList에 저장한다
 		ArrayList<String> hashList = new ArrayList<String>();
@@ -102,6 +103,7 @@ public class PostService {
 		return hashIDXList;
 	}
 	
+	// 유저태그를 찾아서 없으면 추가해주고 전체 유저태그의 idx를 담은 ArrayList를 반환한다
 	private ArrayList<Integer> searchUser(String content) {
 		ArrayList<String> userList = new ArrayList<String>();
 		StringBuilder sb_user = new StringBuilder();
@@ -136,9 +138,7 @@ public class PostService {
 				postDAO.insertHashTag(userList.get(i));
 			}
 		}
-		
-		userList.forEach(tag -> postDAO.insertHashTag(tag));
-		
+				
 		ArrayList<Integer> userIDXList = new ArrayList<Integer>();
 		
 		userList.forEach(tag -> userIDXList.add(postDAO.getHashIDX(tag)));
@@ -180,6 +180,33 @@ public class PostService {
 		return usersList;
 	}
 
+	private int addPostHashTag(ArrayList<Integer> idxList, int post_idx) {				
+//		idxList.forEach(tag -> {			
+//			HashMap<String, Integer> idxMap = new HashMap<String, Integer>();
+//			idxMap.put("post_idx", post_idx);
+//			idxMap.put("tag", tag);
+//			if(postDAO.insertPostHashTag(idxMap) != 1) {
+//				return row;
+//			};
+//		});
+		int row = 0;
+		for(int tag : idxList) {
+			HashMap<String, Integer> idxMap = new HashMap<String, Integer>();
+			idxMap.put("post_idx", post_idx);
+			idxMap.put("tag", tag);
+			if(postDAO.insertPostHashTag(idxMap) == 1) {
+				row++;
+			}
+		}
+		
+		return row == idxList.size() ? 1 : 0;
+	}
+	
+	private int removePostHashTag(int post_idx) {
+		int row = 0;
+		row = postDAO.deletePostHashTag(post_idx);
+		return row;
+	}
 		
 	public List<ImageDTO> getImage() {
 		return postDAO.selectImage();
@@ -206,7 +233,7 @@ public class PostService {
 		
 		if(insert_post != 1) return 0;		
 		
-		int post_idx = postDAO.getIDX(dto.getUsers_idx());
+		int post_idx = postDAO.getMaxIDX(dto.getUsers_idx());
 		
 		String fileName = makeFileName(dto);
 		
@@ -221,24 +248,32 @@ public class PostService {
 		if(dto.getContent().contains("#")) {
 			ArrayList<Integer> hashIDXList = searchHash(dto.getContent());
 			
-			hashIDXList.forEach(tag -> {
-				HashMap<String, Integer> idxMap = new HashMap<String, Integer>();
-				idxMap.put("post_idx", post_idx);
-				idxMap.put("tag", tag);
-				postDAO.insertPostHashTag(idxMap);
-			});
+			int insert_hashtag = addPostHashTag(hashIDXList, post_idx);
+			
+			if(insert_hashtag != 1) return 0;
+			
+//			hashIDXList.forEach(tag -> {
+//				HashMap<String, Integer> idxMap = new HashMap<String, Integer>();
+//				idxMap.put("post_idx", post_idx);
+//				idxMap.put("tag", tag);
+//				postDAO.insertPostHashTag(idxMap);
+//			});
 		}
 		
 		if(dto.getContent().contains("@")) {
 			ArrayList<Integer> userIDXList = searchUser(dto.getContent());
 			ArrayList<Integer> usersList = selectUsers(dto.getContent());
 			
-			userIDXList.forEach(tag -> {
-				HashMap<String, Integer> idxMap = new HashMap<String, Integer>();
-				idxMap.put("post_idx", post_idx);
-				idxMap.put("tag", tag);
-				postDAO.insertPostHashTag(idxMap);
-			});
+			int insert_hashtag = addPostHashTag(userIDXList, post_idx);
+			
+			if(insert_hashtag != 1) return 0;
+			
+//			userIDXList.forEach(tag -> {
+//				HashMap<String, Integer> idxMap = new HashMap<String, Integer>();
+//				idxMap.put("post_idx", post_idx);
+//				idxMap.put("tag", tag);
+//				postDAO.insertPostHashTag(idxMap);
+//			});
 			
 			usersList.forEach(user -> {
 				HashMap<String, Integer> idxMap = new HashMap<String, Integer>();
@@ -275,9 +310,49 @@ public class PostService {
 		return postDAO.deleteLike(likeList);
 	}
 
-	
+	public List<ImageDTO> getList(int users_idx) {
+		List<Integer> post_idx_list = postDAO.selectPostIDX(users_idx);
+//		System.out.println(post_idx_list);
+		List<ImageDTO> image_list = new ArrayList<ImageDTO>();
+		post_idx_list.forEach(post_idx -> image_list.add(postDAO.selectPostImage(post_idx)));		
+//		System.out.println(image_list);
+		return image_list;
+	}
 
+	public int removePost(int post_idx) {
+		return postDAO.updateStatus(post_idx);
+	}
 
-	
+	public int getLikeCount(int post_idx) {
+		return postDAO.selectLikeCount(post_idx);
+	}
+
+	public int modifyPost(PostDTO dto) {
+		int post_idx = dto.getIdx();
+		int remove_hashtag = removePostHashTag(post_idx);
+		System.out.println(remove_hashtag >= 1 ? "삭제 성공" : "삭제 요소 없음");
+		
+		int update_post = postDAO.updatePost(dto);
+		
+		if(update_post != 1) return 0;
+		
+		if(dto.getContent().contains("#")) {
+			ArrayList<Integer> hashIDXList = searchHash(dto.getContent());	
+			
+			int insert_hashtag = addPostHashTag(hashIDXList, post_idx);
+			
+			if(insert_hashtag != 1) return 0;
+		}
+		
+		if(dto.getContent().contains("@")) {
+			ArrayList<Integer> userIDXList = searchUser(dto.getContent());
+			
+			int insert_hashtag = addPostHashTag(userIDXList, post_idx);
+			
+			if(insert_hashtag != 1) return 0;
+		}		
+		
+		return 1;
+	}	
 
 }

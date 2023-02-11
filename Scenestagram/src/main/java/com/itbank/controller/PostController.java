@@ -35,6 +35,13 @@ public class PostController {
 		return mav;
 	}
 	
+	@GetMapping("/getList/{users_idx}")
+	@ResponseBody
+	public List<ImageDTO> getList(@PathVariable("users_idx") int users_idx) {
+		List<ImageDTO> json = postService.getList(users_idx);
+		return json;
+	}
+	
 	@GetMapping("/detail/{post_idx}")
 	public ModelAndView detail(@PathVariable("post_idx") int post_idx) {
 		ModelAndView mav = new ModelAndView("/post/detail");
@@ -42,7 +49,9 @@ public class PostController {
 		String imageFileName = postService.getImageName(post_idx);
 		int row = postService.updateViews(post_idx);
 		System.out.println(row == 1 ? "카운트 성공" : "카운트 실패");
-		System.out.println(imageFileName);
+//		System.out.println(imageFileName);
+		int likeCount = postService.getLikeCount(post_idx);
+		mav.addObject("likeCount", likeCount);
 		mav.addObject("dto", post_dto);
 		mav.addObject("image", imageFileName);		
 		return mav;
@@ -81,5 +90,28 @@ public class PostController {
 		System.out.println(row == 1 ? "적용 성공" : "적용 실패");		
 		
 		return like;
+	}
+	
+	@GetMapping("/modify/{post_idx}")
+	public ModelAndView modify(@PathVariable("post_idx") int post_idx) {
+		ModelAndView mav = new ModelAndView("/post/modify");
+		PostDTO dto = postService.getDetail(post_idx);
+		mav.addObject("dto", dto);		
+		return mav; 
+	}
+	
+	@PostMapping("/modify/{post_idx}")
+	public String modify(PostDTO dto) {
+		System.out.println("게시글 idx : " + dto.getIdx());
+		int row = postService.modifyPost(dto);
+		System.out.println(row != 0 ? "게시글 수정 성공" : "게시글 수정 실패");
+		return "redirect:/post/detail/" + dto.getIdx();		
+	}
+	
+	@GetMapping("/remove/{post_idx}")
+	public String remove(@PathVariable("post_idx") int post_idx) {
+		int row = postService.removePost(post_idx);
+		System.out.println(row != 0 ? "상태 변경 성공" : "상태 변경 실패");
+		return "redirect:/users/myPage";
 	}
 }
