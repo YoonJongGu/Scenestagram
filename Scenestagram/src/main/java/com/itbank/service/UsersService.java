@@ -52,9 +52,4 @@ public class UsersService {
 	public List<UsersDTO> usersSearch(String search) {
 		return usersDAO.usersSearch(search);
 	}
-
-	public List<UsersDTO> usersSearch(String search) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

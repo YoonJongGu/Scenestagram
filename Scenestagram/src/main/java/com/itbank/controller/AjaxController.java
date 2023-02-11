@@ -103,7 +103,6 @@ public class AjaxController {
 	// 아이디 중복확인
 	@PostMapping("/nickNameCheck")
 	public int nickNameCheck(String nick_name) {
-		
 		return userService.getUserNickName(nick_name);
 	}
 	
