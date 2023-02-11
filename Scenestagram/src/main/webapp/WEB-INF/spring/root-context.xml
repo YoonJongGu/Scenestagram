@@ -25,6 +25,7 @@
 		<property name="configLocation" value="classpath:mybatis/main.xml" />
 		<property name="mapperLocations">
 			<list>
+				<value>classpath:mybatis/follow.xml</value>
 				<value>classpath:mybatis/users.xml</value>
 				<value>classpath:mybatis/post.xml</value>				
 			</list>

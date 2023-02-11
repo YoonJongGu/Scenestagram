@@ -1,10 +1,13 @@
 ﻿package com.itbank.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -112,13 +115,40 @@ public class UsersController {
 		
 		return mav;
 	}
-	//아이디 찾기 end
 	
-	//비밀번호 변경
-	@GetMapping("/replacePw")
-	public String replacePw(UsersDTO dto) {
-		int flag = usersService.replacePw(dto);
-		return "redirect:/";
+	// 02-08
+	@GetMapping("/usersList")
+	public ModelAndView usersList() {
+		ModelAndView mav = new ModelAndView("/users/usersList");
+		List<UsersDTO> list = usersService.getList();
+		mav.addObject("list", list);
+		return mav;
+	}
+	
+	// 02-08
+	@GetMapping("/viewDetail/{idx}/{myIdx}")
+	public ModelAndView viewDetail(@PathVariable("idx") int idx) {
+		ModelAndView mav = new ModelAndView("/users/viewDetail");
+		UsersDTO dto = usersService.getUser(idx);
+		mav.addObject("dto", dto);
+		return mav;
+	}
+	
+	@GetMapping("/search")
+	public void search() {}
+	
+	@PostMapping("/search")
+	public ModelAndView search(String search) {
+		ModelAndView mav = new ModelAndView("/users/search");
+		
+		if(search.contains("#") == false) {
+			List<UsersDTO> list = usersService.usersSearch(search);
+			mav.addObject("list", list);
+		}
+		else {
+			
+		}
+		return mav;
 	}
 	
 	

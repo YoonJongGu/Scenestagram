@@ -11,49 +11,34 @@
                    <!--로그인 폼-->
                    <div class="login__form">
                         <h1><img src="${cpath }/resources/img/loginlog.jpg" alt=""></h1>
-                      
+                        
+                        <h3>비밀번호를 찾으실 건가요?</h3>
+                        
+                        <div>
+                        	이메일주소를 입력 하시면 이메일주소로<br>
+                        	인증 코드를 보내드립니다.
+                        </div>
+                        
                         <!--이메일 인풋-->
                         <form class="login__input" method="GET" id="emailInput">
-                        	<h3>비밀번호를 찾으실 건가요?</h3>
-	                        <div>
-	                        	<br>
-	                        	이메일주소를 입력 하시면 이메일주소로
-	                        	인증 코드를 보내드립니다.
-	                        </div>
-	                        <input type="text" name="ph_number" placeholder="전화번호입력 (-없이)" required>
-                            <input type="text" id="id" name="email" placeholder="이메일을 입력하세요" required/>
+                            <input type="text" id="id" name="email" placeholder="이메일을 입력하세요" required="required" />
                             <input type="submit" value="인증 번호 발송">
                         </form>
                         <!--이메일 인풋 end-->
-                        
-                        <!-- 이메일 인증 코드 인풋 -->
+						
                        <form class="login__input hidden" id="check">
-                       		<h3>이메일 인증</h3>
-                       		<br>
-							<div>
-								발송받은 이메일에 
-								인증코드를 입력해주세요.
-							</div>
-							<br>
-                            <input type="text" name="authNumber" placeholder="인증번호를 입력하세요" required/>
+                            <input type="text" name="authNumber" placeholder="인증번호를 입력하세요" required="required" />
                             <input type="submit" value="인증">
-                        </form>     
-                        <!-- 이메일 인증 코드 인풋 end -->                  
+                        </form>                       
                         
-                        <!--  인증후 변경할 비번 입력 -->
-						<form class="login__input hidden" id="replacePw" action="${cpath }/users/replacePw">
-							<div class="pw_tip_main"><h3>보안 수준이 높은 비밀번호 만들기</h3></div>
-							<div class="pw_tip_sub">
-								비밀번호는 6자 이상이어야 하고 숫자,<br>
-								영문,특수기호( ! $ @ % )의  <br>
-								조합을 포함해야 합니다.
-							</div>
-							<input type="hidden" name="phone_number" value="">
-							<input type="password" name="pw_sub" placeholder="새 비밀번호 입력" required>
-							<input type="password" name="pw" placeholder="새 비밀번호  다시 입력" required>
-							<input type="submit" value="비밀번호 재설정">
-						</form>
-						<!--  인증후 변경할 비번 입력 -->
+                        <div class="showPw hidden" id="result">
+                        	<div class="userEmail"></div>계정의 비밀번호는<br>
+                        	<div class="userPw"></div>입니다.
+                        </div>
+                        
+                        <div class="next hidden" >
+                        	<a href="${cpath }/users/login">로그인페이지 이동</a>
+                        </div>
                         
                     </div>
                     
@@ -68,38 +53,25 @@
         </main>
         
     </div>
-<!-- 비밀번호 입력시 히든에 추가 코드 -->
-<script>
-	const ph_num = document.querySelector('input[name="ph_number"]')
-	
-	ph_num.onkeyup = function(event){
-		const phone_number = document.querySelector('input[name="phone_number"]')
-		phone_number.value = event.target.value
-	}
-	
-</script>
-<!-- 비밀번호 입력시 히든에 추가 코드 end-->
 
 <!-- 이메일 보내기 -->
 <script>
 
 	const sendForm = document.forms[0]
+	const check = document.getElementById('check')
+	const emailInput = document.getElementById('emailInput')
 	sendForm.onsubmit = function(event){
 		event.preventDefault()
 		const email = document.querySelector('input[name="email"]').value
 		const url = '${cpath}/sendAuthNumber'
-		let phone_number = ''
 		
 		fetch(url + '?email=' +email)
 		.then(resp => resp.text())
 		.then(text=>{
 			if(text == 1){
-				document.getElementById('emailInput').classList.add('hidden')
-				document.getElementById('check').classList.remove('hidden')
-				phone_number += document.querySelector('input[name="ph_number"]').value
-				console.log(phone_number)
+				emailInput.classList.add('hidden')
+				check.classList.remove('hidden')
 				alert('인증번호가 발송되었습니다. 메일을 확인해주세요')
-				
 			}	
 		})
 		.catch(ex => {	
@@ -138,8 +110,7 @@
 			console.log(text)
 			if(text == 1){
 				alert('인증이 완료되었습니다')
-				document.getElementById('check').classList.add('hidden')
-				document.getElementById('replacePw').classList.remove('hidden')
+				
 			}
 			else{
 				alert('인증번호가 일치하지 않습니다. 다시 확인해주세요')

@@ -13,6 +13,11 @@
 		delete from follow where follower_idx = ${idx} and following_idx = ${myIdx}
 	</delete>
 	
+<!-- 	02-08 -->
+	<select id="findFollow" parameterType="HashMap" resultType="int">
+		select count(*) from follow where follower_idx = #{idx} and following_idx = #{myIdx}
+	</select>
+	
 	
 <!-- 	idxhash.put("idx", idx); -->
 <!-- 		idxhash.put("myIdx", myIdx); -->
