@@ -29,5 +29,9 @@ public interface UsersDAO {
 
 	List<UsersDTO> usersSearch(String search);
 
+	int countUserNickName(String nickName);
+
+	int countUserPhoneNumber(String phoneNumber);
+
 
 }

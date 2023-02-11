@@ -125,6 +125,7 @@ public class UsersController {
 		return mav;
 	}
 	
+
 	// 02-08
 	@GetMapping("/viewDetail/{idx}/{myIdx}")
 	public ModelAndView viewDetail(@PathVariable("idx") int idx) {
@@ -151,5 +152,6 @@ public class UsersController {
 		return mav;
 	}
 	
+
 	
 }

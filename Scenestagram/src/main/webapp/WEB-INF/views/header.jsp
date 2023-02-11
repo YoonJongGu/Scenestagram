@@ -8,10 +8,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>Scenestagram</title>
 <link type="text/css" rel="stylesheet" href="${cpath }/resources/css/style.css">
+
 <style>
-/*¸ðµç¿ä¼ÒÀÇ ±âº» ¸¶Áø ÆÐµù, »çÀÌÂ¡ ÃÊ±âÈ­*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½ï¿½ ï¿½Ðµï¿½, ï¿½ï¿½ï¿½ï¿½Â¡ ï¿½Ê±ï¿½È­*/
 * {
   margin: 0;
   padding: 0;
@@ -21,13 +23,13 @@
   outline: none;
 }
 
-/*ÆäÀÌÁöÀÇ Áß¾ÓÀ» Àâ¾ÆÁÙ ÄÁÅ×ÀÌ³Ê*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½*/
 .container {
   width: 100%;
   min-height: 100%;
 }
 
-/*¸ÞÀÎÅÂ±× ±âº»Á¤ÀÇ*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½*/
 .loginMain {
   height: 100vh;
   display: flex;
@@ -35,12 +37,12 @@
   background-color: rgba(var(--b3f, 250, 250, 250), 1);
 }
 
-/*¸ðµç ¹öÆ°Àº Æ÷ÀÎÅÍ*/
+/*ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 button {
   cursor: pointer;
 }
 
-/*·Î±×ÀÎ ¼½¼Ç*/
+/*ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 .login {
   width: 100%;
   max-width: 935px;
@@ -49,7 +51,7 @@ button {
   align-items: center;
 }
 
-/*·Î±×ÀÎÆû°ú °¡ÀÔÇÏ±â¸¦ °¨½Î´Â ÄÁÅ×ÀÌ³Ê*/
+/*ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±â¸¦ ï¿½ï¿½ï¿½Î´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½*/
 .login__form__container {
   width: 350px;
   height: 100%;
@@ -58,7 +60,7 @@ button {
   justify-content: center;
 }
 
-/*·Î±×ÀÎÆû, °¡ÀÔÇÏ±â ¹Ú½º µðÀÚÀÎ*/
+/*ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .login__form,
 .login__register {
   padding: 10px 0 20px;
@@ -67,7 +69,7 @@ button {
   background-color: #fff;
 }
 
-/*·Î°íÀÌ¹ÌÁö¸¦ ´ãÀ» ºí·Ï¿ä¼Ò*/
+/*ï¿½Î°ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½*/
 .login__form h1 {
   height: 86px;
   display: flex;
@@ -75,13 +77,13 @@ button {
   justify-content: center;
 }
 
-/*·Î°í ÀÌ¹ÌÁö*/
+/*ï¿½Î°ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½*/
 .login__form h1 img {
   height: 80px;
   width: 250px;
 }
 
-/*·Î±×ÀÎ ÀÎÇ²¹Ú½º*/
+/*ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½Ç²ï¿½Ú½ï¿½*/
 .login__input {
   display: flex;
   flex-direction: column;
@@ -90,7 +92,7 @@ button {
   padding: 0 40px;
 }
 
-/*·Î±×ÀÎ ÀÎÇ²ÅÂ±×*/
+/*ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½Ç²ï¿½Â±ï¿½*/
 .login__input input {
   width: 100%;
   height: 38px;
@@ -100,7 +102,7 @@ button {
   margin-bottom: 6px;
 }
 
-/*·Î±×ÀÎ ¹öÆ°*/
+/*ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°*/
 .login__input button {
   border: 0;
   outline: 0;
@@ -114,7 +116,7 @@ button {
   transition: background 0.5s;
 }
 
-/* login__horizon ºÙÀº°Ç ±×³É hrÀ» µðÀÚÀÎÇÑ°Å. */
+/* login__horizon ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×³ï¿½ hrï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½. */
 .login__horizon {
   display: flex;
   margin-top: 20px;
@@ -135,12 +137,12 @@ button {
   font-size: 14px;
 }
 
-/* ÆäÀÌ½ººÏ·Î±×ÀÎ ¿µ¿ª */
+/* ï¿½ï¿½ï¿½Ì½ï¿½ï¿½Ï·Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .login__facebook {
   padding: 0 40px;
   margin-top: 15px;
 }
-/*ÆäÀÌ½ººÏ ·Î±×ÀÎ ¹öÆ°*/
+/*ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°*/
 .login__facebook button {
   background-color: #0095F6;
   width: 100%;
@@ -149,7 +151,7 @@ button {
   font-weight: 600;
   font-size: 15px;
 }
-/*ÆäÀÌ½ººÏ ·Î±×ÀÎ »ö±ò*/
+/*ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 .login__facebook button i,
 span {
   color: #fff;
@@ -163,26 +165,26 @@ display: none;
 color:#6A82FB; 
 display: none;
 }
-/*°¡ÀÔÆäÀÌÁö·Î ÀÌµ¿*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½*/
 .login__register {
   margin-top: 10px;
   line-height: 60px;
   padding: 0;
 }
 
-/*°èÁ¤ÀÌ ¾øÀ¸½Å°¡¿ä?*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ï¿½?*/
 .login__register span {
 	color:black;
   font-size: 14px;
   font-weight: 200;
 }
 
-/*°¡ÀÔÆäÀÌÁö ÀÌµ¿¹öÆ°*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½Æ°*/
 .login__register a {
   color: #0095f6;
 }
 
-/* ¹öÆ°µðÀÚÀÎ */
+/* ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .cta {
   margin-right: 10px;
   padding: 5px 9px;
@@ -193,18 +195,18 @@ display: none;
   background: transparent;
 }
 
-/*¹öÆ° ºí·ç*/
+/*ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½*/
 .cta.blue {
   background: #0095f6 !important;
   color: #fff !important;
 }
 
-/* È¸¿ø°¡ÀÔÆäÀÌÁö ·Î°í¸ÇÆ® */
+/* È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î°ï¿½ï¿½ï¿½Æ® */
 .logo_ment{
 	color: #8e8e8e;
 }
 
-/* ¾ÆÀÌµð Ã¼Å© ¹®±¸ */
+/* ï¿½ï¿½ï¿½Ìµï¿½ Ã¼Å© ï¿½ï¿½ï¿½ï¿½ */
 .id_ok{
 color:#008000;
 display: none;
@@ -215,14 +217,42 @@ color:#6A82FB;
 display: none;
 }
 
-/* ¼û±â±â */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .hidden{
 	display: none;
 }
-/* È¸¿ø°¡ÀÔ ÀÌ¸ÞÀÏ */
+/* È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ */
 .show{
 	display: inline-block;
 }
+/* íšŒì›ê°€ìž… ì„±ë³„ div */
+#gender{
+	display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 38px;
+    border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+    border-radius: 3px;
+    margin-bottom: 6px;
+}
+
+/* ì„±ë³„ ì„ íƒ */
+select[name="gender"]{
+    width: 100%;
+    height: 38px;
+    padding: 9px 0 7px 8px;
+    border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+    border-radius: 3px;
+    margin-bottom: 6px;
+}
+
+/* errë¬¸êµ¬ div */
+.login__input > div{
+	color: red;
+	font-size: 12px;
+	margin-right: auto	
+}
+
 </style>
 </head>
 <body>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itbank.service.FollowService;
@@ -58,6 +59,7 @@ public class AjaxController {
 		return flag ? 1 : 0;
 	}
 	
+
 	// 팔로우가 되어있는지 확인
 	@GetMapping("/findFollow/{idx}/{myIdx}")
 	public int findFollow(@PathVariable("idx") int idx, @PathVariable("myIdx") int myIdx) {
@@ -96,7 +98,18 @@ public class AjaxController {
 		System.out.println(row != 0 ? "언팔로우 성공" : "언팔로우 실패");
 
 		return row;
+
+	// 아이디 중복확인
+	@PostMapping("/nickNameCheck")
+	public int nickNameCheck(String nick_name) {
+		
+		return userService.getUserNickName(nick_name);
 	}
+	
+	@PostMapping("/phoneNumberCheck")
+	public int phoneNumberCheck(String phoneNumber) {
+		return userService.getUserPhoneNumber(phoneNumber);
+
 	
 }
 
