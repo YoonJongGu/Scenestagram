@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="cpath" value="${pageContext.request.contextPath}" />
+<c:set var="cpath" value="${pageContext.request.contextPath}"/>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Scenestagram</title>
-<link type="text/css" rel="stylesheet" href="${cpath }/resources/css/style.css">
+<title>Insert title here</title>
+
 <style>
 /*모든요소의 기본 마진 패딩, 사이징 초기화*/
 * {
@@ -223,6 +223,34 @@ display: none;
 .show{
 	display: inline-block;
 }
+/* 회원가입 성별 div */
+#gender{
+	display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 38px;
+    border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+    border-radius: 3px;
+    margin-bottom: 6px;
+}
+
+/* 성별 선택 */
+select[name="gender"]{
+    width: 100%;
+    height: 38px;
+    padding: 9px 0 7px 8px;
+    border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+    border-radius: 3px;
+    margin-bottom: 6px;
+}
+
+/* err문구 div */
+.login__input > div{
+	color: red;
+	font-size: 12px;
+	margin-right: auto	
+}
+
 </style>
 </head>
 <body>

@@ -27,7 +27,11 @@ public interface UsersDAO {
 
 	String findId(UsersDTO dto);
 
-	List<UsersDTO> usersSearch(String search);
+	int updatePw(UsersDTO dto);
+
+	int countUserNickName(String nickName);
+
+	int countUserPhoneNumber(String phoneNumber);
 
 
 }

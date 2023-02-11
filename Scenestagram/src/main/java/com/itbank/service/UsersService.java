@@ -49,7 +49,15 @@ public class UsersService {
 		return usersDAO.findId(dto);
 	}
 
-	public List<UsersDTO> usersSearch(String search) {
-		return usersDAO.usersSearch(search);
+	public int replacePw(UsersDTO dto) {
+		return usersDAO.updatePw(dto);
+	}
+
+	public int getUserNickName(String nickName) {
+		return usersDAO.countUserNickName(nickName);
+	}
+
+	public int getUserPhoneNumber(String phoneNumber) {
+		return usersDAO.countUserPhoneNumber(phoneNumber);
 	}
 }
