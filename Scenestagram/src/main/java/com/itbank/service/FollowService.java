@@ -20,8 +20,4 @@ public class FollowService {
 		return followDAO.unFollow(idxhash);
 	}
 
-	public int findFollow(HashMap<String, Integer> idxHash) {
-		return followDAO.findFollow(idxHash);
-	}
-
 }
