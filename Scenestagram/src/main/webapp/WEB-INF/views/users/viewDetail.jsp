@@ -26,10 +26,11 @@ ${dto.nick_name }
 <a href="#"><button>메시지 보내기</button></a>
 
 <br><br>
-
-<span>게시물</span>
-<span>팔로워</span>
-<span>팔로우</span>
+<div>
+<div>게시물</div>
+<div>팔로워</div>
+<div>팔로우</div>
+</div>
 
 <div>${dto.name }</div>
 <div>${dto.introduce }</div>
