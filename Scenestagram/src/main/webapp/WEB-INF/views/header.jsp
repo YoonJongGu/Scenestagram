@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="cpath" value="${pageContext.request.contextPath}"/>
+<c:set var="cpath" value="${pageContext.request.contextPath}" />
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Scenestagram</title>
+<link type="text/css" rel="stylesheet" href="${cpath }/resources/css/style.css">
 <style>
-/*ëª¨ë“ ìš”ì†Œì˜ ê¸°ë³¸ ë§ˆì§„ íŒ¨ë”©, ì‚¬ì´ì§• ì´ˆê¸°í™”*/
+/*¸ðµç¿ä¼ÒÀÇ ±âº» ¸¶Áø ÆÐµù, »çÀÌÂ¡ ÃÊ±âÈ­*/
 * {
   margin: 0;
   padding: 0;
@@ -20,13 +21,13 @@
   outline: none;
 }
 
-/*íŽ˜ì´ì§€ì˜ ì¤‘ì•™ì„ ìž¡ì•„ì¤„ ì»¨í…Œì´ë„ˆ*/
+/*ÆäÀÌÁöÀÇ Áß¾ÓÀ» Àâ¾ÆÁÙ ÄÁÅ×ÀÌ³Ê*/
 .container {
   width: 100%;
   min-height: 100%;
 }
 
-/*ë©”ì¸íƒœê·¸ ê¸°ë³¸ì •ì˜*/
+/*¸ÞÀÎÅÂ±× ±âº»Á¤ÀÇ*/
 .loginMain {
   height: 100vh;
   display: flex;
@@ -34,12 +35,12 @@
   background-color: rgba(var(--b3f, 250, 250, 250), 1);
 }
 
-/*ëª¨ë“  ë²„íŠ¼ì€ í¬ì¸í„°*/
+/*¸ðµç ¹öÆ°Àº Æ÷ÀÎÅÍ*/
 button {
   cursor: pointer;
 }
 
-/*ë¡œê·¸ì¸ ì„¹ì…˜*/
+/*·Î±×ÀÎ ¼½¼Ç*/
 .login {
   width: 100%;
   max-width: 935px;
@@ -48,7 +49,7 @@ button {
   align-items: center;
 }
 
-/*ë¡œê·¸ì¸í¼ê³¼ ê°€ìž…í•˜ê¸°ë¥¼ ê°ì‹¸ëŠ” ì»¨í…Œì´ë„ˆ*/
+/*·Î±×ÀÎÆû°ú °¡ÀÔÇÏ±â¸¦ °¨½Î´Â ÄÁÅ×ÀÌ³Ê*/
 .login__form__container {
   width: 350px;
   height: 100%;
@@ -57,7 +58,7 @@ button {
   justify-content: center;
 }
 
-/*ë¡œê·¸ì¸í¼, ê°€ìž…í•˜ê¸° ë°•ìŠ¤ ë””ìžì¸*/
+/*·Î±×ÀÎÆû, °¡ÀÔÇÏ±â ¹Ú½º µðÀÚÀÎ*/
 .login__form,
 .login__register {
   padding: 10px 0 20px;
@@ -66,7 +67,7 @@ button {
   background-color: #fff;
 }
 
-/*ë¡œê³ ì´ë¯¸ì§€ë¥¼ ë‹´ì„ ë¸”ë¡ìš”ì†Œ*/
+/*·Î°íÀÌ¹ÌÁö¸¦ ´ãÀ» ºí·Ï¿ä¼Ò*/
 .login__form h1 {
   height: 86px;
   display: flex;
@@ -74,13 +75,13 @@ button {
   justify-content: center;
 }
 
-/*ë¡œê³  ì´ë¯¸ì§€*/
+/*·Î°í ÀÌ¹ÌÁö*/
 .login__form h1 img {
   height: 80px;
   width: 250px;
 }
 
-/*ë¡œê·¸ì¸ ì¸í’‹ë°•ìŠ¤*/
+/*·Î±×ÀÎ ÀÎÇ²¹Ú½º*/
 .login__input {
   display: flex;
   flex-direction: column;
@@ -89,7 +90,7 @@ button {
   padding: 0 40px;
 }
 
-/*ë¡œê·¸ì¸ ì¸í’‹íƒœê·¸*/
+/*·Î±×ÀÎ ÀÎÇ²ÅÂ±×*/
 .login__input input {
   width: 100%;
   height: 38px;
@@ -99,7 +100,7 @@ button {
   margin-bottom: 6px;
 }
 
-/*ë¡œê·¸ì¸ ë²„íŠ¼*/
+/*·Î±×ÀÎ ¹öÆ°*/
 .login__input button {
   border: 0;
   outline: 0;
@@ -113,7 +114,7 @@ button {
   transition: background 0.5s;
 }
 
-/* login__horizon ë¶™ì€ê±´ ê·¸ëƒ¥ hrì„ ë””ìžì¸í•œê±°. */
+/* login__horizon ºÙÀº°Ç ±×³É hrÀ» µðÀÚÀÎÇÑ°Å. */
 .login__horizon {
   display: flex;
   margin-top: 20px;
@@ -134,12 +135,12 @@ button {
   font-size: 14px;
 }
 
-/* íŽ˜ì´ìŠ¤ë¶ë¡œê·¸ì¸ ì˜ì—­ */
+/* ÆäÀÌ½ººÏ·Î±×ÀÎ ¿µ¿ª */
 .login__facebook {
   padding: 0 40px;
   margin-top: 15px;
 }
-/*íŽ˜ì´ìŠ¤ë¶ ë¡œê·¸ì¸ ë²„íŠ¼*/
+/*ÆäÀÌ½ººÏ ·Î±×ÀÎ ¹öÆ°*/
 .login__facebook button {
   background-color: #0095F6;
   width: 100%;
@@ -148,7 +149,7 @@ button {
   font-weight: 600;
   font-size: 15px;
 }
-/*íŽ˜ì´ìŠ¤ë¶ ë¡œê·¸ì¸ ìƒ‰ê¹”*/
+/*ÆäÀÌ½ººÏ ·Î±×ÀÎ »ö±ò*/
 .login__facebook button i,
 span {
   color: #fff;
@@ -162,26 +163,26 @@ display: none;
 color:#6A82FB; 
 display: none;
 }
-/*ê°€ìž…íŽ˜ì´ì§€ë¡œ ì´ë™*/
+/*°¡ÀÔÆäÀÌÁö·Î ÀÌµ¿*/
 .login__register {
   margin-top: 10px;
   line-height: 60px;
   padding: 0;
 }
 
-/*ê³„ì •ì´ ì—†ìœ¼ì‹ ê°€ìš”?*/
+/*°èÁ¤ÀÌ ¾øÀ¸½Å°¡¿ä?*/
 .login__register span {
 	color:black;
   font-size: 14px;
   font-weight: 200;
 }
 
-/*ê°€ìž…íŽ˜ì´ì§€ ì´ë™ë²„íŠ¼*/
+/*°¡ÀÔÆäÀÌÁö ÀÌµ¿¹öÆ°*/
 .login__register a {
   color: #0095f6;
 }
 
-/* ë²„íŠ¼ë””ìžì¸ */
+/* ¹öÆ°µðÀÚÀÎ */
 .cta {
   margin-right: 10px;
   padding: 5px 9px;
@@ -192,18 +193,18 @@ display: none;
   background: transparent;
 }
 
-/*ë²„íŠ¼ ë¸”ë£¨*/
+/*¹öÆ° ºí·ç*/
 .cta.blue {
   background: #0095f6 !important;
   color: #fff !important;
 }
 
-/* íšŒì›ê°€ìž…íŽ˜ì´ì§€ ë¡œê³ ë§¨íŠ¸ */
+/* È¸¿ø°¡ÀÔÆäÀÌÁö ·Î°í¸ÇÆ® */
 .logo_ment{
 	color: #8e8e8e;
 }
 
-/* ì•„ì´ë”” ì²´í¬ ë¬¸êµ¬ */
+/* ¾ÆÀÌµð Ã¼Å© ¹®±¸ */
 .id_ok{
 color:#008000;
 display: none;
@@ -214,45 +215,14 @@ color:#6A82FB;
 display: none;
 }
 
-/* ìˆ¨ê¸°ê¸° */
+/* ¼û±â±â */
 .hidden{
 	display: none;
 }
-/* íšŒì›ê°€ìž… ì´ë©”ì¼ */
+/* È¸¿ø°¡ÀÔ ÀÌ¸ÞÀÏ */
 .show{
 	display: inline-block;
 }
-/* íšŒì›ê°€ìž… ì„±ë³„ div */
-#gender{
-	display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 38px;
-    border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
-    border-radius: 3px;
-    margin-bottom: 6px;
-}
-
-#gender > div{
-	display: flex;
-	align-items: center;
-}
-
-#gender > div > input{
-	height: 21px;
-	margin-bottom: 0px;
-	
-}
-
-#gender > div > span{
-	font-size: 15px;
-    color: black;
-    width: 63px;
-    display: flex;
-    align-items: center;
-}
-
-
 </style>
 </head>
 <body>

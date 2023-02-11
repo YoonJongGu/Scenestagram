@@ -37,16 +37,18 @@
                         
                         <!--로그인 인풋-->
                         <form class="login__input"  action="${cpath }/users/join" method="POST">
-                            <input type="text" id="id" name="email" placeholder="이메일 주소" required>
-                            <input type="text" name="phone_number" placeholder="휴대전화 (-없이)" required>
+                            <input type="text" id="id" name="email" placeholder="이메일 주소" required="required" oninput="checkId()"/>
+                            <input type="text" name="phone_number" placeholder="휴대전화 (-없이)">
+<!--                             <span class="id_ok">사용 가능한 아이디입니다.</span> -->
+<!-- 							<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span> -->
                             <input type="text" id="name" name="name" placeholder="성명" required="required" />
                             <div id="gender">
-	                        	<div><input type="radio" id="gender" name="gender" required="required" value="남성"/><span>남성</span></div>
-                            	<div><input type="radio" id="gender" name="gender" required="required" value="여성"/><span>여성</span></div>
+	                        <label><input type="radio" id="gender" name="gender" required="required" value="남성"/>남성</label>
+                            <label><input type="radio" id="gender" name="gender" required="required" value="여성"/>여성</label>
                             </div>
                             <input type="text" id="nick_name" name="nick_name" placeholder="사용자 이름" required="required" />
                             <input type="password" id="pw" name="pw" placeholder="비밀번호" required="required" />
-                            <input type="date" id="birth" name="birth" required="required" />
+                            <input type="date" name="birth">
                             <button class="btn">가입</button>
                         </form>
                         <!--로그인 인풋end-->
@@ -62,6 +64,29 @@
             </section>
         </main>
     </div>
+<script>
+// 	function checkId(){
+// 	    var id = document.querySelector('#id').value; //id값이 "id"인 입력란의 값을 저장
+// 	    console.log(id)
+// 	    const url = '${cpath}/idcheck/' + id
+// 	    fetch(url)
+// 	    .then(resp=>resp.text())
+// 	    .then(text=>{
+// 	    	console.log(text)
+// 	        function idCheck(text){ //컨트롤러에서 넘어온 cnt값을 받는다 
+// 	            if(text == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+// 	                document.querySelector('.id_ok').styleList.add("show"); 
+// 	                document.querySelector('.id_already').styList.add("hidden");
+// 	            } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+// 	            	document.querySelector('.id_already').styleList.add("show");
+// 	            	document.querySelector('.id_ok').styleList.remove("hidden");
+// 	                alert("아이디를 다시 입력해주세요");
+// 	            }
+// 	        }
+	    	
+// 	    })
+// 	}
+</script>
 
 </body>
 </html>

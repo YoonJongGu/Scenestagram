@@ -49,7 +49,7 @@ public class UsersService {
 		return usersDAO.findId(dto);
 	}
 
-	public int replacePw(UsersDTO dto) {
-		return usersDAO.updatePw(dto);
+	public List<UsersDTO> usersSearch(String search) {
+		return usersDAO.usersSearch(search);
 	}
 }
