@@ -11,6 +11,6 @@ public interface FollowDAO {
 
 	int unFollow(HashMap<String, Integer> idxhash);
 	
-	
+	int findFollow(HashMap<String, Integer> idxHash);
 	
 }

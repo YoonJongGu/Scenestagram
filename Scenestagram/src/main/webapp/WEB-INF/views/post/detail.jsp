@@ -18,7 +18,14 @@
 			<p>REGIST_DATE : ${dto.regist_date }</p>
 			<p>STATUS : ${dto.status }</p>			
 			<p>VIEWS : ${dto.views }</p>
-			<div><button class="like">좋아요</button></div>
+			<p>LIKECOUNT : ${likeCount }</p>
+			<div class="btn">
+				<div><button class="like">좋아요</button></div>
+				<div class="btn_ud">
+					<div><a href="${cpath }/post/modify/${dto.idx }"><button>수정</button></a></div>
+					<div><a href="${cpath }/post/remove/${dto.idx }"><button>삭제</button></a></div>
+				</div>
+			</div>
 			<div>${like }</div>			
 		</div>				
 	</div>
@@ -58,57 +65,236 @@
 </script>
 
 <script>
-	let content = document.querySelector('pre.content')
-	const arr = []
+	const content = document.querySelector('pre.content')
 	console.log(content.innerText)
-	let str = '#'
 	
-	const c_text = content.innerText.split('#')
-	arr.push(c_text[0])
-	console.log(c_text)
-// 	for(let i = 0; i< c_text.length; i++) {
-// 		if(c_text[i].includes('\n')) {
-// 			c_text[i] = c_text[i].replace('\n', '<br>')
-// 		}
-// 	}
-	
-	for(let i = 1; i < c_text.length; i++) {
-		for(let ch of c_text[i]) {
-			console.log(ch.charCodeAt())
-			const ch_code = ch.charCodeAt()
-			if((ch_code >= 48 && ch_code <= 57) || (ch_code >= 65 && ch_code <= 90) || (ch_code >= 97 && ch_code <= 122) || ch_code == 95 || ch_code > 127) {
-				str += ch
-			}
-			else {
-				break;
-			}
+	function firstHandler(ob) {
+		const o = ob.original
+				
+		if(o[0] == '#') {
+			ob.front = o.split('#')[1]
+			ob.front_type = 'hash'
 		}
-		console.log(str)
-		const sp_ch = c_text[i].split(str.substr(1, str.length))
-		console.log(sp_ch)		
-		arr.push(str)
-		arr.push(sp_ch[1])
-		str = '#'
-	}
-	console.log(arr)
-	content.innerText = ''	
-	for(let i = 0; i < arr.length; i++) {
-		if(arr[i].includes('#')) {
-			const tag = document.createElement('a')
-			tag.href = 'test'			
-			tag.innerText = arr[i]
-			console.log(tag)
-			content.appendChild(tag)
+		else if(o[0] == '@') {
+			ob.front = o.split('@')[1]
+			ob.front_type = 'user'
 		}
 		else {
-			const tag = document.createElement('span')
-			tag.innerText = arr[i]
-			console.log(tag)
-			content.appendChild(tag)
+			ob.front = o
+			ob.front_type = 'none'
+		}
+		
+		const otherFilter = '!$%^&*()-=+,?'
+		const tagFilter = '@#'		
+		const size = ob.front.length
+		const tmp = ob.front
+		
+		if(o.length != ob.front.length || ob.front.includes('#') || ob.front.includes('@')) {
+			ob.front = ''			
+		}
+		
+		for(let i = 0; i < size; i++) {
+			console.log(tmp[i].charCodeAt())
+			if(o.length != ob.front.length) {
+				if(tagFilter.includes(tmp[i])) {
+					break
+				}
+				else if(tmp[i].charCodeAt() == 10) {
+					ob.front_other += tmp[i]
+					break
+				}
+				else if(otherFilter.includes(tmp[i]) == false) {					
+					ob.front += tmp[i]
+				}
+				else {
+					ob.front_other += tmp[i]
+				}
+			}
+		}
+		
+		if(ob.front_type == 'hash' || ob.front_type == 'user') {
+			ob.middle = o.substr(ob.front.length + ob.front_other.length + 1)
+		}
+		else {
+			ob.middle = o.substr(ob.front.length + ob.front_other.length)
+		}		
+		
+		return ob		
+	}
+	
+	function secondHandler(ob) {
+		const flag = ob.front_type == 'hash' || ob.front_type == 'user'		
+		const o = flag ? ob.original.substr(ob.front.length + ob.front_other.length + 1) : ob.original.substr(ob.front.length + ob.front_other.length)		
+		
+		if(o[0] == '#') {
+			ob.middle = o.split('#')[1]
+			ob.middle_type = 'hash'
+		}
+		else if(o[0] == '@') {
+			ob.middle = o.split('@')[1]
+			ob.middle_type = 'user'
+		}
+		else {
+			ob.middle = o
+			ob.middle_type = 'none'
+		}
+		
+		const otherFilter = '!$%^&*()-=+,?'
+		const tagFilter = '@#'		
+		const size = ob.middle.length
+		const tmp = ob.middle
+		
+		if(o.length != ob.middle.length || ob.middle.includes('#') || ob.middle.includes('@')) {
+			ob.middle = ''			
+		}
+		
+		for(let i = 0; i < size; i++) {
+			if(o.length != ob.middle.length) {
+				if(tagFilter.includes(tmp[i])) {
+					break
+				}
+				else if(tmp[i].charCodeAt() == 10) {
+					ob.middle_other += tmp[i]
+					break
+				}
+				else if(otherFilter.includes(tmp[i]) == false) {					
+					ob.middle += tmp[i]
+				}
+				else {
+					ob.middle_other += tmp[i]
+				}
+			}
+		}
+		
+		if(ob.middle_type == 'hash' || ob.middle_type == 'user') {
+			ob.back = o.substr(ob.middle.length + ob.middle_other.length + 1)
+		}
+		else {
+			ob.back = o.substr(ob.middle.length + ob.middle_other.length)
+		}			
+		
+		return ob
+	}
+	
+	function thirdHandler(ob) {
+		const flag1 = ob.front_type == 'hash' || ob.front_type == 'user'
+		const flag2 = ob.middle_type == 'hash' || ob.middle_type == 'user'
+		const ttmp = flag1 ? ob.original.substr(ob.front.length + ob.front_other.length + 1) : ob.original.substr(ob.front.length + ob.front_other.length)
+		const o = flag2 ? ttmp.substr(ob.middle.length + ob.middle_other.length + 1) : ttmp.substr(ob.middle.length + ob.middle_other.length)
+		
+		if(o[0] == '#') {
+			ob.back = o.split('#')[1]
+			ob.back_type = 'hash'
+		}
+		else if(o[0] == '@') {
+			ob.back = o.split('@')[1]
+			ob.back_type = 'user'
+		}
+		else {
+			ob.back = o
+			ob.back_type = 'none'
+		}
+		
+		const otherFilter = '!$%^&*()-=+,?'
+		const tagFilter = '@#'		
+		const size = ob.back.length
+		const tmp = ob.back
+		
+		if(o.length != ob.back.length || ob.back.includes('#') || ob.back.includes('@')) {
+			ob.back = ''			
+		}
+		
+		for(let i = 0; i < size; i++) {
+			if(o.length != ob.back.length) {
+				if(tagFilter.includes(tmp[i])) {
+					break
+				}
+				else if(tmp[i].charCodeAt() == 10) {
+					ob.back_other += tmp[i]
+					break
+				}
+				else if(otherFilter.includes(tmp[i]) == false) {					
+					ob.back += tmp[i]
+				}
+				else {
+					ob.back_other += tmp[i]
+				}
+			}
+		}
+		
+		return ob
+	}
+	
+	function tagHandler(ob) {
+		let tag = ''
+		if(ob.front_type != '') {
+			if(ob.front_type == 'hash') {
+				tag += '<a href="test">#' + ob.front + '</a>' + ob.front_other
+			}
+			else if(ob.front_type == 'user') {
+				tag += '<a href="test">@' + ob.front + '</a>' + ob.front_other
+			}
+			else {
+				tag += ob.front + ob.front_other
+			}
+		}
+		if(ob.middle_type != '') {
+			if(ob.middle_type == 'hash') {
+				tag += '<a href="test">#' + ob.middle + '</a>' + ob.middle_other
+			}
+			else if(ob.middle_type == 'user') {
+				tag += '<a href="test">@' + ob.middle + '</a>' + ob.middle_other
+			}
+			else {
+				tag += ob.middle + ob.middle_other
+			}
+		}
+		if(ob.back_type != '') {
+			if(ob.back_type == 'hash') {
+				tag += '<a href="test">#' + ob.back + '</a>' + ob.back_other
+			}
+			else if(ob.back_type == 'user') {
+				tag += '<a href="test">@' + ob.back + '</a>' + ob.back_other
+			}
+			else {
+				tag += ob.back + ob.back_other
+			}
+		}
+		return tag		
+	}
+	
+	const hashTagArr = content.innerText.split(' ').map(e => {
+		let ob = {
+			original: e,
+			front: '',
+			middle: '',				
+			back: '',
+			front_other: '',
+			middle_other: '',
+			back_other: '',
+			front_type: '',
+			middle_type: '',
+			back_type: ''
+		}
+		
+		firstHandler(ob)
+		secondHandler(ob)
+		thirdHandler(ob)
+		
+		ob.link = tagHandler(ob)
+		
+		return ob
+	})
+	console.log(hashTagArr)
+	
+	content.innerHTML = ''
+	for(let i = 0; i < hashTagArr.length; i++) {
+		content.innerHTML += hashTagArr[i].link
+		if(i != hashTagArr.length - 1) {
+			content.innerHTML += ' '
 		}
 	}
 	console.log(content)
-	
 </script>
 
 </body>
