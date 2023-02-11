@@ -19,5 +19,9 @@ public class FollowService {
 	public int unFollow(HashMap<String, Integer> idxhash) {
 		return followDAO.unFollow(idxhash);
 	}
+	
+	public int findFollow(HashMap<String, Integer> idxHash) {
+		return followDAO.findFollow(idxHash);
+	}
 
 }

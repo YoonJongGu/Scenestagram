@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itbank.service.FollowService;
 import com.itbank.service.MailService;
 import com.itbank.service.UsersService;
 
 @RestController
 public class AjaxController {
 
+	@Autowired FollowService followService;
 	@Autowired UsersService userService;
 	
 	@Autowired private MailService mailService;
@@ -68,6 +70,46 @@ public class AjaxController {
 	public int phoneNumberCheck(String phoneNumber) {
 		return userService.getUserPhoneNumber(phoneNumber);
 	}
+	
+	// 팔로우가 되어있는지 확인
+		@GetMapping("/findFollow/{idx}/{myIdx}")
+		public int findFollow(@PathVariable("idx") int idx, @PathVariable("myIdx") int myIdx) {
+			System.out.println(idx);
+			System.out.println(myIdx);
+			HashMap<String, Integer> idxHash = new HashMap<String, Integer>();
+			idxHash.put("idx", idx);
+			idxHash.put("myIdx", myIdx);
+			
+			int row = followService.findFollow(idxHash);
+			
+			return row;
+		}
+		
+		// 팔로우
+		@GetMapping("/follow/{idx}/{myIdx}") // 걔 팔로우 버튼 누르면 팔로우 페이지에서는 걔의 정보를 담고 있던 것. 버튼 누르면 걔의 idx 던져줌
+		public int follow(@PathVariable int idx, @PathVariable int myIdx) {
+			HashMap<String, Integer> idxhash = new HashMap<String, Integer>();
+			idxhash.put("idx", idx);
+			idxhash.put("myIdx", myIdx);
+
+			int row = followService.addFollow(idxhash);
+			System.out.println(row != 0 ? "팔로우 성공" : "팔로우 실패");
+
+			return row;
+		}
+		
+		// 언팔
+		@GetMapping("/unfollow/{idx}/{myIdx}") // 걔 팔로우 버튼 누르면 팔로우 페이지에서는 걔의 정보를 담고 있던 것. 버튼 누르면 걔의 idx 던져줌
+		public int unfollow(@PathVariable int idx, @PathVariable int myIdx) {
+			HashMap<String, Integer> idxhash = new HashMap<String, Integer>();
+			idxhash.put("idx", idx);
+			idxhash.put("myIdx", myIdx);
+
+			int row = followService.unFollow(idxhash);
+			System.out.println(row != 0 ? "언팔로우 성공" : "언팔로우 실패");
+
+			return row;
+		}
 	
 }
 

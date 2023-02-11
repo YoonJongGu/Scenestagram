@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
-
+<link type="text/css" rel="stylesheet" href="${cpath }/resources/css/testStyle.css">
 <div class="screen">
 
         <!-- 왼쪽 메뉴 -->
