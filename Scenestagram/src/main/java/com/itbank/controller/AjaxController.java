@@ -111,6 +111,6 @@ public class AjaxController {
 	public int phoneNumberCheck(String phoneNumber) {
 		return userService.getUserPhoneNumber(phoneNumber);
 
-	
+	}
 }
 
