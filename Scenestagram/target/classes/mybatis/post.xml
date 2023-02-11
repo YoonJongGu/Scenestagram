@@ -6,7 +6,11 @@
 <mapper namespace="com.itbank.repository.PostDAO">
 
 	<select id="selectImage" resultType="image">
-		select * from image order by idx desc
+		select image.* from image 
+       			join post
+        		on image.post_idx = post.idx
+    		where post.status = 'activate'
+		order by image.idx desc
 	</select>
 
 	<select id="selectDetail" parameterType="int" resultType="post">
@@ -31,7 +35,7 @@
 		)
 	</insert>
 	
-	<select id="getIDX" parameterType="int" resultType="int">
+	<select id="getMaxIDX" parameterType="int" resultType="int">
 		select max(idx) from post where users_idx=#{users_idx}
 	</select>
 	
@@ -81,8 +85,34 @@
 		)		
 	</insert>
 	
+	<delete id="deletePostHashTag" parameterType="int">
+		delete post_hashtag where post_idx=#{post_idx}
+	</delete>
+	
 	<select id="searchHashTag" parameterType="string" resultType="int">
 		select count(*) from hashtag where hashtag=#{tag}
 	</select>
+	
+	<select id="selectPostIDX" parameterType="int" resultType="integer">
+		select idx from post where users_idx=#{users_idx} and status='activate' order by idx desc
+	</select>
+	
+	<select id="selectPostImage" parameterType="int" resultType="image">
+		select * from image where post_idx=#{post_idx}
+	</select>
+	
+	<update id="updateStatus" parameterType="int">
+		update post set status='deactivate'
+			where idx=#{post_idx}
+	</update>
+	
+	<select id="selectLikeCount" parameterType="int" resultType="int">
+		select count(*) from post_users_like where post_idx=#{post_idx}
+	</select>
+	
+	<update id="updatePost" parameterType="post">
+		update post set content=#{content}, location=#{location}
+			where idx=#{idx}
+	</update>
 
 </mapper>

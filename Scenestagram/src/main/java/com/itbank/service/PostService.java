@@ -225,6 +225,7 @@ public class PostService {
 	}
 
 	public int addPost(PostDTO dto) {
+		// 이미지 들어왔는지 판단
 		List<MultipartFile> fileList = dto.getImage_file();
 		fileList.removeIf(file -> file.getSize() == 0);
 		dto.setImage_file(fileList);
