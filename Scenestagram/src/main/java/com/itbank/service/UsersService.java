@@ -53,11 +53,8 @@ public class UsersService {
 		return usersDAO.usersSearch(search);
 	}
 
-	public int getUserNickName(String nickName) {
-		return usersDAO.countUserNickName(nickName);
-	}
-
-	public int getUserPhoneNumber(String phoneNumber) {
-		return usersDAO.countUserPhoneNumber(phoneNumber);
+	public List<UsersDTO> usersSearch(String search) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

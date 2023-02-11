@@ -98,6 +98,7 @@ public class AjaxController {
 		System.out.println(row != 0 ? "언팔로우 성공" : "언팔로우 실패");
 
 		return row;
+	}
 
 	// 아이디 중복확인
 	@PostMapping("/nickNameCheck")
