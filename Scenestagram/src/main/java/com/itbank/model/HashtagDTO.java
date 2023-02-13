@@ -3,6 +3,7 @@ package com.itbank.model;
 //	IDX     NOT NULL NUMBER        
 //	HASHTAG NOT NULL VARCHAR2(300) 
 
+
 public class HashtagDTO {
 	private int idx;
 	private String hashtag;
