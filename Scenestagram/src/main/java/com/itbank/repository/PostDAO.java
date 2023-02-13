@@ -21,7 +21,7 @@ public interface PostDAO {
 
 	int insertPost(PostDTO dto);
 
-	int getIDX(int users_idx);
+	int getMaxIDX(int users_idx);
 
 	int insertImage(ImageDTO imgDTO);
 	
@@ -42,5 +42,17 @@ public interface PostDAO {
 	int insertHashTag(String tag);
 
 	int searchHashTag(String tag);
+
+	List<Integer> selectPostIDX(int users_idx);
+
+	ImageDTO selectPostImage(Integer post_idx);
+
+	int updateStatus(int post_idx);
+
+	int selectLikeCount(int post_idx);
+
+	int deletePostHashTag(int post_idx);
+
+	int updatePost(PostDTO dto);
 	
 }

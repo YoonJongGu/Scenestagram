@@ -11,6 +11,8 @@
 <body>
 계정확인용 임시 페이지 입니다..
 
+<!-- 02-08 뷰디테일 페이지 이동시 쿼리 전달-->
+
 <a href="${cpath }/users/login">로그인 하러 가기</a>
 
 <p>현재 로그인 한 계정은 ${login.idx }</p>
@@ -27,7 +29,7 @@
 	<c:forEach var="dto" items="${list }" >
 	<tr>
 		<td>${dto.idx }</td>
-		<td>${dto.name }</td>
+		<td><a href="${cpath }/users/viewDetail/${dto.idx }/${login.idx}">${dto.name }</a></td>
 		<td>${dto.email }</td>
 		<td>${dto.pw }</td>
 		<td><a href="${cpath }/users/follow/${dto.idx}/${login.idx}"><button>팔로우?</button></a></td>
