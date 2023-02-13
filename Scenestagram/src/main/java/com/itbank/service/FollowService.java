@@ -24,4 +24,12 @@ public class FollowService {
 		return followDAO.findFollow(idxHash);
 	}
 
+	public int countFollowing(int idx) {
+		return followDAO.countFollowing(idx);
+	}
+
+	public int countFollower(int idx) {
+		return followDAO.countFollower(idx);
+	}
+
 }
