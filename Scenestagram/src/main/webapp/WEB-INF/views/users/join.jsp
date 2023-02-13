@@ -88,7 +88,6 @@
 		            alert("서버요청오류");
 		        }
 			})
-			console.log(phone_number_flag)
 			return phone_number_flag
        }
 	    
@@ -174,6 +173,12 @@
 		
 	}
 	
+	//날짜 제한
+	var now_date = Date.now()
+	var timeOff = new Date().getTimezoneOffset()*60000
+	var today = new Date(now_date-timeOff).toISOString().split("T")[0]
+	document.getElementById("birth").setAttribute('max',today)
+	
 </script>
     <div class="container">
         <main class="loginMain">
@@ -210,7 +215,7 @@
                         <!-- 또는end -->
                         
                         <!--로그인 인풋-->
-                        <form class="login__input"  action="${cpath }/users/join" method="POST">
+                        <form id="join_form" class="login__input"  action="${cpath }/users/join" method="POST">
                             <input type="text" id="id" name="email" placeholder="이메일 주소" required>
                             <div class="email_err"></div>
 							<input type="password" name="pw_sub" placeholder="비밀번호 입력" required>
@@ -228,7 +233,7 @@
                             <div class="nick_name_err"></div>
                             <input type="text" id="phone_number" name="phone_number" placeholder="휴대전화 (-없이)" required>
                             <div class="phone_number_err"></div>
-                            <button class="btn" onclick="return AllCheck()">가입</button>
+                            <button id="join_btn" class="join_btn" onclick="return AllCheck()">가입</button>
                         </form>
                         <!--로그인 인풋end-->
                     </div>
@@ -276,6 +281,7 @@
     // 전화번호 중복, 숫자만 길이확인
 	$('#phone_number').keyup(phone_number_Check)
     
+
 	
 </script>
 <!-- script기능 end -->

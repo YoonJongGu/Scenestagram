@@ -251,6 +251,11 @@ select[name="gender"]{
 	margin-right: auto	
 }
 
+/*회원가입 버튼*/
+#join_btn{
+	background-color: #1c7ed6;
+}
+
 
 
 </style>
