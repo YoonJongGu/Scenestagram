@@ -4,34 +4,59 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itbank.model.UsersDTO;
 import com.itbank.service.UserProfile;
 import com.itbank.service.UsersService;
 
+
+
 @Controller
 @RequestMapping("/users")
 public class UsersController {
+
+	private static final Logger logger = LoggerFactory.getLogger(UsersController.class); 
 	
 	@Autowired private UsersService usersService;
 	@Autowired private UserProfile userProfile;
-	
+	@Autowired private BCryptPasswordEncoder pwdEncoder;
 	// 로그인
 	@GetMapping("/login")
-	public void ge() {}
+	public void ge() {
+		
+	}
 	
 	@PostMapping("/login")
-	public String login(UsersDTO dto, HttpSession session) {
+	public String login(UsersDTO dto, HttpSession session , RedirectAttributes rttr) {
+		logger.info("post login");
+		
+		session.getAttribute("login");
 		UsersDTO login = usersService.login(dto);
-		session.setAttribute("login", login);
-		return "redirect:/users/main";
+		boolean pwdMatch = false;
+		if(login != null) {
+			pwdMatch = pwdEncoder.matches(dto.getPw(), login.getPw());
+		}
+		
+		if(login != null && pwdMatch == true) {
+			session.setAttribute("login", login);
+			return "redirect:/users/main";
+		}else {
+			session.setAttribute("login", null);
+			rttr.addFlashAttribute("msg",false);
+			return "redirect:/users/login";
+		}
+		
 	}
 	// 로그인 end
 	
@@ -48,9 +73,16 @@ public class UsersController {
 	
 	@PostMapping("/join")
 	public String join(UsersDTO dto) {
+		
+		logger.info("post join");
+		String inputPass = dto.getPw();
+		String pwd = pwdEncoder.encode(inputPass);
+		dto.setPw(pwd);
 		int row = usersService.insert(dto);
-		System.out.println(row != 0 ? "가입 성공" : "가입 실패");
-		return "redirect:/";
+		System.out.println(row == 0  ? "가입실패" : "가입성공");
+		
+		return "redirect:/users/login";
+		
 	}
 	//회원가입 end
 	
