@@ -19,8 +19,8 @@
 		from users
 		where
 			email = #{email}
-				and
-					pw = #{pw}
+<!-- 				and -->
+<!-- 					pw = #{pw} -->
 	</select>
 
 	<!-- 회원탈퇴  -->

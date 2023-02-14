@@ -15,7 +15,9 @@
                         <form class="login__input"  action="${cpath }/users/login" method="POST">
                             <input type="text" id="id" name="email" placeholder="email" required="required" />
                             <input type="password" id="pw" name="pw" placeholder="password" required="required" />
+                            <div>${msg == false ? '아이디 혹은 비밀번호가 틀렸습니다.' : '' }</div>
                             <button class="btn">로그인</button>
+                            
                         </form>
                         <!--로그인 인풋end-->
                         <div>
