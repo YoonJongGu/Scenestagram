@@ -18,7 +18,7 @@
 		select *
 		from users
 		where
-			email = #{email}
+			phone_number = #{phone_number}
 <!-- 				and -->
 <!-- 					pw = #{pw} -->
 	</select>

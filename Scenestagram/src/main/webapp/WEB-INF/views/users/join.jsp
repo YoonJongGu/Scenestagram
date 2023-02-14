@@ -168,6 +168,7 @@
 			phone_number.focus()
 			return false
 		}else {
+			alert($('#nick_name').val() +'님 환영합니다 가입되셨습니다.')
 			return true
 		}
 		

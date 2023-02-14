@@ -13,9 +13,9 @@
                         
                         <!--로그인 인풋-->
                         <form class="login__input"  action="${cpath }/users/login" method="POST">
-                            <input type="text" id="id" name="email" placeholder="email" required="required" />
+                            <input type="text" id="id" value="${empty inputPhoneNumber ? '' : inputPhoneNumber }" name="phone_number" placeholder="전화번호 입력 (-제외)" required="required" />
                             <input type="password" id="pw" name="pw" placeholder="password" required="required" />
-                            <div>${msg == false ? '아이디 혹은 비밀번호가 틀렸습니다.' : '' }</div>
+                            <div id="login_err">${msg == false ? '전화번호 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.' : '' }</div>
                             <button class="btn">로그인</button>
                             
                         </form>

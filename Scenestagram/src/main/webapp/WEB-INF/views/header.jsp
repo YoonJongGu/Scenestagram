@@ -256,6 +256,11 @@ select[name="gender"]{
 	background-color: #1c7ed6;
 }
 
+/*로그인 에러*/
+#login_err{
+	text-align: left;
+}
+
 
 
 </style>

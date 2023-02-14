@@ -54,6 +54,7 @@ public class UsersController {
 		}else {
 			session.setAttribute("login", null);
 			rttr.addFlashAttribute("msg",false);
+			rttr.addFlashAttribute("inputPhoneNumber",dto.getPhone_number());
 			return "redirect:/users/login";
 		}
 		
