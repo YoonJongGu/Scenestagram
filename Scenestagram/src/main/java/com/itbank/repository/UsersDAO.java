@@ -18,8 +18,6 @@ public interface UsersDAO {
 
 	int infoUpdate(UsersDTO dto);
 
-	int updateUserProfile(UsersDTO dto);
-
 	UsersDTO selectOne(int idx);
 
 	int idCheck(String id);

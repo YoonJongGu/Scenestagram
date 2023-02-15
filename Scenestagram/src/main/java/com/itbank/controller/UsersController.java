@@ -90,23 +90,6 @@ public class UsersController {
 	@GetMapping("/main")
 	public void main() {}
 	
-	//프로필 수정
-	@GetMapping("/profileModify")
-	public void profileModify() {
-	}
-	@PostMapping("/profileModify")
-	public void profileModify(UsersDTO dto ,HttpSession session ) {
-		if(dto.getUser_img_file().getSize() != 0 ) {
-			dto.setUser_img(dto.getUser_img_file().getOriginalFilename());
-			userProfile.saveProfile(dto.getUser_img_file());
-			
-		}
-		int row = usersService.profileModify(dto);
-		session.setAttribute("login", usersService.getUser(dto.getIdx()));
-		System.out.println(row ==  0 ? "프로필 수정실패" : "프로필 수정성공");
-	}
-	// 프로필 수정 end
-	
 	//개인정보 수정
 	@GetMapping("/infoModify")
 	public void userModify() {

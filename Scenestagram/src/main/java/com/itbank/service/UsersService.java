@@ -30,10 +30,6 @@ public class UsersService {
 		return usersDAO.infoUpdate(dto);
 	}
 
-	public int profileModify(UsersDTO dto) {
-		return usersDAO.updateUserProfile(dto);
-	}
-
 	public UsersDTO getUser(int idx) {		
 		return usersDAO.selectOne(idx);
 	}

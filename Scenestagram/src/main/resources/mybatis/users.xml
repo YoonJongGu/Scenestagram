@@ -45,19 +45,6 @@
 		idx = #{idx}
 	</update>
 	
-	<!-- 프로필 수정  -->
-	<update id="updateUserProfile" parameterType="users">
-		update users
-		<set>
-			<if test="user_img != null">USER_IMG = #{user_img},</if>
-			<if test="name != null">name = #{name},</if>
-			<if test="nick_name != null">nick_name = #{nick_name},</if>
-			<if test="introduce != null">introduce = #{introduce},</if>
-		</set>
-		where
-		idx = #{idx}
-	</update>
-	
 	<!-- 비밀번호 변경  -->
 	<update id="updatePw" parameterType="users">
 		update users
