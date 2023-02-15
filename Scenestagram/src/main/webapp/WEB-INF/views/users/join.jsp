@@ -146,7 +146,7 @@
 
 	
 	//모든 값 확인
-	function AllCheck(){
+	function allCheck(){
 		if(emailCheck() == false){
 			alert('이메일을 확인해주세요')
 			email.focus()
@@ -234,7 +234,7 @@
                             <div class="nick_name_err"></div>
                             <input type="text" id="phone_number" name="phone_number" placeholder="휴대전화 (-없이)" required>
                             <div class="phone_number_err"></div>
-                            <button id="join_btn" class="join_btn" onclick="return AllCheck()">가입</button>
+                            <button id="join_btn" class="join_btn" onclick="return allCheck()">가입</button>
                         </form>
                         <!--로그인 인풋end-->
                     </div>

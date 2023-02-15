@@ -1,5 +1,6 @@
 package com.itbank.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,13 @@ public class UsersService {
 	
 	public List<UsersDTO> usersSearch(String search) {
 		return usersDAO.usersSearch(search);
+	}
+
+	public int emailFindUsers(String email, String phone_number) {
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("email",email);
+		param.put("phone_number",phone_number);
+		
+		return usersDAO.countUserEmailPhoneNumber(param);
 	}
 }

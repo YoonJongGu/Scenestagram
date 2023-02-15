@@ -55,12 +55,12 @@
 
 <!-- 아이디와 비번입력시에만 로그인버튼 색갈표시 -->
 <script>
-	const inputId = document.querySelector("#id");
+	const inputPhoneNumber = document.querySelector("#id");
 	const inputPassword = document.querySelector("#pw");
 	const button = document.querySelector(".btn");
 
 	function loginBtn() {
-		let idValue = inputId.value;
+		let idValue = inputPhoneNumber.value;
 		let passwordValue = inputPassword.value;
 
 		if (idValue.length > 0 && passwordValue.length > 0) {
@@ -74,7 +74,7 @@
 		}
 	};
 
-	inputId.addEventListener('keyup', loginBtn);
+	inputPhoneNumber.addEventListener('keyup', loginBtn);
 	inputPassword.addEventListener('keyup', loginBtn);
 </script>
 

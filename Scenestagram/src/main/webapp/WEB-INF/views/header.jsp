@@ -263,11 +263,34 @@ select[name="gender"]{
 
 /*비밀번호 찾기 tip*/
 #findPw_tip{
-	color: balck;
-	text-align: left;
-	
+    text-align: left;
+    color: black;
+    margin-bottom: 10px;
+    font-size: 14px;
+    padding-left: 18px;
 }
 
+/*이메일 팁*/
+#email_tip{
+    color: black;
+    font-size: 17px;
+}
+
+/* 비밀번호 찾기 버튼스타일*/
+.btn_findPw_style{
+    background-color: rgb(28, 126, 214);
+    color: white;
+   	cursor: pointer;
+}
+#pw_tip_sub{
+	color: black;
+	margin: 10px 0 10px 0;
+}
+
+#pw_tip_main{
+	color: black;
+    margin-right: 0;
+}
 
 </style>
 </head>

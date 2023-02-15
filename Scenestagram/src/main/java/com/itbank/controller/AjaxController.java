@@ -38,15 +38,22 @@ public class AjaxController {
 
 	// 인증코드 생성 후 이메일 보내기
 	@GetMapping("/sendAuthNumber")
-	public int sendMail(String email) throws IOException {
+	public int sendMail(String email , String phone_number) throws IOException {
 		Random ran = new Random();
 		String authNumber = ran.nextInt(89999999) + 10000000 + "";
-		System.out.println(authNumber);
-		int row = mailService.sendMail(email, authNumber);
-		if (row == 1) {
+		int row = 0;
+		
+		// 메일 보내기전 사용자가 존재하는지 확인
+		if(userService.emailFindUsers(email,phone_number) != 0 ) {
+			
+			row = mailService.sendMail(email, authNumber);
 			authNumberMap.put(email, authNumber);
+			return row = 1;
+		}else {
+			// 없다면 0을 반환하여 없는사용자라 멘트출력
+			return row;			
 		}
-		return row;
+		
 	}
 
 	// 클라이언트에게 인증번호를 받은뒤 내가보낸 인증코드와 일치하는지 확인

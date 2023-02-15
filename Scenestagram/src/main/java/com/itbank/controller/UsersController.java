@@ -138,7 +138,12 @@ public class UsersController {
 	//비밀번호 변경
 	@GetMapping("/replacePw")
 	public String replacePw(UsersDTO dto) {
-		int flag = usersService.replacePw(dto);
+		
+	    String inputPass = dto.getPw();
+	    String pwd = pwdEncoder.encode(inputPass);
+	    dto.setPw(pwd);
+		
+		System.out.println(usersService.replacePw(dto) ==0 ? "수정성공" : "수정실패");
 		return "redirect:/";
 	}
 	

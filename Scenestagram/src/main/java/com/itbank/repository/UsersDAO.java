@@ -1,5 +1,6 @@
 ﻿package com.itbank.repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -32,6 +33,8 @@ public interface UsersDAO {
 	int countUserPhoneNumber(String phoneNumber);
 
 	List<UsersDTO> usersSearch(String search);
+
+	int countUserEmailPhoneNumber(HashMap<String, Object> param);
 
 
 }
