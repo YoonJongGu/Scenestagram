@@ -45,10 +45,6 @@ public class UsersService {
 		return usersDAO.getList();
 	}
 
-	public String findId(UsersDTO dto) {
-		return usersDAO.findId(dto);
-	}
-
 	public int replacePw(UsersDTO dto) {
 		return usersDAO.updatePw(dto);
 	}

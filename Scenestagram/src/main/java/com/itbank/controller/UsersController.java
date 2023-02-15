@@ -135,21 +135,6 @@ public class UsersController {
 	public void moveFindPw() {
 	}
 	
-	// 아이디 찾기
-	@GetMapping("/findId")
-	public void findId() {}
-	
-	@PostMapping("/findId")
-	public ModelAndView findId(UsersDTO dto) {
-		ModelAndView mav = new ModelAndView("/users/idTest");
-		String id = usersService.findId(dto);
-		
-		mav.addObject("id", id);
-		
-		return mav;
-	}
-	//아이디 찾기 end
-	
 	//비밀번호 변경
 	@GetMapping("/replacePw")
 	public String replacePw(UsersDTO dto) {

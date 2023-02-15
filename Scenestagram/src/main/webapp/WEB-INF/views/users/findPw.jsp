@@ -15,7 +15,7 @@
                         <!--이메일 인풋-->
                         <form class="login__input" method="GET" id="emailInput">
                         	<h3>비밀번호를 찾으실 건가요?</h3>
-	                        <div>
+	                        <div id="findPw_tip">
 	                        	<br>
 	                        	이메일주소를 입력 하시면 이메일주소로
 	                        	인증 코드를 보내드립니다.

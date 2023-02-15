@@ -21,8 +21,7 @@
                         </form>
                         <!--로그인 인풋end-->
                         <div>
-                        	<a href="${cpath }/users/findId">ID찾기</a> /
-                        	<a href="${cpath }/users/findPw">PW찾기</a>
+                        	<a href="${cpath }/users/findPw">비밀번호를 잊으셨나요?</a>
                         </div>
                         <!-- 또는 -->
                         <div class="login__horizon">

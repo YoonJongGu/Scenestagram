@@ -261,6 +261,12 @@ select[name="gender"]{
 	text-align: left;
 }
 
+/*비밀번호 찾기 tip*/
+#findPw_tip{
+	color: balck;
+	text-align: left;
+	
+}
 
 
 </style>

@@ -35,8 +35,6 @@ public class MailService {
 		}
 		sc.close();
 		
-		
-		
 		String host = "smtp.naver.com";
 		int port = 465;
 		final String serverId = accountInfo.split("/")[0];
@@ -52,7 +50,6 @@ public class MailService {
 		Session mailSession = Session.getDefaultInstance(props,new Authenticator() {
 			String un = serverId;
 			String pw = serverPw;
-			
 			
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {

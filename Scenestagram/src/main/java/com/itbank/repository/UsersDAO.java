@@ -25,8 +25,6 @@ public interface UsersDAO {
 
 	List<UsersDTO> getList();
 
-	String findId(UsersDTO dto);
-
 	int updatePw(UsersDTO dto);
 
 	int countUserNickName(String nickName);
