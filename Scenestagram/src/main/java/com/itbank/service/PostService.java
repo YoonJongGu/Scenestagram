@@ -354,6 +354,20 @@ public class PostService {
 		}		
 		
 		return 1;
-	}	
+	}
+
+	// 태그 검색 결과에 대한 페이지 (스크롤 페이징)
+	public List<ImageDTO> getPostList(HashMap<String, Object> tagOff) {
+		return postDAO.getPostList(tagOff);
+	}
+
+//	// 태그 검색 결과에 대한 페이지
+//	public List<PostDTO> getPostList(int offset) {
+//		return postDAO.getPostList(offset);
+//	}
+//
+//	public List<ImageDTO> getHashSearchResult(String hashtag) {
+//		return postDAO.getHashSearchResult(hashtag);
+//	}	
 
 }

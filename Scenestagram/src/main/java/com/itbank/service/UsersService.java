@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itbank.model.HashtagDTO;
 import com.itbank.model.UsersDTO;
 import com.itbank.repository.UsersDAO;
 
@@ -28,6 +29,10 @@ public class UsersService {
 
 	public int infoModify(UsersDTO dto) {
 		return usersDAO.infoUpdate(dto);
+	}
+
+	public int profileModify(UsersDTO dto) {
+		return usersDAO.updateUserProfile(dto);
 	}
 
 	public UsersDTO getUser(int idx) {		
@@ -54,8 +59,12 @@ public class UsersService {
 		return usersDAO.countUserPhoneNumber(phoneNumber);
 	}
 	
-	public List<UsersDTO> usersSearch(String search) {
-		return usersDAO.usersSearch(search);
+	public List<UsersDTO> usersSearch(String searchValue) {
+		return usersDAO.usersSearch(searchValue);
+	}
+
+	public List<HashtagDTO> hashSearch(String searchValue) {
+		return usersDAO.hashSearch(searchValue);
 	}
 
 	public int emailFindUsers(String email, String phone_number) {

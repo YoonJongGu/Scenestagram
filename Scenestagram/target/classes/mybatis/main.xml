@@ -12,6 +12,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.itbank.model.UsersDTO" alias="users" />
+		<typeAlias type="com.itbank.model.HashtagDTO" alias="hash" />
 		<typeAlias type="com.itbank.model.PostDTO" alias="post" />
 		<typeAlias type="com.itbank.model.ImageDTO" alias="image" />		
 	</typeAliases>

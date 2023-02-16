@@ -44,6 +44,7 @@ public class PostController {
 	
 	@GetMapping("/detail/{post_idx}")
 	public ModelAndView detail(@PathVariable("post_idx") int post_idx) {
+		System.out.println(post_idx);
 		ModelAndView mav = new ModelAndView("/post/detail");
 		PostDTO post_dto = postService.getDetail(post_idx);
 		String imageFileName = postService.getImageName(post_idx);
@@ -114,4 +115,31 @@ public class PostController {
 		System.out.println(row != 0 ? "상태 변경 성공" : "상태 변경 실패");
 		return "redirect:/users/myPage";
 	}
+	
+	// 해시 검색 결과에 대한 포스트 리스트 페이지
+//	@GetMapping("/postList/{hashtag}/")
+//	public ModelAndView postList(@PathVariable("hashtag") String hashtag) {
+//		System.out.println(hashtag);
+//		System.out.println("#"+hashtag);
+//		ModelAndView mav = new ModelAndView("/post/postList");
+//		List<ImageDTO> list = postService.getHashSearchResult("#" + hashtag);
+//		System.out.println(list);
+//		// 받아온 이미지(들) 여기서 잘라버릴 거임 썸네일은 하나니까
+//		list.forEach(dto -> {
+//			String fileName = dto.getFile_name();
+//			fileName = fileName.split(",")[0];
+//			dto.setFile_name(fileName);
+//			System.out.println(fileName);
+//		});
+//		mav.addObject("list", list);
+//		
+//		return mav;
+//	}
+	@GetMapping("/postList/{hashtag}/")
+	public ModelAndView postList(@PathVariable("hashtag") String hashtag) {
+		ModelAndView mav = new ModelAndView("/post/postList");
+		mav.addObject("hashtag", hashtag);
+		return mav;
+	}
+	
 }

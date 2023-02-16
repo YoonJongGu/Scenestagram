@@ -55,4 +55,12 @@ public interface PostDAO {
 
 	int updatePost(PostDTO dto);
 	
+//	해시 요청에 대한 리스트 페이지 (스크롤 페이징)
+	List<ImageDTO> getPostList(HashMap<String, Object> tagOff);
+
+//	해시 요청에 대한 리스트 페이지
+//	List<PostDTO> getPostList(int offset);
+//
+//	List<ImageDTO> getHashSearchResult(String hashtag);
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.itbank.model.HashtagDTO;
 import com.itbank.model.UsersDTO;
 
 @Repository
@@ -17,6 +18,8 @@ public interface UsersDAO {
 	int updateUserStatus(int idx);
 
 	int infoUpdate(UsersDTO dto);
+
+	int updateUserProfile(UsersDTO dto);
 
 	UsersDTO selectOne(int idx);
 
@@ -33,6 +36,7 @@ public interface UsersDAO {
 	List<UsersDTO> usersSearch(String search);
 
 	int countUserEmailPhoneNumber(HashMap<String, Object> param);
+	List<HashtagDTO> hashSearch(String searchValue);
 
 
 }

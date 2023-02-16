@@ -114,5 +114,44 @@
 		update post set content=#{content}, location=#{location}
 			where idx=#{idx}
 	</update>
+	
+	<!--해시태그 결과에 대한 리스트 반환 (스크롤 페이징) -->
+	<select id="getPostList" parameterType="hashmap" resultType="image">
+		select A.* from image A
+	    join
+	    (
+	        select A.idx from post A
+	                join
+	                (
+	                    select A.post_idx from post_hashtag A
+	                            join hashtag B
+	                            on A.hashtag_idx = B.idx
+	                        where B.hashtag=#{hashtag}
+	                ) B
+	                on A.idx=B.post_idx
+	            where A.status = 'activate' order by idx desc
+					offset #{offset} rows	
+					fetch first 5 rows only 
+	    ) B
+	    on A.post_idx=B.idx
+	</select>
+	<!--해시태그 결과에 대한  리스트 반환 (스크롤 처리 x)-->
+<!-- 	<select id="getHashSearchResult" parameterType="string" resultType="image"> -->
+<!-- 		select A.* from image A -->
+<!--     join -->
+<!--     ( -->
+<!--         select A.idx from post A -->
+<!--                 join -->
+<!--                 ( -->
+<!--                     select A.post_idx from post_hashtag A -->
+<!--                             join hashtag B -->
+<!--                             on A.hashtag_idx = B.idx -->
+<!--                         where B.hashtag=#{hashtag} -->
+<!--                 ) B -->
+<!--                 on A.idx=B.post_idx -->
+<!--             where A.status = 'activate' -->
+<!--     ) B -->
+<!--     on A.post_idx=B.idx -->
+<!-- 	</select> -->
 
 </mapper>

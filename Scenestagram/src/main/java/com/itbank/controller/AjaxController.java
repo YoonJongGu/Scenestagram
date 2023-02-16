@@ -2,6 +2,7 @@ package com.itbank.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itbank.model.HashtagDTO;
+import com.itbank.model.ImageDTO;
+import com.itbank.model.PostDTO;
+import com.itbank.model.UsersDTO;
 import com.itbank.service.FollowService;
 import com.itbank.service.MailService;
+import com.itbank.service.PostService;
 import com.itbank.service.UsersService;
 
 @RestController
@@ -23,6 +28,8 @@ public class AjaxController {
 	FollowService followService;
 	@Autowired
 	UsersService userService;
+	@Autowired
+	PostService postService;
 
 	@Autowired
 	private MailService mailService;
@@ -145,16 +152,40 @@ public class AjaxController {
 	// 검색
 
 	// 유저 검색
-//	@GetMapping("/search")
-//	public List<UsersDTO> search(String option, String searchValue) {
-//		if (option.equals("usersOption")) {
-//			List<UsersDTO> list = userService.usersSearch(searchValue);
-//			return list;
-//		} else {
-//			List<HashtagDTO> list = postService.hashSearch(searchValue);
-//			return list;
-//		}
-//
-//	}
+	@GetMapping("/usersSearch/{searchValue}")
+	public List<UsersDTO> usersSearch(@PathVariable("searchValue") String searchValue) {
+		System.out.println(searchValue);
+			List<UsersDTO> list = userService.usersSearch(searchValue);
+			return list;
+
+	}
+	
+	// 해시 검색
+	@GetMapping("/hashSearch/{searchValue}")
+	public List<HashtagDTO> hashSearch(@PathVariable("searchValue") String searchValue) {	// 해시 서비스 따로 만들기 그래서 일단 유저서비스 DAO 돌려쓰겟습니다
+		List<HashtagDTO> list = userService.hashSearch(searchValue);
+		return list;
+	}
+	
+	// 태그 검색 결과에 대한 스크롤 페이징
+	@GetMapping("/getPostList/{hashtag}/{offset}")
+	public List<ImageDTO> getPostList(@PathVariable("hashtag") String hashtag ,@PathVariable("offset") int offset) {
+		HashMap<String, Object> tagOff = new HashMap<String, Object>();
+		tagOff.put("hashtag", "#" + hashtag);
+		tagOff.put("offset", offset);
+		System.out.println(hashtag);
+		System.out.println(offset);
+		
+		List<ImageDTO> list = postService.getPostList(tagOff);
+		System.out.println(list);
+		list.forEach(dto -> {
+			String fileName = dto.getFile_name();
+			fileName = fileName.split(",")[0];
+			dto.setFile_name(fileName);
+			System.out.println(fileName);
+		});
+		
+		return list;
+	}
 
 }
