@@ -185,6 +185,22 @@ public class AjaxController {
 		return list;
 	}
 	
+	// 뷰디테일 페이지의 작성자 게시물을 가져오는 브링포스트 . 대상의 idx를 가져와서 사진의 이름을 돌려줄 것
+	   @GetMapping("/bringPost/{idx}")
+	   public List<ImageDTO> bringPost(@PathVariable("idx") int idx) {
+	      List<ImageDTO> list = postService.bringPost(idx);
+	      
+	      System.out.println(list);
+	      list.forEach(dto -> {
+	         String fileName = dto.getFile_name();
+	         fileName = fileName.split(",")[0];
+	         dto.setFile_name(fileName);
+	         System.out.println(fileName);
+	      });
+	      
+	      return list;
+	   }
+	
 }
 
 

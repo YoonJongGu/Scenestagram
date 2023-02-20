@@ -358,4 +358,8 @@ public class PostService {
 		return postDAO.getPostList(tagOff);
 	}
 
+	public List<ImageDTO> bringPost(int idx) {
+		return postDAO.bringPost(idx);
+	}
+
 }
