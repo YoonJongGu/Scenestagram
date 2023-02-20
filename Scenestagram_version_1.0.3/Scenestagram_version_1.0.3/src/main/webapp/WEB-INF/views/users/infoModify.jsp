@@ -147,10 +147,87 @@ a{
     font-weight: bold;
 } 
 
+.info_top_img > img{
+	width: 40px;
+    border-radius: 30px;
+} 
+
+/* ---infoModify 모달 ---*/
+        .modal_bg{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 999;
+        }
+
+        .modal_wrap{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 400px;
+            height: 300px;
+            background: #fff;
+            z-index: 1000;
+            border-radius: 20px;
+        }
+
+        .modal_wrap_sub{
+            display: flex;
+            flex-flow: column;
+            justify-content: center;            
+        }
+
+        .modal_foot div{
+            width: 100%;
+
+        }
+        button{
+            border: none;
+            background-color: white;
+            width: 100%;
+            height: 54px;
+            font-size: 17px;
+            border-top: 1px solid #dadada;
+        }
+
+        .modal_top{
+            text-align: center;
+        }
+        .modal_tip{
+            font-size: 20px;
+            height: 36px;
+        }
+        .modal_img {
+            height: 88px;
+        }
+        .modal_logo_name{
+            height: 43px;
+        }
+        .hidden{
+        	display: none;
+        }
+        .modal_img > img{
+        	 width: 73px;
+   			 margin-top: 10px;
+        }
+/* ---infoModify 모달 end ---*/
+
+
 /* ------인포 모디파이 스타일 end--------*/
 </style>
 </head>
 <body>
+
+	
+
+	<div>
+		
+	</div>
 
   <div class="all_wrap">
 
@@ -169,7 +246,7 @@ a{
         <div class="info_section_top">
 
           <div class="info_top_img">
-            <img src="sdf">
+            <img src="${cpath }/resources/img/userImg.jpg">
           </div>
 
           <div>
@@ -193,11 +270,12 @@ a{
             <div class="info_ncikName">
               <div>닉네임</div>
               <div><input type="text" name="nick_name" value="${login.nick_name }"></div>
+              <div></div>
             </div>
 
             <div class="info_introduce">
               <div>소개</div>
-              <div id="introduce"><textarea name="introduce" maxlength="150"></textarea></div>
+              <div id="introduce"><textarea maxlength="150" name="introduce">${login.introduce }</textarea></div>
             </div>
 
             <div class="info_email">
@@ -237,6 +315,48 @@ a{
       </div>
     </div>
   </div>
+  <!--  모달  -->
+    <div class="modal_bg hidden"></div>
+    <div class="modal_wrap hidden">
+        <div class="modal_wrap_sub">
+            <div class="modal_top">
+                <div class="modal_img"><img src="${cpath }/resources/img/userImg.jpg"></div>
+                <div class="modal_tip">사용자의 프로필 사진</div>
+                <div class="modal_logo_name">Scenestagram</div>
+            </div>
+
+            <div>
+                <div class="modal_foot">
+                    <div><button>사진 업로드</button></div>   
+                    <div class="modal_foot_btn"><button>취소</button></div>   
+                </div>
+            </div>
+        </div>
+    </div>
+      <!--  모달  end -->
+    <script>
+    	const modal_bg = document.querySelector('.modal_bg')
+    	const modal_wrap = document.querySelector('.modal_wrap')
+    	const info_change_img = document.querySelector('.info_change_img')
+    	const modal_foot_btn = document.querySelector('.modal_foot_btn')
+    	
+    	function info_modalHandelr() {
+			modal_bg.classList.remove('hidden')
+			modal_wrap.classList.remove('hidden')
+		}
+    	
+    	info_change_img.onclick = info_modalHandelr
+    	
+    	function info_closeModalHandler() {
+			modal_bg.classList.add('hidden')
+			modal_wrap.classList.add('hidden')
+		}
+    	
+    	modal_foot_btn.onclick = info_closeModalHandler
+    	modal_bg.onclick = info_closeModalHandler
+    	
+
+    </script>
 
 </body>
 </html>
