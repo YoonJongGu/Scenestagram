@@ -174,11 +174,6 @@
 		
 	}
 	
-	//날짜 제한
-	var now_date = Date.now()
-	var timeOff = new Date().getTimezoneOffset()*60000
-	var today = new Date(now_date-timeOff).toISOString().split("T")[0]
-	document.getElementById("birth").setAttribute('max',today)
 	
 </script>
     <div class="container">

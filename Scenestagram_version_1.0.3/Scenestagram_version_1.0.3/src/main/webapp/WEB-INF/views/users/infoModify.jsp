@@ -27,6 +27,7 @@ html{
     background-color: rgb(0,149,246);
     width: 66px;
     color: rgb(255,255,255);
+    cursor: pointer;
 }
 
 #introduce > textarea{
@@ -54,7 +55,7 @@ html{
 /* 모든 a태그 설정*/
 a{
   text-decoration: none;
-  color: black;
+  color: white;
 
 }
 
@@ -152,6 +153,19 @@ a{
     border-radius: 30px;
 } 
 
+.info_introduce_count{
+	display: flex;
+}
+
+option{
+	color: black;
+}
+
+.err{
+	color: red;
+    font-size: 12px;
+}
+
 /* ---infoModify 모달 ---*/
         .modal_bg{
             width: 100%;
@@ -223,11 +237,94 @@ a{
 </head>
 <body>
 
+
+<script type="text/javascript">
+// 닉네임 중복 , 공백 , 길이 확인
+let nick_name_flag = false
+var nick_name_Check = function()	{
+    let nick_name=$('input[name="nick_name"]').val();  //id값이 "id"인 입력란의 값을 저장
+    // ajax에서 return으로 값을 반환시 ajax안에서만 반환하게된다 그러니 
+    // ajax밖에서 함수를 선언하고 안에서 값조정을하여 밖에서 값을 return해주자.
+    
+    
+    
+    if(nick_name.match(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/)){
+    	$('.nick_name_err').text('한글을 입력할수 없습니다.')
+    	return false
+    }
+    else if(nick_name.match(/\s/g) != null) {
+   		$('.nick_name_err').text('공백을 포함할 수 없습니다.')
+          return false
+ 	}	    
+   	else if (nick_name.length < 6 || nick_name.length > 21) {
+   		$('.nick_name_err').text('닉네임은 7자이상 20자이하여야 합니다.')
+       return false
+   }else if(nick_name == '${login.nick_name}'){
+   	$('.nick_name_err').text('')
+   }
+   else{
+
+	    $.ajax({
+	        url:'${cpath}/nickNameCheck', //Controller에서 요청 받을 주소
+	        type:"post", //POST 방식으로 전달
+	        data:{nick_name : nick_name},
+	        dataType : 'json',
+	        async : false,
+	        
+	        success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
+	            if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디
+	            	$('.nick_name_err').text('');
+	            	nick_name_flag = true
+	            } 
+	            else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+	               $('.nick_name_err').text('이미 존재하는 닉네임입니다.');
+	            	nick_name_flag = false
+	            }
+	        },
+	        error:function(){
+	            alert("서버요청오류");
+	        }
+		})
+		return nick_name_flag
+   }
+    
+}
+
+
+//email형식 확인
+function emailCheck(){
+  const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/
+  if(email.value.match(reg_email)==null){
+    email_err_ment.innerText = '이메일형식이 올바르지 않습니다.'
+    email.style.border ='3px solid red'
+    return false
+  }
+  else{
+    email_err_ment.innerText=''
+    email.style.border ='1px solid rgba(var(--ca6, 219, 219, 219), 1)'
+    return true
+  }
+}
+
+//모든 값 확인
+function allCheck(){
+	if(emailCheck() == false){
+		alert('이메일을 확인해주세요')
+		email.focus()
+		return false
+	}else if(nick_name_Check() == false){
+		alert('닉네임을 확인해주세요')
+		nick_name.focus()
+		return false
+	}else {
+		alert('프로필이 수정되었습니다.')
+		return true
+	}
+	
+}
+</script>
 	
 
-	<div>
-		
-	</div>
 
   <div class="all_wrap">
 
@@ -236,7 +333,7 @@ a{
       <!-- 사이드 탭-->
       <div class="info_side">
         <div>프로필 편집</div>
-        <div>비밀번호 변경</div>
+        <div><a href="${cpath }/users/infoModify_replacePw">비밀번호 변경</a></div>
       </div>
       <!-- 사이드 탭 end-->
 
@@ -269,18 +366,28 @@ a{
 
             <div class="info_ncikName">
               <div>닉네임</div>
-              <div><input type="text" name="nick_name" value="${login.nick_name }"></div>
-              <div></div>
+              <div>
+              	<input type="text" name="nick_name" value="${login.nick_name }">
+              	<div class="nick_name_err err"></div>
+              </div>
+              
             </div>
 
             <div class="info_introduce">
               <div>소개</div>
-              <div id="introduce"><textarea maxlength="150" name="introduce">${login.introduce }</textarea></div>
+              <div id="introduce">
+              	<textarea maxlength="150" spellcheck="false" name="introduce">${login.introduce }</textarea>
+              	<div class="info_introduce_count"><div class="length_count"></div>/150</div>
+              </div>
             </div>
 
             <div class="info_email">
               <div>이메일</div>
-              <div><input type="text" name="email" value="${login.email }"></div>
+              <div>
+              	<div><input type="text" name="email" value="${login.email }"></div>
+              	<div class="email_err err"></div>
+              	
+              </div>
             </div>
 			
             <div class="info_phoneNumber">
@@ -302,7 +409,7 @@ a{
             <div>
               <div></div>
               <div class="info_submit_">
-                <div><input id="info_submit_btn" type="submit" value="제출"></div>
+                <div><input id="info_submit_btn" type="submit" onclick="return allCheck()"></div>
                 <div><a href="">일시적으로 계정 비활성화</a></div>
               </div>
 
@@ -334,6 +441,11 @@ a{
         </div>
     </div>
       <!--  모달  end -->
+      
+      <!-- jquery 라이브러리 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      
+      <!-- 모달 스크립트 -->
     <script>
     	const modal_bg = document.querySelector('.modal_bg')
     	const modal_wrap = document.querySelector('.modal_wrap')
@@ -357,6 +469,35 @@ a{
     	
 
     </script>
+    
+      <!-- 모달 스크립트  end-->
+    
+    <!-- 닉네임 중복체크 스크립트 -->
+    <script>
+	const nick_name = document.querySelector('input[name="nick_name"]')
+	const nick_name_err = document.querySelector('.nick_name_err')
+	$('input[name="nick_name"]').keyup(nick_name_Check)
+    </script>
+    
+    <!-- 자기소개 글 갯수 카운트 -->
+    <script>
+    	const introduce = document.querySelector('textarea[name="introduce"]')
+    	const lengthCount = document.querySelector('.length_count')
+    	
+    	function lengthCountHandler() {
+			let count = introduce.value.length
+			lengthCount.innerText = count
+		}
+    	
+    	introduce.onkeyup = lengthCountHandler
+    	lengthCountHandler()
+    </script>
 
+	<!-- 이메일 형식 확인 -->
+	<script type="text/javascript">
+	    const email = document.querySelector('input[name="email"]')
+	    const email_err_ment = document.querySelector('.email_err')
+	    email.onblur = emailCheck
+	</script>	
 </body>
 </html>

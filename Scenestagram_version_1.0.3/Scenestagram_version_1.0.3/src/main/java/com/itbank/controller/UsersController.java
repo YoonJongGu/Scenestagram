@@ -191,5 +191,16 @@ public class UsersController {
 			return mav;
 		}
 	
+		@GetMapping("infoModify_replacePw")
+		public void infoReplacePw() {}
+		
+		@PostMapping("infoModify_replacePw")
+		public String infoReplacePwPost(HttpSession session ,String old_pw,String pw) {
+			UsersDTO dto = (UsersDTO)session.getAttribute("login");
+			System.out.println(dto.getPw());
+			System.out.println(old_pw);
+			System.out.println(pw);
+			return "redirect:/infoModify";
+		}
 	
 }
