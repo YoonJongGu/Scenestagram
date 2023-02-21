@@ -316,6 +316,14 @@ function allCheck(){
 	  	
 	  // 비밀번호 일치확인
 	  pw.onblur = pwEqulsCheck
+	  
+	  const old_pw_ment = '${infoModify_replacePw_msg}'
+	  if(old_pw_ment != ''){
+		  alert(old_pw_ment)
+	  }
+	  
+	  
+		  
   </script>
 
 </body>

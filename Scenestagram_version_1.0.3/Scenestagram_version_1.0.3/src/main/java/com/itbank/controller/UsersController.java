@@ -195,12 +195,23 @@ public class UsersController {
 		public void infoReplacePw() {}
 		
 		@PostMapping("infoModify_replacePw")
-		public String infoReplacePwPost(HttpSession session ,String old_pw,String pw) {
-			UsersDTO dto = (UsersDTO)session.getAttribute("login");
-			System.out.println(dto.getPw());
+		public String infoReplacePwPost(HttpSession session ,String old_pw,String pw,RedirectAttributes rttr) {
 			System.out.println(old_pw);
-			System.out.println(pw);
-			return "redirect:/infoModify";
+			UsersDTO users = (UsersDTO)session.getAttribute("login");
+			boolean pwdMatch = false;
+			pwdMatch = pwdEncoder.matches(old_pw, users.getPw());
+			System.out.println(pwdMatch);
+			
+			if(pwdMatch == true) {
+				 String pwd = pwdEncoder.encode(pw);
+				 users.setPw(pwd);
+				 System.out.println(usersService.replacePw(users) == 0 ? "수정실패" : "수정성공");
+				 rttr.addFlashAttribute("infoModify_replacePw_msg","비밀번호가 변경되었습니다.");
+				 return "redirect:/users/infoModify_replacePw";
+			}else {
+				rttr.addFlashAttribute("infoModify_replacePw_msg","이전 비밀번호가 틀립니다.");
+				return "redirect:/users/infoModify_replacePw";
+			}
 		}
 	
 }

@@ -48,7 +48,7 @@ body {
 div {
     /* height: 7170.96px; */
     /* width: 998.667px; */
-    background-color: #0f0f0f;
+/*     background-color: #0f0f0f; */
     min-height: auto;
     min-width: auto;
     display: block;
@@ -442,9 +442,66 @@ div.insta-post-item-middle > * {
    width: 1200px;
 }
 
+/* 사이드 프로필 미니 프사*/ 
+.miniImg-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #1cd14f;
+    position: relative;
+    
+}
+
+.modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal .bg {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .modalBox {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 2%;
+            width: 400px;
+            height: auto;
+            padding: 0px;
+        }
+        .modalBox button {
+            display: block;
+            width: 80px;
+            margin: 0 auto;
+        }
+        .hidden {
+            display: none;
+        }
+        .modalBox div {
+           color: black;
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .modalBox > hr {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        .modalBox > div:hover {
+            cursor: pointer;
+        }
+
 </style>
 </head>
-<body onload="followCntHandler(); checkFollowHandler(); bringPostHandler();">
+<body onload="followCntHandler(); checkFollowHandler(); bringPostHandler(); optionCheckHandler();">
 
 <div class="screen">
 
@@ -512,32 +569,6 @@ div.insta-post-item-middle > * {
                     <li>
                         <a href="">
                             <span class="icon">
-                                <svg aria-label="릴스" class="_ab6-" color="#fafafa" fill="#fafafa" height="24" role="img"
-                                    viewBox="0 0 24 24" width="24">
-                                    <line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"
-                                        x1="2.049" x2="21.95" y1="7.002" y2="7.002"></line>
-                                    <line fill="none" stroke="currentColor" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="2" x1="13.504" x2="16.362" y1="2.001"
-                                        y2="7.002"></line>
-                                    <line fill="none" stroke="currentColor" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="2" x1="7.207" x2="10.002" y1="2.11"
-                                        y2="7.002"></line>
-                                    <path
-                                        d="M2 12.001v3.449c0 2.849.698 4.006 1.606 4.945.94.908 2.098 1.607 4.946 1.607h6.896c2.848 0 4.006-.699 4.946-1.607.908-.939 1.606-2.096 1.606-4.945V8.552c0-2.848-.698-4.006-1.606-4.945C19.454 2.699 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.546 2 5.704 2 8.552Z"
-                                        fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2">
-                                    </path>
-                                    <path
-                                        d="M9.763 17.664a.908.908 0 0 1-.454-.787V11.63a.909.909 0 0 1 1.364-.788l4.545 2.624a.909.909 0 0 1 0 1.575l-4.545 2.624a.91.91 0 0 1-.91 0Z"
-                                        fill-rule="evenodd"></path>
-                                </svg>
-                            </span>
-                            <span>릴스</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <span class="icon">
                                 <svg aria-label="Direct" class="_ab6-" color="#fafafa" fill="#fafafa" height="24"
                                     role="img" viewBox="0 0 24 24" width="24">
                                     <line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"
@@ -586,21 +617,8 @@ div.insta-post-item-middle > * {
                     </li>
                     <li>
                         <a href="">
-                            <span class="icon">
-                                <svg aria-label="새로운 게시물" class="_ab6-" color="#fafafa" fill="#fafafa" height="24"
-                                    role="img" viewBox="0 0 24 24" width="24">
-                                    <path
-                                        d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552Z"
-                                        fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2">
-                                    </path>
-                                    <line fill="none" stroke="currentColor" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="2" x1="6.545" x2="17.455" y1="12.001"
-                                        y2="12.001"></line>
-                                    <line fill="none" stroke="currentColor" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="2" x1="12.003" x2="12.003" y1="6.545"
-                                        y2="17.455"></line>
-                                </svg>
+                            <span class="miniImg-box">
+                                <img src="${cpath}/resources/img/insta-profile.jpg" width="10px" height="10px">
                             </span>
                             <span>프로필</span>
                         </a>
@@ -690,16 +708,24 @@ div.insta-post-item-middle > * {
                                                     <div class="text-box">${dto.nick_name }</div>
                                                     <button id="followBtn"></button>
                                                     <div>
-                                                <a href="">
-                                                    <span class="icon">
-                                                        <svg aria-label="옵션" class="_ab6-" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
-                                                    </span>
-                                                </a>
+                                                  <span class="option hidden">
+                                                     <svg aria-label="옵션" class="_ab6-" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                                                 </span>
                                             </div>
                                                 </div>
+                            <!-- 모달 -->           <div class="modal hidden">
+                                            <div class="bg"></div>
+                                            <div class="modalBox">
+                                                <a href="${cpath }/users/infoModify_replacePw"><div>비밀번호 변경</div></a>
+                                                <hr>
+                                                <a href="${cpath }/users/logout"><div>로그아웃</div></a>
+                                                <hr>
+                                                <div class="closeBtn">취소</div>
+                                            </div>
+                                        </div>
                                                 <div class="flex" style="flex-direction: row;">
 
-                                                    <div>게시물</div>
+                                                    <div><span>게시물</span><span id="postCnt"></span></div>
                                                     <div><span>팔로워</span><span id="followerCnt"></span></div>
                                                     <div><span>팔로잉</span><span id="followingCnt"></span></div>
                                                 </div>
@@ -730,15 +756,25 @@ div.insta-post-item-middle > * {
                 </div>
             </div>
         </div>
+        
+        
 
-    </div>
     
     <script>
-    const imgLine = document.getElementById('imgLine')
-    const followBtn = document.getElementById('followBtn')
-    const followerCnt = document.getElementById('followerCnt')
-    const followingCnt = document.getElementById('followingCnt')
+    const imgLine = document.getElementById('imgLine') // 게시물의 1번째 이미지가 보여질 게시글 장소
+    const followBtn = document.getElementById('followBtn') // 팔로우 팔로잉 프로필 편집 버튼 (3개 돌려쓰기)
+    const postCnt = document.getElementById('postCnt') // 게시물 카운트
+    const followerCnt = document.getElementById('followerCnt') // 팔로워 카운트
+    const followingCnt = document.getElementById('followingCnt') // 팔로잉 카운트
+    const option = document.querySelector('.option   ')   // 옵션(톱니바퀴)
+    console.log(option)
     
+    function optionCheckHandler() {
+       if('${dto.idx}'=='${login.idx}') {
+           option.classList.remove('hidden')
+        }
+    }
+
     function checkFollowHandler() {
        if('${dto.idx}' == '${login.idx}') {
              followBtn.innerHTML = '<a href="${cpath}/users/infoModify">프로필 편집</a>'
@@ -789,7 +825,7 @@ div.insta-post-item-middle > * {
              }
           })
        }
-       else {
+       else if(event.target.innerHTML == '팔로잉') {
           fetch('${cpath}/unfollow/${dto.idx}/${login.idx}')
           .then(resp => resp.text())
           .then(text => {
@@ -801,9 +837,13 @@ div.insta-post-item-middle > * {
              }
           })
        }
+       else {
+          // 이거 안해주면 프로필 편집 버튼 눌렀을 때 위에 else if 애들 손봐줘야 됨
+       }
     }
     
     function bringPostHandler() {
+       let postsu = 0
        fetch('${cpath}/bringPost/${dto.idx}')
        .then(resp => resp.json())
        .then(json => {
@@ -825,14 +865,30 @@ div.insta-post-item-middle > * {
             imgTag += '</div>'
             imgTag += '</div>'
             imgLine.innerHTML += imgTag
+            
+            postsu += 1
+            postCnt.innerText = postsu
          })
        })
     }
+    
+//     옵션 모달
+    const open = () => {
+        document.querySelector(".modal").classList.remove("hidden")
+    }
+    const close = () => {
+        document.querySelector(".modal").classList.add("hidden")
+    }
+    
+    document.querySelector(".option").addEventListener("click", open);
+    document.querySelector(".closeBtn").addEventListener("click", close);
+    document.querySelector(".bg").addEventListener("click", close);
    
 
 //        document.body.onload = followCntHandler 
-//     document.body.onload = checkFollowHandler 이 주석 처리한 코드. 한 문서에 온로드 2개 사용 불가능 한데 <body> 태그에 체인 거는 방식으로 사용할 수 있게 만듬
+//     document.body.onload = checkFollowHandler 이 주석 처리한 코드. 한 문서에 온로드 2개 이상 사용 불가능 한데 <body> 태그에 체인 거는 방식으로 사용할 수 있게 만듬
 //      document.body.onload = bringPostHandler
+//      document.body.onload = optionCheckHandler
     followBtn.onclick = followHandler
 </script>
 
