@@ -742,7 +742,7 @@ div.insta-post-item-middle > * {
                             <!-- 모달 -->           <div class="modal hidden">
                                             <div class="bg"></div>
                                             <div class="modalBox">
-                                                <a href="${cpath }/"><div>비밀번호 변경</div></a>
+                                                <a href="${cpath }/users/infoModify_replacePw"><div>비밀번호 변경</div></a>
                                                 <hr>
                                                 <a href="${cpath }/users/logout"><div>로그아웃</div></a>
                                                 <hr>

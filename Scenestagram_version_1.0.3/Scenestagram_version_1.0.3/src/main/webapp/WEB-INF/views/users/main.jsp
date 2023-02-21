@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="cpath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -108,11 +107,19 @@ div.img-box .img {
 /* 전체 화면 */
 div.screen {
     display: flex;
+    height: 100vh;
     /* flex-direction: column; */
     /* position: relative; */
     /* z-index: 0;  */
     
     /* flex-wrap: wrap; */
+    flex-flow: column;
+}
+/*푸터*/
+.footer{
+	margin-left: 300px;
+    text-align: center;
+    width: 600px;
 }
 
 /* 왼쪽메뉴 */
@@ -173,7 +180,7 @@ div.menu-top {
 div.home-main {
     /* position: relative; */
     display: flex;            
-
+	height: 100vh;
     /* 나중에 수정 */
     background-color: #0f0f0f;
     
@@ -674,41 +681,77 @@ div.insta-post-item-middle > * {
           padding: 16px 12px;
       }
 
-  
+
+/*---------더보기 style----------*/
+.more_menu{
+ 	opacity: 0;
+	transition-duration: 1.2s;
+	position: absolute;
+	z-index: 4;
+    bottom: 83px;
+    left: 4px;
+	width: 238px;
+}
+.more_menu_wrap{
+	width: 238px;
+}
+.more_menu_wrap div{
+	background-color: #262626;
+}
+.more_menu_wrap > div{
+	display: flex;
+	height: 44px;
+ 	justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    cursor: pointer;
+}
+.more_menu_wrap > div:nth-child(1){
+	border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.more_menu_wrap > div:nth-child(2) {
+	border-bottom-right-radius: 15px;	
+	border-bottom-left-radius: 15px;	
+}
+.more_menu_wrap > div:hover {
+	background: #121212
+}
+/*---------더보기 style end----------*/  
 </style>
 </head>
 <body>
-
-       <div class="search-box" style="height: 100vh;">
-            <div class="search-box-top">
-                <h2>검색</h2>
-            </div>
-            <br>
-            <div class="">
-                <div class="">
-                    <form method="GET" id="form">
-                       <select id="option">
-                          <option value="usersOption" selected="selected">유저</option>
-                          <option value="hashOption">해시</option>
-                       </select>
+<!-- 검색창 -->
+<div class="search-box" style="height: 100vh;">
+    <div class="search-box-top">
+        <h2>검색</h2>
+    </div>
+    <div class="">
+        <div class="">
+            <form method="GET" id="form">
+               <select id="option">
+                  <option value="usersOption" selected="selected">유저</option>
+                  <option value="hashOption">해시</option>
+               </select>
 <!--                   <input type="radio" name="option" value="usersOption">유저 -->
 <!--                   <input type="radio" name="option" value="hashOption">태그 -->
-                  <input id="searchValue" type="text" name="searchValue" placeholder="검색" style="color: black;">
-                  <input type="submit" value="검색">
-               </form>
-                </div>
-                <br>
-                <div class="">
-                    <div id="root"></div>
-
-                </div>
-            </div>
+          <input id="searchValue" type="text" name="searchValue" placeholder="검색" style="color: black;">
+          <input type="submit" value="검색">
+       </form>
         </div>
+        <br>
+        <div class="">
+            <div id="root"></div>
+
+        </div>
+    </div>
+</div>
 
 
 <div class="screen">
-
-        <!-- 왼쪽 사이드 메뉴 -->
+<!-- 검색창 end -->
+<!-- 왼쪽 사이드 메뉴 -->
   <aside class="sidebar">
     <header class="sidebar-header">
       <img class="logo-img" src="${cpath }/resources/img/logo_dark.png" />
@@ -716,7 +759,7 @@ div.insta-post-item-middle > * {
     </header>
     <nav>
 
-      <button>
+      <button class="sidevar_go_main">
         <span>
           <i class="uil uil-estate"></i>
           <span>홈</span>
@@ -762,14 +805,14 @@ div.insta-post-item-middle > * {
         </span>
       </button>
 
-      <button>
+      <button class="sidevar_go_profile">
         <span>
           <img src="${cpath }/resources/img/userImg.jpg" />
           <span>프로필</span>
         </span>
       </button>
 
-      <button>
+      <button class="more_menu_btn">
         <span>
           <i class="uil uil-bars"> </i>
           <span>더 보기</span>
@@ -778,6 +821,7 @@ div.insta-post-item-middle > * {
     </nav>
   </aside>
 <!-- 사이드메뉴 end -->
+
         <!-- 가운데 메인 -->
         <div class="home-main">
             <div class="main">
@@ -796,390 +840,13 @@ div.insta-post-item-middle > * {
                                             <div class="text-box">cha_ni__</div>
                                         </div>
                                     </div>
-                                    <!--아이템들 loop-->
-                                    <div class="insta-main-top-ul-li">
-                                        <div class="insta-main-top-ul-item">
-                                            <div class="img-box">
-                                                <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                            </div>
-                                            <div class="text-box">cha_ni__</div>
-                                        </div>
-                                    </div>
-                                    <!--아이템들 loop-->
-                                    <div class="insta-main-top-ul-li">
-                                        <div class="insta-main-top-ul-item">
-                                            <div class="img-box">
-                                                <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                            </div>
-                                            <div class="text-box">cha_ni__</div>
-                                        </div>
-                                    </div>
-                                    <!--아이템들 loop-->
-                                    <div class="insta-main-top-ul-li">
-                                        <div class="insta-main-top-ul-item">
-                                            <div class="img-box">
-                                                <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                            </div>
-                                            <div class="text-box">cha_ni__</div>
-                                        </div>
-                                    </div>
-                                    <!--아이템들 loop-->
-                                    <div class="insta-main-top-ul-li">
-                                        <div class="insta-main-top-ul-item">
-                                            <div class="img-box">
-                                                <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                            </div>
-                                            <div class="text-box">cha_ni__</div>
-                                        </div>
-                                    </div>
-                                    <!--아이템들 loop-->
-                                    <div class="insta-main-top-ul-li">
-                                        <div class="insta-main-top-ul-item">
-                                            <div class="img-box">
-                                                <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                            </div>
-                                            <div class="text-box">cha_ni__</div>
-                                        </div>
-                                    </div>
-
-
-
                                 </div>
-
                             </div>
-
                             <!-- 게시물 (POST) -->
                             <div class="post">
-                                <!-- Loop -->
-                                <div class="insta-post-item">
-                                    <div class="i-col-0 insta-post-item-top">
-
-                                        <div class="img-box">
-                                            <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                        </div>
-                                        <div class="i-col-0 id-box">
-                                            <span class="id">cha_ni__</span>
-                                            <span>•</span>
-                                            <span class="day">2일</span>
-                                        </div>
-
-                                        <div class="option-box">
-                                            <svg aria-label="옵션 더 보기" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                <circle cx="12" cy="12" r="1.5"></circle>
-                                                <circle cx="6" cy="12" r="1.5"></circle>
-                                                <circle cx="18" cy="12" r="1.5"></circle>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="insta-post-item-middle">
-                                        <div class="img-box">
-                                            <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="insta-post-item-btn-box">
-                                        <ul class="i-col-0 insta-post-item-btn-ul">
-                                            <li>
-                                                <a href="">
-                                                    <svg aria-label="좋아요" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                        height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                        <path
-                                                            d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <svg aria-label="댓글 달기" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                        height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                        <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"
-                                                            fill="none" stroke="currentColor" stroke-linejoin="round"
-                                                            stroke-width="2"></path>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <svg aria-label="게시물 공유" class="_ab6-" color="#fafafa"
-                                                        fill="#fafafa" height="24" role="img" viewBox="0 0 24 24"
-                                                        width="24">
-                                                        <line fill="none" stroke="currentColor" stroke-linejoin="round"
-                                                            stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083">
-                                                        </line>
-                                                        <polygon fill="none"
-                                                            points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
-                                                            stroke="currentColor" stroke-linejoin="round"
-                                                            stroke-width="2"></polygon>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li class="bookmark">
-                                                <a href="">
-                                                    <svg aria-label="저장" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                        height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                        <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21"
-                                                            stroke="currentColor" stroke-linecap="round"
-                                                            stroke-linejoin="round" stroke-width="2"></polygon>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="insta-post-item-comment">
-                                        <p class="good">좋아요 99개</p>
-                                        <p class="post-comment">여기는 게시글입니다</p>
-                                        <p class="post-reply">여기는 댓글보여주는곳</p>
-                                        <textarea aria-label="댓글 달기..." placeholder="댓글 달기..."></textarea>
-                                    </div>
-                                </div>
-                                <div class="insta-post-item">
-                                    <div class="i-col-0 insta-post-item-top">
-
-                                        <div class="img-box">
-                                            <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                        </div>
-                                        <div class="i-col-0 id-box">
-                                            <span class="id">cha_ni__</span>
-                                            <span>•</span>
-                                            <span class="day">2일</span>
-                                        </div>
-
-                                        <div class="option-box">
-                                            <svg aria-label="옵션 더 보기" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                <circle cx="12" cy="12" r="1.5"></circle>
-                                                <circle cx="6" cy="12" r="1.5"></circle>
-                                                <circle cx="18" cy="12" r="1.5"></circle>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="insta-post-item-middle">
-                                        <div class="img-box">
-                                            <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="insta-post-item-btn-box">
-                                        <ul class="i-col-0 insta-post-item-btn-ul">
-                                            <li>
-                                                <a href="">
-                                                    <svg aria-label="좋아요" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                        height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                        <path
-                                                            d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <svg aria-label="댓글 달기" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                        height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                        <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"
-                                                            fill="none" stroke="currentColor" stroke-linejoin="round"
-                                                            stroke-width="2"></path>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <svg aria-label="게시물 공유" class="_ab6-" color="#fafafa"
-                                                        fill="#fafafa" height="24" role="img" viewBox="0 0 24 24"
-                                                        width="24">
-                                                        <line fill="none" stroke="currentColor" stroke-linejoin="round"
-                                                            stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083">
-                                                        </line>
-                                                        <polygon fill="none"
-                                                            points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
-                                                            stroke="currentColor" stroke-linejoin="round"
-                                                            stroke-width="2"></polygon>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li class="bookmark">
-                                                <a href="">
-                                                    <svg aria-label="저장" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                        height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                        <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21"
-                                                            stroke="currentColor" stroke-linecap="round"
-                                                            stroke-linejoin="round" stroke-width="2"></polygon>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="insta-post-item-comment">
-                                        <p class="good">좋아요 99개</p>
-                                        <p class="post-comment">여기는 게시글입니다</p>
-                                        <p class="post-reply">여기는 댓글</p>
-                                    </div>
-                                </div>
-                                <div class="insta-post-item">
-                                    <div class="i-col-0 insta-post-item-top">
-
-                                        <div class="img-box">
-                                            <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                        </div>
-                                        <div class="i-col-0 id-box">
-                                            <span class="id">cha_ni__</span>
-                                            <span>•</span>
-                                            <span class="day">2일</span>
-                                        </div>
-
-                                        <div class="option-box">
-                                            <svg aria-label="옵션 더 보기" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                <circle cx="12" cy="12" r="1.5"></circle>
-                                                <circle cx="6" cy="12" r="1.5"></circle>
-                                                <circle cx="18" cy="12" r="1.5"></circle>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="insta-post-item-middle">
-                                        <div class="img-box">
-                                            <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="insta-post-item-btn-box">
-                                        <ul class="i-col-0 insta-post-item-btn-ul">
-                                            <li>
-                                                <a href="">
-                                                    <svg aria-label="좋아요" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                        height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                        <path
-                                                            d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <svg aria-label="댓글 달기" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                        height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                        <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"
-                                                            fill="none" stroke="currentColor" stroke-linejoin="round"
-                                                            stroke-width="2"></path>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <svg aria-label="게시물 공유" class="_ab6-" color="#fafafa"
-                                                        fill="#fafafa" height="24" role="img" viewBox="0 0 24 24"
-                                                        width="24">
-                                                        <line fill="none" stroke="currentColor" stroke-linejoin="round"
-                                                            stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083">
-                                                        </line>
-                                                        <polygon fill="none"
-                                                            points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
-                                                            stroke="currentColor" stroke-linejoin="round"
-                                                            stroke-width="2"></polygon>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li class="bookmark">
-                                                <a href="">
-                                                    <svg aria-label="저장" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                        height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                        <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21"
-                                                            stroke="currentColor" stroke-linecap="round"
-                                                            stroke-linejoin="round" stroke-width="2"></polygon>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="insta-post-item-comment">
-                                        <p class="good">좋아요 99개</p>
-                                        <p class="post-comment">여기는 게시글입니다</p>
-                                        <p class="post-reply">여기는 댓글</p>
-                                    </div>
-                                </div>
-                                <div class="insta-post-item">
-                                    <div class="i-col-0 insta-post-item-top">
-
-                                        <div class="img-box">
-                                            <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                        </div>
-                                        <div class="i-col-0 id-box">
-                                            <span class="id">cha_ni__</span>
-                                            <span>•</span>
-                                            <span class="day">2일</span>
-                                        </div>
-
-                                        <div class="option-box">
-                                            <svg aria-label="옵션 더 보기" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                <circle cx="12" cy="12" r="1.5"></circle>
-                                                <circle cx="6" cy="12" r="1.5"></circle>
-                                                <circle cx="18" cy="12" r="1.5"></circle>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="insta-post-item-middle">
-                                        <div class="img-box">
-                                            <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="insta-post-item-btn-box">
-                                        <ul class="i-col-0 insta-post-item-btn-ul">
-                                            <li>
-                                                <a href="">
-                                                    <svg aria-label="좋아요" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                        height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                        <path
-                                                            d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <svg aria-label="댓글 달기" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                        height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                        <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"
-                                                            fill="none" stroke="currentColor" stroke-linejoin="round"
-                                                            stroke-width="2"></path>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <svg aria-label="게시물 공유" class="_ab6-" color="#fafafa"
-                                                        fill="#fafafa" height="24" role="img" viewBox="0 0 24 24"
-                                                        width="24">
-                                                        <line fill="none" stroke="currentColor" stroke-linejoin="round"
-                                                            stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083">
-                                                        </line>
-                                                        <polygon fill="none"
-                                                            points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
-                                                            stroke="currentColor" stroke-linejoin="round"
-                                                            stroke-width="2"></polygon>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li class="bookmark">
-                                                <a href="">
-                                                    <svg aria-label="저장" class="_ab6-" color="#fafafa" fill="#fafafa"
-                                                        height="24" role="img" viewBox="0 0 24 24" width="24">
-                                                        <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21"
-                                                            stroke="currentColor" stroke-linecap="round"
-                                                            stroke-linejoin="round" stroke-width="2"></polygon>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="insta-post-item-comment">
-                                        <p class="good">좋아요 99개</p>
-                                        <p class="post-comment">여기는 게시글입니다</p>
-                                        <p class="post-reply">여기는 댓글</p>
-                                    </div>
-                                </div>
                             </div>
+                            <!-- 게시물 (POST) end -->
                         </div>
-
-
                         <!-- 메인피드의 오른쪽 마이프로필 및 추천 -->
                         <div class="home-feed-right">
                             <div class="home-feed-right-myprofile">
@@ -1255,39 +922,70 @@ div.insta-post-item-middle > * {
                                 </div>
 
                             </div>
-                            <div class="home-feed-right-footer">
-                                <div>
-                                    <a href=""><span>소개</span></a><span>•</span>
-                                    <a href=""><span>도움말</span></a><span>•</span>
-                                    <a href=""><span>홍보 센터</span></a><span>•</span>
-                                    <a href=""><span>API</span></a><span>•</span>
-                                    <a href=""><span>채용 정보</span></a><span>•</span>
-                                    <a href=""><span>개인정보처리방침</span></a><span>•</span>
-                                    <a href=""><span>약관</span></a><span>•</span>
-                                    <a href=""><span>위치</span></a><span>•</span>
-                                    <a href=""><span>언어</span></a>
-                                </div>
-                                <div>
-                                    © 2023 INSTAGRAM FROM META
-                                </div>
-                            </div>
                         </div>
+                        <!-- 메인피드의 오른쪽 마이프로필 및 추천 end-->
                     </div>
                 </div>
             </div>
         </div>
+        <!-- 가운데 메인 end-->
+     	<div class="footer">
+          <div>
+              <a href=""><span>소개</span></a><span>•</span>
+              <a href=""><span>도움말</span></a><span>•</span>
+              <a href=""><span>홍보 센터</span></a><span>•</span>
+              <a href=""><span>API</span></a><span>•</span>
+              <a href=""><span>채용 정보</span></a><span>•</span>
+              <a href=""><span>개인정보처리방침</span></a><span>•</span>
+              <a href=""><span>약관</span></a><span>•</span>
+              <a href=""><span>위치</span></a><span>•</span>
+              <a href=""><span>언어</span></a>
+          </div>
+          <div>
+              © 2023 INSTAGRAM FROM META
+          </div>
+      </div>
+		<!-- 더 보기 목록 -->
+		<div class="more_menu">
+			<div class="more_menu_wrap">
+				<div class="more_menu_option_btn">
+					<div>설정</div>
+					<div class="_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p  _abb1 _abcm"><svg aria-label="설정" class="_ab6-" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg></div>
+				</div>
+				<div class="more_menu_logout_btn">
+					<div>로그아웃</div>
+				</div>
+			</div>		
+		</div>
+		<!-- 더 보기 목록end -->
+</div>
+    
+    
+    
+<!-- 사이드바 이동 스크립트 -->
+<script type="text/javascript">
+	//프로필 누를시 viewdetail이동
+  	const sidevar_go_profile  = document.querySelector('.sidevar_go_profile')
+  	go_profile_url = '${cpath}/users/viewDetail/${login.idx}'
+	function go_profile_handler() {location.href = go_profile_url}
+  	sidevar_go_profile.onclick = go_profile_handler
+  	
+  	// 홈 누를시 홈화면 이동
+  	const sidevar_go_main  = document.querySelector('.sidevar_go_main')
+  	go_home_url = '${cpath}/users/main'
+	function go_home_handler() {location.href = go_home_url}
+  	sidevar_go_main.onclick = go_home_handler
+  	
+</script>
 
-
-    <a href="${cpath }/users/viewDetail">뷰 디테일 페이지</a>
-
-    </div>
-    <script>
+<!-- 사이드바 검색 표시 숨기기 -->    
+<script>
     const searchBtn = document.querySelector('.search-btn')
     const searchBar = document.querySelector('.search-box')
   let searchValue = 0
     function searchHandler(){
        if(searchValue == 0) {
-           searchBar.style.left="265px"
+           searchBar.style.left="250px"
            searchValue = 1
        }
        else if (searchValue == 1) {
@@ -1298,6 +996,46 @@ div.insta-post-item-middle > * {
     }
     searchBtn.onclick = searchHandler
 </script>
+
+<!-- 더보기 클릭시 요청 처리 -->
+<script type="text/javascript">
+	// 설정 누를시infoModify이동
+	const more_menu_option_btn  = document.querySelector('.more_menu_option_btn')
+  	go_infoModify_url = '${cpath}/users/infoModify'
+	function go_infoModify_handler() {location.href = go_infoModify_url}
+  	more_menu_option_btn.onclick = go_infoModify_handler
+  	
+  	// 로그아웃 누를시 로그아웃 요청
+  	const more_menu_logout_btn  = document.querySelector('.more_menu_logout_btn')
+  	go_logout_url = '${cpath}/users/logout'
+	function go_logout_handler() {
+		alert('로그아웃 되셨습니다.')  		
+		location.replace(go_logout_url);
+  		}
+  	more_menu_logout_btn.onclick = go_logout_handler
+  	
+</script>
+	
+<!-- 더보기 표시 숨기기 -->
+<script>
+    const more_menu = document.querySelector('.more_menu')
+    const more_menu_btn = document.querySelector('.more_menu_btn')
+  	let menuShowVal = 0
+    function moreMenuShowHandler(){
+       if(menuShowVal == 0) {
+    	   more_menu.style.opacity = "1"
+    		   more_menu.style.zIndex="4"
+    		   menuShowVal = 1
+       }
+       else if (menuShowVal == 1) {
+    	   more_menu.style.opacity = "0"
+    		   more_menu.style.zIndex="0"
+    		   menuShowVal = 0
+       }
+    }
+    more_menu_btn.onclick = moreMenuShowHandler
+</script>
+<!-- 사이드바 검색 효과 -->
 <script>
 const root = document.getElementById('root')
 const form = document.getElementById('form')
@@ -1320,7 +1058,7 @@ function searchHandler(event) {
         console.log(json)   // 여기에 지금 유저리스트 담겨있스빈다
         json.forEach(dto => {
            let tag = ''      // 여기에 유저 프사 넣는 것도 해야됨
-           tag += '<a href="${cpath}/users/viewDetail/'+ dto.idx + '"><div><img src="${cpath}/C:\\userProfile">' + dto.nick_name + '</div></a>'
+           tag += '<a href="${cpath}/users/viewDetail/'+ dto.idx + '"><div style="display: flex;"><img style="width: 44px; border-radius: 30px;" src="${cpath}/resources/img/userImg.jpg"><div>' + dto.nick_name + '</div></div></a>'
            root.innerHTML += tag
         })
      })
@@ -1363,6 +1101,7 @@ form.onsubmit = searchHandler
 
 
 </script>
+
 
 
 </body>
