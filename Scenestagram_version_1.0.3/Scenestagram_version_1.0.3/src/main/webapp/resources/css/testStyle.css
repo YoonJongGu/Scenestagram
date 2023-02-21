@@ -20,7 +20,7 @@ input{border-radius: 0;}
 /* Default */
 /* 모든속성에 적용. 레이아웃잡을때 사용함 */
 *{
-    border: 1px dashed red;
+/*     border: 1px dashed red; */
     margin: 0;
     padding: 0;
     /* padding: 2px; */
@@ -113,6 +113,7 @@ div.left-menu {
     width: 342px;
     padding: 8px 12px 20px;
     border-right: 1px solid rgb(38, 38, 38);
+    z-index: 3;
 }
 
 
@@ -186,6 +187,7 @@ div.home-feed {
     width: 70%;
     margin: auto;
     /* width: 853px; */
+/*     z-index: 0; */
     
 }
 
@@ -434,4 +436,3 @@ div.insta-post-item-middle > * {
     height: 300px;
     
 }
-

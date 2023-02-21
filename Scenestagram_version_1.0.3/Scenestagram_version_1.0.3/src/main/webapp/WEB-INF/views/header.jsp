@@ -172,7 +172,7 @@ display: none;
 
 /*계정이 없으신가요?*/
 .login__register span {
-	color:black;
+   color:black;
   font-size: 14px;
   font-weight: 200;
 }
@@ -201,7 +201,7 @@ display: none;
 
 /* 회원가입페이지 로고맨트 */
 .logo_ment{
-	color: #8e8e8e;
+   color: #8e8e8e;
 }
 
 /* 아이디 체크 문구 */
@@ -217,15 +217,15 @@ display: none;
 
 /* 숨기기 */
 .hidden{
-	display: none;
+   display: none;
 }
 /* 회원가입 이메일 */
 .show{
-	display: inline-block;
+   display: inline-block;
 }
 /* 회원가입 성별 div */
 #gender{
-	display: flex;
+   display: flex;
     justify-content: space-evenly;
     width: 100%;
     height: 38px;
@@ -246,19 +246,19 @@ select[name="gender"]{
 
 /* err문구 div */
 .login__input > div{
-	color: red;
-	font-size: 12px;
-	margin-right: auto	
+   color: red;
+   font-size: 12px;
+   margin-right: auto   
 }
 
 /*회원가입 버튼*/
 #join_btn{
-	background-color: #1c7ed6;
+   background-color: #1c7ed6;
 }
 
 /*로그인 에러*/
 #login_err{
-	text-align: left;
+   text-align: left;
 }
 
 /*비밀번호 찾기 tip*/
@@ -280,15 +280,15 @@ select[name="gender"]{
 .btn_findPw_style{
     background-color: rgb(28, 126, 214);
     color: white;
-   	cursor: pointer;
+      cursor: pointer;
 }
 #pw_tip_sub{
-	color: black;
-	margin: 10px 0 10px 0;
+   color: black;
+   margin: 10px 0 10px 0;
 }
 
 #pw_tip_main{
-	color: black;
+   color: black;
     margin-right: 0;
 }
 
@@ -296,4 +296,3 @@ select[name="gender"]{
 </style>
 </head>
 <body>
-
