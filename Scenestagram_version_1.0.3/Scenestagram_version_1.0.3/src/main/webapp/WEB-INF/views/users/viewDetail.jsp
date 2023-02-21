@@ -835,17 +835,12 @@ div.insta-post-item-middle > * {
                 event.target.classList.remove('unfollow')
                 location.reload()
              }
+		       else {
+		          // 이거 안해주면 프로필 편집 버튼 눌렀을 때 위에 else if 애들 손봐줘야 됨
+		       }
           })
        }
-<<<<<<< Updated upstream
-       else {
-          // 이거 안해주면 프로필 편집 버튼 눌렀을 때 위에 else if 애들 손봐줘야 됨
-=======
-       else{
-    	   
->>>>>>> Stashed changes
-       }
-    }
+
     
     function bringPostHandler() {
        let postsu = 0
