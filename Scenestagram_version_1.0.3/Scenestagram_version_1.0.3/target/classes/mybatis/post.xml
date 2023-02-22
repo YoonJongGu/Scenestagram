@@ -115,26 +115,39 @@
 			where idx=#{idx}
 	</update>
 
-	<!--해시태그 결과에 대한 리스트 반환 (스크롤 페이징) -->
-	<select id="getPostList" parameterType="hashmap" resultType="image">
-		select A.* from image A
-	    join
-	    (
-	        select A.idx from post A
-	                join
-	                (
-	                    select A.post_idx from post_hashtag A
-	                            join hashtag B
-	                            on A.hashtag_idx = B.idx
-	                        where B.hashtag=#{hashtag}
-	                ) B
-	                on A.idx=B.post_idx
-	            where A.status = 'activate' order by idx desc
-					offset #{offset} rows	
-					fetch first 30 rows only 
-	    ) B
-	    on A.post_idx=B.idx
-	</select>
+<!--해시태그 결과에 대한 리스트 반환 (스크롤 페이징) -->
+   <select id="getPostList" parameterType="hashmap" resultType="image">       
+       select distinct* from image
+       where post_idx in
+       (
+           select A.idx from post A
+                   join
+                   (
+                       select A.post_idx from post_hashtag A
+                               join hashtag B
+                               on A.hashtag_idx = B.idx
+                           where B.hashtag=#{hashtag}
+                   ) B
+                   on A.idx=B.post_idx
+               where A.status = 'activate'
+       ) 
+       or post_idx in       
+       (
+           select A.idx from post A
+                   join
+                   (
+                       select A.post_idx from comments_hashtag A
+                               join hashtag B
+                               on A.hashtag_idx = B.idx
+                           where B.hashtag=#{hashtag}
+                   ) B
+                   on A.idx=B.post_idx
+               where A.status = 'activate'
+       )
+    order by idx desc
+    offset #{offset} rows   
+    fetch first 10 rows only
+   </select>
 	
 	<!-- 뷰디테일 페이지의 유저가 작성한 게시글을 불러오는 브링포스트 함수 -->
    <select id="bringPost" parameterType="int" resultType="image">

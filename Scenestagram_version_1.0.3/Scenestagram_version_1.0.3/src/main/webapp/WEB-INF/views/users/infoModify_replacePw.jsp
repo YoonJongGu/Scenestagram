@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../header.jsp" %>
 <c:set var="cpath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -9,18 +10,7 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-/* ------인포 모디파이 스타일--------*/
-html{
-	background-color: black;
-}
-.main_wrap{
-
-  display: flex;
-  justify-content: center;
-  color:white;
-  padding: 30px 0 30px 0;
-  
-}  
+/* ------인포 모디파이 스타일--------*/  
 
 #info_submit_btn{
 	border: none;

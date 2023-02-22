@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 
+<style>
+.add_from{
+	    left: 500px;
+    position: absolute;
+}
+</style>
+
+<div class="add_from">
 <form method="POST" enctype="multipart/form-data">
 	<p><input type="hidden" name="users_idx" value="${login.idx }"></p>
 	<p><textarea name="content"></textarea></p>
@@ -9,6 +17,6 @@
 	<p><input type="file" name="image_file" multiple required></p>
 	<p><input type="submit" value="글작성"></p>
 </form>
-
+</div>
 </body>
 </html>
