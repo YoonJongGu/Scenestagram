@@ -890,8 +890,8 @@ div.insta-post-item-middle > * {
             imgLine.innerHTML += imgTag
             
             postsu += 1
-            postCnt.innerText = postsu
          })
+            postCnt.innerText = postsu
        })
     }
     

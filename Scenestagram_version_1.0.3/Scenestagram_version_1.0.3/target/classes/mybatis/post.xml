@@ -149,7 +149,7 @@
     fetch first 10 rows only
    </select>
 	
-	<!-- 뷰디테일 페이지의 유저가 작성한 게시글을 불러오는 브링포스트 함수 -->
+<!-- 뷰디테일 페이지의 유저가 작성한 게시글을 불러오는 브링포스트 함수 -->
    <select id="bringPost" parameterType="int" resultType="image">
       select A.* from image A
    join
@@ -157,9 +157,10 @@
       select A.idx from post A
             join users B
             on A.users_idx = B.idx
-         where B.idx = #{idx}
+         where B.idx = #{idx} and A.status = 'activate'
    ) B
    on A.post_idx = B.idx
+   order by A.post_idx desc
    </select>
 
 </mapper>

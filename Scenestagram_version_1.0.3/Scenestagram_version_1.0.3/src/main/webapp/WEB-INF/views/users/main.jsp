@@ -16,7 +16,7 @@ body {
 div {
     /* height: 7170.96px; */
     /* width: 998.667px; */
-    background-color: #0f0f0f;
+    background-color: #000;
     min-height: auto;
     min-width: auto;
     display: block;
@@ -140,7 +140,7 @@ div.home-main {
     display: flex;            
 	height: 100vh;
     /* 나중에 수정 */
-    background-color: #0f0f0f;
+    background-color: #000;
     
 }
 

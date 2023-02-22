@@ -535,12 +535,6 @@ select[name="gender"]{
         </main>
     </div>
 
-
-<!-- jquery 라이브러리 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-
 <!-- script기능 -->
 <script type="text/javascript">
 	//닉네임 중복확인

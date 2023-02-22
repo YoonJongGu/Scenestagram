@@ -19,9 +19,9 @@
 * {margin:0; padding:0; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; word-break: keep-all;color: #fff;}
 html,body{max-width: 100%; min-height: 100%;}
 html{overflow-x: hidden; -webkit-text-size-adjust: none;background-color: #000;}
-body{-webkit-print-color-adjust:exact; background: #0f0f0f; font-family: 'Jost', 'Noto Sans KR', sans-serif; font-style: normal; font-size: 16px; font-weight: 300; color: #333; line-height: 1.5; letter-spacing: -0.5px;}
+body{-webkit-print-color-adjust:exact; background: #000; font-family: 'Jost', 'Noto Sans KR', sans-serif; font-style: normal; font-size: 16px; font-weight: 300; color: #333; line-height: 1.5; letter-spacing: -0.5px;}
 ul, li, dl,dt,dd {margin:0;padding:0;list-style:none}
-a{color:#333;text-decoration:none;}
+a{color:#fff;text-decoration:none;}
 img {border: 0; font-size: 0; max-width: 100%;}
 h1, h2, h3, h4, h5, h6{font-size:1em;font-family: 'Jost', 'Noto Sans KR', sans-serif;}
 textarea, select{font-family: 'Jost', 'Noto Sans KR', sans-serif;font-size:1em}
@@ -68,7 +68,6 @@ input{border-radius: 0;}
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 250px;
     height: 100%;
     padding: 40px 10px 30px 10px;
     background: #000;
@@ -126,7 +125,7 @@ input{border-radius: 0;}
     transition: 0.3s;
   }
   
-  @media (width < 1200px) {
+  @media (width < 1200px){
     .logo-img {
       display: none;
       
@@ -141,7 +140,7 @@ input{border-radius: 0;}
     }
   
     .sidebar {
-      width: 72px;
+      width: 72px !important;
     }
   
     .sidebar button > span {
@@ -228,11 +227,6 @@ input{border-radius: 0;}
             background-color: #000;
             
         }
-        .search-box-action {
-/*             left: -333px; */
-/*             transform: translateX(150px); */
-        }
-
         .search-button {
             background-color: #0f0f0f;
             color: #0095f6;
@@ -470,16 +464,23 @@ input{border-radius: 0;}
 <script>
     const searchBtn = document.querySelector('.search-btn')
     const searchBar = document.querySelector('.search-box')
-  let searchValue = 0
+    const sideBar = document.querySelector('.sidebar')
+  	let searchASC = 0
+   	sideBar.style.width = '250px'
     function searchHandler(){
-       if(searchValue == 0) {
-           searchBar.style.left="250px"
-           searchValue = 1
+       if(searchASC == 0) {
+    	   if(sideBar.style.width == '250px'){
+	           searchBar.style.left="250px"    		   
+    	   }
+    	   else{
+    		   searchBar.style.left="72px"
+    	   }
+    	   searchASC = 1
        }
-       else if (searchValue == 1) {
+       else if (searchASC == 1) {
           searchBar.style.left="-350px"
           
-          searchValue = 0
+        	searchASC = 0
        }
     }
     searchBtn.onclick = searchHandler
@@ -589,3 +590,5 @@ form.onsubmit = searchHandler
 
 
 </script>
+<!-- jquery 라이브러리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
