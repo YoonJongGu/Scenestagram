@@ -108,4 +108,32 @@
 	<select id="selectUserIDXByNickName" parameterType="string" resultType="int">
 		select idx from users where nick_name=#{nick_name}
 	</select>
+	
+	   <!-- 메인에서 유저 추천(메인이 온로드 될 때) -->
+   <select id="recommend" parameterType="int" resultType="users">
+      select * from users A join
+        (select follower_idx from follow
+        where following_idx in
+            (select follower_idx from follow
+                where following_idx=#{idx})
+        and follower_idx != #{idx}
+        and follower_idx not in
+            (select follower_idx from follow
+                where following_idx=#{idx})) B
+                on A.idx = B.follower_idx
+                order by idx
+   </select>
+   
+   <!-- 유명인 추천 (팔로잉 0인 사람이 로그인 했을 때 팔로워가 가장 많은 사람을 추천해줌)-->
+   <select id="recommendFamous" parameterType="int" resultType="users">
+      select * from users U
+    join 
+    (    
+        select count(*) as count, follower_idx from follow
+            where follower_idx != #{idx}
+        group by follower_idx        
+    ) F
+    on U.idx=F.follower_idx
+      order by F.count desc
+   </select>
 </mapper>

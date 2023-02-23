@@ -82,4 +82,13 @@ public class UsersService {
 	public int getUserIDXByNickName(String nick_name) {
 		return usersDAO.selectUserIDXByNickName(nick_name);
 	}
+	
+   public List<UsersDTO> recommend(int idx) {
+	      return usersDAO.recommend(idx);
+	   }
+
+   public List<UsersDTO> recommendFamous(int idx) {
+      return usersDAO.recommendFamous(idx);
+   }
+	
 }

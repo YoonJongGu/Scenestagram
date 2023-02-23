@@ -23,19 +23,20 @@
 	}
 </style>
 
-<h1>게시글 작성 페이지</h1>
-<hr>
+<div class="all_wrap">
+	<div class="main_wrap">
+	<button class="btn">모달창</button>
 
-<button class="btn">모달창</button>
-
-<div class="modal">
-<form method="POST" enctype="multipart/form-data">
-	<p><input type="hidden" name="users_idx" value="${login.idx }"></p>
-	<p><textarea name="content"></textarea></p>
-	<p><input type="text" name="location" placeholder="지역 추가"></p>
-	<p><input type="file" name="image_file" multiple required></p>
-	<p><input type="submit" value="글작성"></p>
-</form>
+		<div class="modal">
+		<form method="POST" enctype="multipart/form-data">
+			<p><input type="hidden" name="users_idx" value="${login.idx }"></p>
+			<p><textarea name="content"></textarea></p>
+			<p><input type="text" name="location" placeholder="지역 추가"></p>
+			<p><input type="file" name="image_file" multiple required></p>
+			<p><input type="submit" value="글작성"></p>
+		</form>
+		</div>
+	</div>
 </div>
 <script>
 	const modal = document.querySelector('.modal')

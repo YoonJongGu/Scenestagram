@@ -42,5 +42,9 @@ public interface UsersDAO {
 	UsersDTO selectOneNickName(String nick_name);
 
 	int selectUserIDXByNickName(String nick_name);
+	
+   List<UsersDTO> recommend(int idx);
+
+   List<UsersDTO> recommendFamous(int idx);
 
 }

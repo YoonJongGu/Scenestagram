@@ -358,7 +358,8 @@ select[name="gender"]{
         </main>
         
     </div>
-    
+<!-- jquery 라이브러리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- 비밀번호 재설정 형식,일치 확인 -->
 <script type="text/javascript">
 	

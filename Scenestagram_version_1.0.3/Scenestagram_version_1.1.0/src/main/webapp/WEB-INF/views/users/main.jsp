@@ -410,9 +410,15 @@ div.insta-post-item-middle > * {
     height: 300px;
     
 }
+
+/*스크롤 적용*/
+#home-feed {
+	height: 100vh;
+	overflow-y: scroll;
+}
 </style>
 </head>
-<body>
+<body onload="loadHandler(); scrollHandler();">
 
 <div class="screen">
 
@@ -421,17 +427,17 @@ div.insta-post-item-middle > * {
         <div class="home-main">
             <div class="main">
                 <div style="display: block;">
-                    <div class="home-feed">
+                    <div class="home-feed" id="home-feed" offset="0">
                         <div class="home-feed-left">
                             <!-- 스토리-->
                             <div class="stoty">
                             </div>
                             <!-- 게시물 (POST) -->
-                            <div class="post">
+                            <div class="post" id="post">
                             </div>
                             <!-- 게시물 (POST) end -->
                         </div>
-                        <!-- 메인피드의 오른쪽 마이프로필 및 추천 -->
+						<!-- 메인피드의 오른쪽 마이프로필 및 추천 -->
                         <div class="home-feed-right">
                             <div class="home-feed-right-myprofile">
                                 <div>
@@ -440,9 +446,9 @@ div.insta-post-item-middle > * {
                                     </div>
                                     <div class="id-box">
                                         <a href="">
-                                            <div>서영찬</div>
+                                            <div>${login.name }</div>
                                         </a>
-                                        <span class="id">cha_ni__</span>
+                                        <span class="id">${login.nick_name }</span>
 
                                     </div>
                                 </div>
@@ -454,57 +460,22 @@ div.insta-post-item-middle > * {
                             </div>
                             <div class="recommend">
                                 <div class="flex">
-                                    <div>회원님을 위한 추천</div>
-                                    <div>모두보기</div>
+                                   <div style=" display:flex; justify-content: space-between; width:100%;">
+                                       <div>회원님을 위한 추천</div>
+                                       <div><a href="${cpath }/users/recommendAll">모두보기</a></div>
+                                    </div>
                                 </div>
-                                <div class="flex">
-                                    <div class="img-box">
-                                        <img class="" src="${cpath}/resources/img/insta-profile.jpg">추천회원img</img>
-
-                                    </div>
-                                    <div>
-                                        <div>추천회원이름</div>
-                                        <div>rok1212님이 팔로우 합니다</div>
-                                    </div>
-                                    <div>팔로우btn</div>
-                                </div>
-
-                                <div class="flex">
-                                    <div class="img-box">
-                                        <img class="" src="${cpath}/resources/img/insta-profile.jpg">추천회원img</img>
-
-                                    </div>
-                                    <div>
-                                        <div>추천회원이름</div>
-                                        <div>rok1212님이 팔로우 합니다</div>
-                                    </div>
-                                    <div>팔로우btn</div>
-                                </div>
-
-                                <div class="flex">
-                                    <div class="img-box">
-                                        <img class="" src="${cpath}/resources/img/insta-profile.jpg">추천회원img</img>
-
-                                    </div>
-                                    <div>
-                                        <div>추천회원이름</div>
-                                        <div>rok1212님이 팔로우 합니다</div>
-                                    </div>
-                                    <div>팔로우btn</div>
-                                </div>
-
-                                <div class="flex">
-                                    <div class="img-box">
-                                        <img class="" src="${cpath}/resources/img/insta-profile.jpg">추천회원img</img>
-
-                                    </div>
-                                    <div>
-                                        <div>추천회원이름</div>
-                                        <div>rok1212님이 팔로우 합니다</div>
-                                    </div>
-                                    <div>팔로우btn</div>
-                                </div>
-
+                                <div id="recommend-friend"></div>
+<!--                                 <div class="flex"> -->
+<!--                                     <div class="img-box"> -->
+<%--                                         <img class="" src="${cpath}/resources/img/insta-profile.jpg">추천회원img</img> --%>
+<!--                                     </div> -->
+<!--                                     <div> -->
+<!--                                         <div>추천회원이름</div> -->
+<!--                                         <div>rok1212님이 팔로우 합니다</div> -->
+<!--                                     </div> -->
+<!--                                     <div>팔로우btn</div> -->
+<!--                                 </div> -->
                             </div>
                         </div>
                         <!-- 메인피드의 오른쪽 마이프로필 및 추천 end-->
@@ -515,8 +486,183 @@ div.insta-post-item-middle > * {
         <!-- 가운데 메인 end-->
 
 </div>
-    
 
+
+<!--  추천인 스크립트 -->
+<script>
+   const recofri = document.getElementById('recommend-friend')
+   
+   function loadHandler() {
+      const url = '${cpath}/countFollowing/${login.idx}'
+      fetch(url)
+      .then(resp => resp.text())
+      .then(text => {
+      console.log(text)
+      
+      if(text == 0) {
+         location.href = '${cpath}/users/recommendAll'
+      }
+         else {
+         recommendHandler()
+      }
+         
+      })
+      
+   }
+   
+   function recommendHandler() {
+     let friend5Cut = 0;      // 5명만 보여주게 할 것
+      const url = '${cpath}/recommend/${login.idx}'
+      fetch(url)
+      .then(resp => resp.json())
+      .then(json => {
+       console.log(json)
+         json.forEach(dto => {
+            console.log(dto.nick_name)
+            console.log(dto.idx)
+            if(friend5Cut != 5) {      // 리스트 다 불러온 다음 강제로 5명컷 낸거라 나쁜 코드입니다.
+               let tag = ''
+               tag += '<div class="flex">'
+               tag += '<a href="${cpath}/users/viewDetail/' + dto.idx + '"><div class="img-box">'
+               tag += '<img class="" src="${cpath}/resources/img/insta-profile.jpg">추천회원img</img>'
+               tag += '</div></a>'
+               tag += '<a href="${cpath}/users/viewDetail/' + dto.idx + '"><div>' + dto.nick_name + '</div></a>'
+               tag += '<div>팔로우</div>'
+               tag += '</div>'
+               recofri.innerHTML += tag
+               
+               friend5Cut += 1
+            }         
+            
+//             <div class="flex">
+//                 <div class="img-box">
+//                     <img class="" src="${cpath}/resources/img/insta-profile.jpg">추천회원img</img>
+//                 </div>
+//                 <div>
+//                     <div>추천회원이름</div>
+//                     <div>rok1212님이 팔로우 합니다</div>
+//                 </div>
+//                 <div>팔로우btn</div>
+//             </div>            
+         })
+      })
+      
+   }
+   
+//   document.body.onload = loadHandler
+    //recommendHandler()
+
+</script>
+
+    
+<!-- 타임라인 게시글 스크롤 이벤트 -->
+<script type="text/javascript">
+	const post = document.querySelector('#post')
+  const homefeed = document.getElementById('home-feed')        		
+  	function scrollHandler(event) {	
+  		const offset = +homefeed.getAttribute('offset')
+          console.log(offset)
+
+          const cur = homefeed.scrollTop + homefeed.clientHeight
+          console.log(cur)
+          const flag = homefeed.scrollHeight * 0.95 <= cur && cur <= homefeed.scrollHeight * 1.95
+
+          if(flag) {
+              fetch('${cpath }/getPostListScroll/' + offset + '/${login.idx }')
+              .then(resp => resp.json())
+              .then(json => {
+                  json.forEach(dto => {
+                      let tag = ''
+                      tag+= '<div class="insta-post-item">'
+                      tag+= '<div class="i-col-0 insta-post-item-top">'
+                      tag+= '<div class="img-box">'
+                      tag+= '<img src="${cpath}/resources/img/insta-profile.jpg" alt="">' // dto 이미지 추가해야함
+                      tag+= '</div>'
+                      tag+= '<div class="i-col-0 id-box">'
+                      tag+= '<span class="id">'+dto.nick_name+'</span>'
+                      tag+= '<span>•</span>'
+                      tag+= '<span class="day">2일</span>'  // 추가해야함 (게시물 올린 후 경과일수)
+                      tag+= '</div>'
+                      tag+= '<div class="option-box">'
+                      tag+= '<svg aria-label="옵션 더 보기" class="_ab6-" color="#fafafa" fill="#fafafa"'
+                      tag+= ' height="24" role="img" viewBox="0 0 24 24" width="24">'
+                      tag+= '<circle cx="12" cy="12" r="1.5"></circle>'
+                      tag+= '<circle cx="6" cy="12" r="1.5"></circle>'
+                      tag+= '<circle cx="18" cy="12" r="1.5"></circle>'
+                      tag+= '</svg>'
+                      tag+= '</div>'
+                      tag+= '</div>'
+                      tag+= '<div class="insta-post-item-middle">'
+                      tag+= '<div class="img-box">'
+                      tag+= '<img src="${cpath}/resources/img/'+dto.file_name+'" alt="">'
+                      tag+= '</div>'
+                      tag+= '</div>'
+                      tag+= '<div class="insta-post-item-btn-box">'
+                      tag+= '<ul class="i-col-0 insta-post-item-btn-ul">'
+                      tag+= '<li>'
+                      tag+= '<a href="">'
+                      tag+= '<svg aria-label="좋아요" class="_ab6-" color="#fafafa" fill="#fafafa"'
+                      tag+= ' height="24" role="img" viewBox="0 0 24 24" width="24">'
+                      tag+= '<path'
+                      tag+= ' d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z">'
+                      tag+= '</path>'
+                      tag+= '</svg>'
+                      tag+= '</a>'
+                      tag+= '</li>'
+                      tag+= '<li>'
+                      tag+= '<a href="">'
+                      tag+= '<svg aria-label="댓글 달기" class="_ab6-" color="#fafafa" fill="#fafafa"'
+                      tag+= ' height="24" role="img" viewBox="0 0 24 24" width="24">'
+                      tag+= '<path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"'
+                      tag+= ' fill="none" stroke="currentColor" stroke-linejoin="round"'
+                      tag+= ' stroke-width="2"></path>'
+                      tag+= '</svg>'
+                      tag+= '</a>'
+                      tag+= '</li>'
+                      tag+= '<li>'
+                      tag+= '<a href="">'
+                      tag+= '<svg aria-label="게시물 공유" class="_ab6-" color="#fafafa"'
+                      tag+= ' fill="#fafafa" height="24" role="img" viewBox="0 0 24 24"'
+                      tag+= ' width="24">'
+                      tag+= '<line fill="none" stroke="currentColor" stroke-linejoin="round"'
+                      tag+= ' stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083">'
+                      tag+= '</line>'
+                      tag+= '<polygon fill="none"'
+                      tag+= ' points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"'
+                      tag+= ' stroke="currentColor" stroke-linejoin="round"'
+                      tag+= ' stroke-width="2"></polygon>'
+                      tag+= '</svg>'
+                      tag+= '</a>'
+                      tag+= '</li>'
+                      tag+=' <li class="bookmark">'
+                      tag+='<a href="">'
+                      tag+='<svg aria-label="저장" class="_ab6-" color="#fafafa" fill="#fafafa"'
+                      tag+=' height="24" role="img" viewBox="0 0 24 24" width="24">'
+                      tag+='<polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21"'
+                      tag+=' stroke="currentColor" stroke-linecap="round"'
+                      tag+=' stroke-linejoin="round" stroke-width="2"></polygon>'
+                      tag+='</svg>'
+                      tag+='</a>'
+                      tag+='</li>'
+                      tag+='</ul>'
+                      tag+='</div>'
+                      tag+='<div class="insta-post-item-comment">'
+                      tag+='<p class="good">좋아요 99개</p>'
+                      tag+='<p class="post-comment">'+dto.content+'</p>'
+                      tag+='<p class="post-reply">여기는 댓글보여주는곳</p>'
+                      tag+='<textarea aria-label="댓글 달기..." placeholder="댓글 달기..."></textarea>'
+                      tag+='</div>'
+                      tag+='</div>'
+                      post.innerHTML += tag
+                      post.setAttribute('offset', offset + 10)
+                  })
+              })
+          }
+  	}
+//	window.onload = scrollHandler
+	homefeed.onscroll = scrollHandler
+			                       	
+</script>
 
 
 

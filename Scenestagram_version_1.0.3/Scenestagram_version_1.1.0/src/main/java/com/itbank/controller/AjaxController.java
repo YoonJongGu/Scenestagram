@@ -185,14 +185,6 @@ public class AjaxController {
 		return list;
 	}
 	
-	
-	// 타임라인 게시글 스크롤 -> 삭제 확인 필요
-	@GetMapping("/getPostListScroll/{offset}/{idx}")
-	public List<PostDTO> getPost(@PathVariable("offset") int offset , @PathVariable("idx") int idx){
-		System.out.println(idx);
-		List<PostDTO> list = postService.getPost(offset,idx);
-		return list;
-	}
 
 	// 뷰디테일 페이지의 작성자 게시물을 가져오는 브링포스트 . 대상의 idx를 가져와서 사진의 이름을 돌려줄 것
 	   @GetMapping("/bringPost/{idx}")
@@ -209,6 +201,42 @@ public class AjaxController {
 	      
 	      return list;
 	   }
+	   
+		// 타임라인 게시글 스크롤 
+	@GetMapping("/getPostListScroll/{offset}/{idx}")
+	public List<PostDTO> getPost(@PathVariable("offset") int offset , @PathVariable("idx") int idx){
+		System.out.println(idx);
+		List<PostDTO> list = postService.getPost(offset,idx);
+		return list;
+	}
+	
+    // 메인 온로드 될 때 추천친구 받아올 함수.   로그인의 idx를 같이 받아옴
+    @GetMapping("/recommend/{idx}")
+    public List<UsersDTO> recommend(@PathVariable("idx") int idx) {
+       List<UsersDTO> list = userService.recommend(idx);
+       System.out.println(list);
+       
+       return list;
+    }
+    
+ // 팔로우가 있는 기준   (1촌 추천)
+    @GetMapping("/recommendAll/{idx}")
+    public List<UsersDTO> recommendAll(@PathVariable("idx") int idx) {
+       List<UsersDTO> list = userService.recommend(idx);
+       System.out.println(list);
+       
+       return list;
+    }
+    
+    // 팔로우가 없는 기준   (유명인 추천)
+    @GetMapping("/recommendFamous/{idx}")
+    public List<UsersDTO> recommendFamous(@PathVariable("idx") int idx) {
+       List<UsersDTO> list = userService.recommendFamous(idx);
+       System.out.println(list);
+       
+       return list;
+    }
+    
 }
 
 

@@ -223,4 +223,7 @@ public class UsersController {
 		}
 	}
 	
+	@GetMapping("recommendAll")
+	public void recommendAll() {}
+	
 }

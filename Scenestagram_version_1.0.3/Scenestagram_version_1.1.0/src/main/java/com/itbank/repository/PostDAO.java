@@ -57,7 +57,7 @@ public interface PostDAO {
 //	해시 요청에 대한 리스트 페이지 (스크롤 페이징)
 	List<ImageDTO> getPostList(HashMap<String, Object> tagOff);
 
-	// 타임라인 게시글 스크롤 -> 삭제 확인 필요
+	// 타임라인 게시글 스크롤
 	List<PostDTO> getScroll(HashMap<String, Object> param);
 
 	List<ImageDTO> bringPost(int idx);

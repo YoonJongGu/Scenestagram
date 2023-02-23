@@ -43,6 +43,7 @@ input{border-radius: 0;}
     background-color: #000;
     margin-left: 100px;
     margin-bottom: 110px;
+    min-height: 800px;
 }
   .main_wrap{
 

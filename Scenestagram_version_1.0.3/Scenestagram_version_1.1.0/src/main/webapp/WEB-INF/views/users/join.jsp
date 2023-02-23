@@ -291,7 +291,8 @@ select[name="gender"]{
 
 </style>
 </head>
-
+<!-- jquery 라이브러리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	
 	// 닉네임 중복 , 공백 , 길이 확인
