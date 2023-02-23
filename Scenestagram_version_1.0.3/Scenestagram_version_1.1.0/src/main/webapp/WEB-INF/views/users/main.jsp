@@ -148,7 +148,6 @@ div.home-main {
 
 div.main{
     display: block;
-    margin-left: 245px;
     min-height: auto;
     min-width: auto;
     
@@ -414,7 +413,6 @@ div.insta-post-item-middle > * {
 /*스크롤 적용*/
 #home-feed {
 	height: 100vh;
-	overflow-y: scroll;
 }
 </style>
 </head>
@@ -424,10 +422,12 @@ div.insta-post-item-middle > * {
 
 
         <!-- 가운데 메인 -->
-        <div class="home-main">
+   <div class="all_wrap">
+    	<div class="main_wrap">    
+        <div class="home-main" offset="0">
             <div class="main">
                 <div style="display: block;">
-                    <div class="home-feed" id="home-feed" offset="0">
+                    <div class="home-feed" id="home-feed">
                         <div class="home-feed-left">
                             <!-- 스토리-->
                             <div class="stoty">
@@ -484,9 +484,9 @@ div.insta-post-item-middle > * {
             </div>
         </div>
         <!-- 가운데 메인 end-->
-
+        </div>
+	</div>
 </div>
-
 
 <!--  추천인 스크립트 -->
 <script>
@@ -497,7 +497,6 @@ div.insta-post-item-middle > * {
       fetch(url)
       .then(resp => resp.text())
       .then(text => {
-      console.log(text)
       
       if(text == 0) {
          location.href = '${cpath}/users/recommendAll'
@@ -516,7 +515,6 @@ div.insta-post-item-middle > * {
       fetch(url)
       .then(resp => resp.json())
       .then(json => {
-       console.log(json)
          json.forEach(dto => {
             console.log(dto.nick_name)
             console.log(dto.idx)
@@ -527,7 +525,7 @@ div.insta-post-item-middle > * {
                tag += '<img class="" src="${cpath}/resources/img/insta-profile.jpg">추천회원img</img>'
                tag += '</div></a>'
                tag += '<a href="${cpath}/users/viewDetail/' + dto.idx + '"><div>' + dto.nick_name + '</div></a>'
-               tag += '<div>팔로우</div>'
+               tag += '<div class="followBtn">팔로우</div>'
                tag += '</div>'
                recofri.innerHTML += tag
                
@@ -558,15 +556,12 @@ div.insta-post-item-middle > * {
 <!-- 타임라인 게시글 스크롤 이벤트 -->
 <script type="text/javascript">
 	const post = document.querySelector('#post')
-  const homefeed = document.getElementById('home-feed')        		
-  	function scrollHandler(event) {	
-  		const offset = +homefeed.getAttribute('offset')
-          console.log(offset)
-
-          const cur = homefeed.scrollTop + homefeed.clientHeight
-          console.log(cur)
-          const flag = homefeed.scrollHeight * 0.95 <= cur && cur <= homefeed.scrollHeight * 1.95
-
+  	const body = document.querySelector('body')        		
+  	function scrollHandler() {	
+		console.log('스크롤 핸들러')
+  		const offset = +body.getAttribute('offset')
+          const cur = body.scrollTop + body.clientHeight
+          const flag = body.scrollHeight * 0.95 <= cur && cur <= body.scrollHeight * 1.95
           if(flag) {
               fetch('${cpath }/getPostListScroll/' + offset + '/${login.idx }')
               .then(resp => resp.json())
@@ -654,13 +649,13 @@ div.insta-post-item-middle > * {
                       tag+='</div>'
                       tag+='</div>'
                       post.innerHTML += tag
-                      post.setAttribute('offset', offset + 10)
+                      body.setAttribute('offset', offset + 10)
                   })
               })
           }
   	}
 //	window.onload = scrollHandler
-	homefeed.onscroll = scrollHandler
+	body.onscroll = scrollHandler
 			                       	
 </script>
 

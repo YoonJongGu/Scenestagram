@@ -63,6 +63,7 @@ input{border-radius: 0;}
     margin-left: 77px;
   }
   .sidebar {
+    margin-left: 20px;
     position: fixed;
     top: 0;
     left: 0;
@@ -79,7 +80,7 @@ input{border-radius: 0;}
   
   .sidebar-header {
     width: 100%;
-    margin-bottom: 44px;
+    margin-bottom: 6px;
   }
   
   .logo-icon {
@@ -92,7 +93,7 @@ input{border-radius: 0;}
   
   .logo-img {
     margin-left: 14px;
-    height: 32px;
+    height: 59px;
   }
   
   .sidebar button {
@@ -345,7 +346,7 @@ input{border-radius: 0;}
 <!-- 왼쪽 사이드 메뉴 -->
   <aside class="sidebar">
     <header class="sidebar-header">
-      <img class="logo-img" src="${cpath }/resources/img/logo_dark.png" />
+      <img class="logo-img" src="${cpath }/resources/img/scenestagram_.jpg" />
       <i class="logo-icon uil uil-instagram"></i>
     </header>
     <nav>

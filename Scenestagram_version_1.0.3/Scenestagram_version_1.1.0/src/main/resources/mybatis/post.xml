@@ -150,7 +150,7 @@
 				join image i
 					on i.idx = p.idx
 					
-			where u.idx in(select following_idx from follow where follower_idx=#{idx})
+			where u.idx in(select follower_idx from follow where following_idx=#{idx})
 			order by p.idx desc
 			
 			offset #{offset} rows	<!-- 건너뛸 레코드의 개수 -->
