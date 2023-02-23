@@ -41,17 +41,15 @@ input{border-radius: 0;}
 	display: flex;
     justify-content: center;
     background-color: #000;
-    margin-left: 100px;
     margin-bottom: 110px;
     min-height: 800px;
 }
   .main_wrap{
-
-  display: flex;
-  justify-content: center;
-  color:white;
-  padding: 30px 0 30px 0;
-  margin-left: 100px;
+	width: 100%;
+  	display: flex;
+  	justify-content: center;
+  	color:white;
+  	padding: 30px 0 30px 0;
   
 } 
   .foot{
@@ -63,7 +61,6 @@ input{border-radius: 0;}
     margin-left: 77px;
   }
   .sidebar {
-    margin-left: 20px;
     position: fixed;
     top: 0;
     left: 0;
@@ -71,11 +68,12 @@ input{border-radius: 0;}
     flex-direction: column;
     align-items: flex-start;
     height: 100%;
-    padding: 40px 10px 30px 10px;
+    padding: 40px 10px 30px 20px;
     background: #000;
     border-right: 1px solid rgb(38,38,38);
     transition: 0.3s;
-        z-index: 3;
+    z-index: 3;
+    width: 220px;
   }
   
   .sidebar-header {
@@ -89,11 +87,13 @@ input{border-radius: 0;}
     height: 35px;
     width: 51px;
     text-align: center;
+    margin-bottom: 30px;
   }
   
   .logo-img {
     margin-left: 14px;
-    height: 59px;
+    height: 47px;
+    margin-bottom: 20px;
   }
   
   .sidebar button {
@@ -116,7 +116,7 @@ input{border-radius: 0;}
   }
   
   .sidebar button:hover > span {
-    background: #0f0f0f;
+    background: #121212;
   }
   
   .sidebar button:hover > span :is(i, img) {
@@ -127,7 +127,13 @@ input{border-radius: 0;}
     transition: 0.3s;
   }
   
-  @media (width < 1200px){
+  @media (width <760px){
+  	.sidebar{
+  		display: none;
+  	}
+  }
+  
+  @media (width < 1280px){
     .logo-img {
       display: none;
       
@@ -142,7 +148,7 @@ input{border-radius: 0;}
     }
   
     .sidebar {
-      width: 72px !important;
+      width: 72px;
     }
   
     .sidebar button > span {
@@ -201,6 +207,8 @@ input{border-radius: 0;}
     font-style: normal;
   }
   
+  
+  
   .sidebar button span {
     font-size: 17px;
   }
@@ -215,6 +223,8 @@ input{border-radius: 0;}
   .sidebar > nav button:last-child {
     margin-top: auto;
   }
+  
+  
   /*사이드바 end*/
 
 
@@ -271,6 +281,7 @@ input{border-radius: 0;}
           font-size: 16px;
           color: #fff;
           padding: 16px 12px;
+          
       }
 
 
@@ -467,21 +478,30 @@ input{border-radius: 0;}
     const searchBtn = document.querySelector('.search-btn')
     const searchBar = document.querySelector('.search-box')
     const sideBar = document.querySelector('.sidebar')
+      
   	let searchASC = 0
-   	sideBar.style.width = '250px'
     function searchHandler(){
        if(searchASC == 0) {
-    	   if(sideBar.style.width == '250px'){
-	           searchBar.style.left="250px"    		   
-    	   }
-    	   else{
-    		   searchBar.style.left="72px"
-    	   }
+    	   $('.logo-img').css('display','none')
+    	   $('div.main').css('margin-left','70px')
+    	   $('.logo-icon').css('display','block')
+    	   $('.sidebar').css('width','72px')
+    	   $('.sidebar button > span').css('width','50px')
+    	   $('.sidebar button > span > span').css('opacity','0')
+    	   $('.sidebar button > span > span').css('visibility','hidden')
+	       searchBar.style.left="72px"    		   
+
     	   searchASC = 1
        }
        else if (searchASC == 1) {
           searchBar.style.left="-350px"
-          
+       	   $('.logo-img').css('display','block')
+    	   $('div.main').css('margin-left','0')
+    	   $('.logo-icon').css('display','none')
+    	   $('.sidebar').css('width','220px')
+    	   $('.sidebar button > span').css('width','125')
+    	   $('.sidebar button > span > span').css('opacity','1')
+    	   $('.sidebar button > span > span').css('visibility','visible')
         	searchASC = 0
        }
     }

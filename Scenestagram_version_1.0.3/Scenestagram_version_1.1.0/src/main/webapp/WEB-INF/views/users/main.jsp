@@ -9,7 +9,9 @@ textarea {
     background-color: #262626;
     color: #fff;
 }
-
+html{
+	overflow-y: hidden;
+}
 body {
     background-color: #0f0f0f;
 }
@@ -66,11 +68,7 @@ div.img-box .img {
 div.screen {
     display: flex;
     height: 100vh;
-    /* flex-direction: column; */
-    /* position: relative; */
-    /* z-index: 0;  */
-    
-    /* flex-wrap: wrap; */
+	overflow-y:scroll;
     flex-flow: column;
 }
 /*푸터*/
@@ -132,11 +130,34 @@ div.menu-top {
     padding-left: 16px;
 }
 
-
-
-
-div.home-main {
-    /* position: relative; */
+/*회원님을 위한 추천 프로필 ui*/
+#recommend-friend  img{
+	width: 32px;
+    border-radius: 30px;
+}
+#recommend-friend > div a{
+	font-size: 14px;
+    font-weight: 500;
+}
+#recommend-friend > div  >  div:nth-child(2){
+	margin-left: 17px;
+    font-size: 12px;
+    color: #a8a8a8 !important;
+    width: 67%;
+	
+}
+.followBtn{
+    font-size: 12px;
+    cursor: pointer;
+    color: #0095f6;
+    height: 17px;
+    width: 20%;
+    text-align: right;
+    font-weight: 800;
+}
+div.home_main {
+    width: 100vh;
+    height: 500px;
     display: flex;            
 	height: 100vh;
     /* 나중에 수정 */
@@ -157,17 +178,13 @@ div.main{
 
 div.home-feed {
     display: flex;
-    
     width: 80%;
-    margin: auto;
-    /* width: 853px; */
-    
 }
 
 /* 스토리, 게시글 */
 div.home-feed-left {
     display: block;
-    min-width: auto;
+    min-width: 470px;
     margin-right: 64px;
 }
 
@@ -214,13 +231,9 @@ div.insta-post-item {
 }
 div.insta-post-item-top {
     display: flex;
-    /* justify-content: space-between; */
     position: relative;
     padding: 12px 0;
 }
-/* div.insta-item-top > div {
-    display: flex;
-} */
 
 div.insta-post-item-top .img-box {
     position: relative;
@@ -321,7 +334,7 @@ div.home-feed {padding-top: 40px;}
 
 /* 오른쪽 포스트 */
 
-div.home-feed-right {min-width: 360px;}
+div.home-feed-right {min-width: 347px;}
 
 
 /* 피드 오른쪽 top 마이프로필 */
@@ -331,11 +344,10 @@ div.home-feed-right-myprofile {
 }
 div.home-feed-right-myprofile .img-box {
 
-    width: 66px;
-    height: 66px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid #1cd14f;
     position: relative;
     display: inline-block;
 }
@@ -350,6 +362,16 @@ div.home-feed-right-myprofile .img-box img {
 div.home-feed-right-myprofile > div {
     display: flex;
     
+}
+div.home-feed-right-myprofile .id-box{
+	margin: 7px 0 0 18px;
+}
+div.home-feed-right-myprofile .id-box div{
+	    font-weight: 500;
+}
+.recommend_ment{
+	font-size: 12px;
+    color: #a8a8a8
 }
 
 /* 추천회원 프로필 img */
@@ -409,22 +431,41 @@ div.insta-post-item-middle > * {
     height: 300px;
     
 }
+.recommend > div{
+	margin: 20px 0px;
+} 
 
-/*스크롤 적용*/
-#home-feed {
-	height: 100vh;
+#recommend-friend > div{
+	height: 48px;
 }
+
+div.insta-post-item textarea {
+	margin-top: 10px;
+    width: 100%;
+    background-color: #000;
+    border: none;
+    resize: none;
+	
+}
+
+ @media (width < 1200px){
+	 div.home-feed-right{
+ 	  display: none;
+ 	}
+ 	  
+ }
+
 </style>
 </head>
 <body onload="loadHandler(); scrollHandler();">
 
-<div class="screen">
+<div class="screen"  offset="0">
 
 
         <!-- 가운데 메인 -->
    <div class="all_wrap">
     	<div class="main_wrap">    
-        <div class="home-main" offset="0">
+        <div class="home_main">
             <div class="main">
                 <div style="display: block;">
                     <div class="home-feed" id="home-feed">
@@ -442,21 +483,16 @@ div.insta-post-item-middle > * {
                             <div class="home-feed-right-myprofile">
                                 <div>
                                     <div class="img-box">
-                                        <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
+                                        <img src="${cpath}/resources/img/userImg.jpg" alt="">
                                     </div>
                                     <div class="id-box">
                                         <a href="">
-                                            <div>${login.name }</div>
+                                            <div>${login.nick_name }</div>
                                         </a>
-                                        <span class="id">${login.nick_name }</span>
+                                        <span class="id">${login.name }</span>
 
                                     </div>
                                 </div>
-                                <div class="account-btn">계정전환버튼</div>
-                                <!-- -메인에서 내 프로필- Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi, ipsam.
-                                Fuga hic,
-                                corporis laudantium consequatur nihil iusto. Atque, reiciendis, quis obcaecati modi est,
-                                quod alias molestias laboriosam odio voluptatum fugit. -->
                             </div>
                             <div class="recommend">
                                 <div class="flex">
@@ -521,11 +557,16 @@ div.insta-post-item-middle > * {
             if(friend5Cut != 5) {      // 리스트 다 불러온 다음 강제로 5명컷 낸거라 나쁜 코드입니다.
                let tag = ''
                tag += '<div class="flex">'
-               tag += '<a href="${cpath}/users/viewDetail/' + dto.idx + '"><div class="img-box">'
-               tag += '<img class="" src="${cpath}/resources/img/insta-profile.jpg">추천회원img</img>'
-               tag += '</div></a>'
-               tag += '<a href="${cpath}/users/viewDetail/' + dto.idx + '"><div>' + dto.nick_name + '</div></a>'
-               tag += '<div class="followBtn">팔로우</div>'
+               tag += '    	<div>'
+               tag += '			<a href="${cpath}/users/viewDetail/' + dto.idx + '">'
+           	   tag += '				<img class="" src="${cpath}/resources/img/insta-profile.jpg"></img>'
+           	   tag += '			</a>'
+       		   tag += '     </div>'
+           	   tag += '    	<div>'
+               tag += '			<a href="${cpath}/users/viewDetail/' + dto.idx + '">' + dto.nick_name + '</a>'
+               tag += '         <div class="recommend_ment">회원님을 위한 추천</div>         '
+           	   tag += '		</div>'
+               tag += '		<div class="followBtn">팔로우</div>'
                tag += '</div>'
                recofri.innerHTML += tag
                
@@ -556,12 +597,13 @@ div.insta-post-item-middle > * {
 <!-- 타임라인 게시글 스크롤 이벤트 -->
 <script type="text/javascript">
 	const post = document.querySelector('#post')
-  	const body = document.querySelector('body')        		
+  	const screen = document.querySelector('.screen')        		
   	function scrollHandler() {	
 		console.log('스크롤 핸들러')
-  		const offset = +body.getAttribute('offset')
-          const cur = body.scrollTop + body.clientHeight
-          const flag = body.scrollHeight * 0.95 <= cur && cur <= body.scrollHeight * 1.95
+  		const offset = +screen.getAttribute('offset')
+          const cur = screen.scrollTop + screen.clientHeight
+          const flag = (screen.scrollHeight * 0.95 <= cur && cur <= screen.scrollHeight * 1.95) || offset == 0
+          console.log(cur,flag)
           if(flag) {
               fetch('${cpath }/getPostListScroll/' + offset + '/${login.idx }')
               .then(resp => resp.json())
@@ -649,13 +691,13 @@ div.insta-post-item-middle > * {
                       tag+='</div>'
                       tag+='</div>'
                       post.innerHTML += tag
-                      body.setAttribute('offset', offset + 10)
+                      screen.setAttribute('offset', offset + 3)
                   })
               })
           }
   	}
 //	window.onload = scrollHandler
-	body.onscroll = scrollHandler
+	screen.onscroll = scrollHandler
 			                       	
 </script>
 
