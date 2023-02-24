@@ -178,4 +178,18 @@
 		fetch first 1 rows only
 	</select>
 
+
+	   <!-- 탐색페이지에서 불러올 추천 게시글 -->
+   <select id="explore" resultType="image">
+      	SELECT I.*
+		FROM image I
+		LEFT OUTER JOIN (
+		    SELECT COUNT(*) AS count, post_idx 
+		    FROM post_users_like 
+		    GROUP BY post_idx
+		) L ON I.post_idx = L.post_idx
+		JOIN post P ON I.post_idx = P.idx
+		WHERE P.status = 'activate'
+		ORDER BY L.count DESC NULLS LAST
+   </select>
 </mapper>

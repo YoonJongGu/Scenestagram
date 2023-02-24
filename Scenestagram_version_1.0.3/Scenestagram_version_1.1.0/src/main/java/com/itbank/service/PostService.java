@@ -370,6 +370,10 @@ public class PostService {
 		return postDAO.bringPost(idx);
 	}
 
+	public List<ImageDTO> explore() {
+         return postDAO.explore();
+     }
+	
 	public PostDTO getData(int users_idx, int offset) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("users_idx", users_idx);

@@ -334,7 +334,6 @@ input{border-radius: 0;}
     </div>
     <div class="">
         <div class="">
-            <form method="GET" id="form">
                <select id="option">
                   <option value="usersOption" selected="selected">유저</option>
                   <option value="hashOption">해시</option>
@@ -342,8 +341,6 @@ input{border-radius: 0;}
 <!--                   <input type="radio" name="option" value="usersOption">유저 -->
 <!--                   <input type="radio" name="option" value="hashOption">태그 -->
           <input id="searchValue" type="text" name="searchValue" placeholder="검색" style="color: black;">
-          <input type="submit" value="검색">
-       </form>
         </div>
         <br>
         <div class="">
@@ -549,16 +546,15 @@ input{border-radius: 0;}
 <!-- 사이드바 검색 효과 -->
 <script>
 const root = document.getElementById('root')
-const form = document.getElementById('form')
 
 function searchHandler(event) {
-  event.preventDefault()
   root.innerText = ''        // 다른 옵션 선택하면 기존에 보던 애들 날려주기
   
 //   const option = document.querySelector('input[name="option"]:checked').value // 옵션 = 옵션(라디오)에 체크된.값
   const selectOption = document.getElementById('option')
   const option = selectOption.options[selectOption.selectedIndex].value
   console.log(option)
+  const searchBar = document.getElementById('searchValue')
   const searchValue = document.querySelector('input[name="searchValue"]').value
   console.log(searchValue)
   
@@ -566,7 +562,6 @@ function searchHandler(event) {
      fetch('${cpath}/usersSearch/' + searchValue)
      .then(resp => resp.json())
      .then(json => {
-        console.log(json)   // 여기에 지금 유저리스트 담겨있스빈다
         json.forEach(dto => {
            let tag = ''      // 여기에 유저 프사 넣는 것도 해야됨
            tag += '<a href="${cpath}/users/viewDetail/'+ dto.idx + '"><div style="display: flex;"><img style="width: 44px; border-radius: 30px;" src="${cpath}/resources/img/userImg.jpg"><div>' + dto.nick_name + '</div></div></a>'
@@ -608,7 +603,8 @@ function searchHandler(event) {
 //   })
 }
 
-form.onsubmit = searchHandler
+
+searchBar.onkeyup = searchHandler
 
 
 </script>

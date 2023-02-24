@@ -63,5 +63,7 @@ public interface PostDAO {
 	List<ImageDTO> bringPost(int idx);
 
 	PostDTO selectData(HashMap<String, Object> map);
+
+	List<ImageDTO> explore();
 	
 }

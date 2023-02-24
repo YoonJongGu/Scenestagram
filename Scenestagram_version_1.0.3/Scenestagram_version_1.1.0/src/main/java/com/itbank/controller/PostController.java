@@ -126,6 +126,23 @@ public class PostController {
 		return mav;
 	}
 	
+   // 탐색탭 왔을 때 추천 수 높은 게시글의 이미지 잘라서 줄 것임
+   @GetMapping("/explore")
+   public ModelAndView explore() {
+      ModelAndView mav = new ModelAndView("/post/explore");
+      List<ImageDTO> list = postService.explore();
+      System.out.println(list);
+      
+      list.forEach(dto -> {
+         String newFileName = dto.getFile_name();
+         newFileName = newFileName.split(",")[0];
+         dto.setFile_name(newFileName);
+         System.out.println(newFileName);
+      });
+      mav.addObject("list", list);
+      return mav;
+   }
+	
 	@GetMapping("/modalTest")
 	public ModelAndView modalTest() {
 		ModelAndView mav = new ModelAndView();
@@ -154,5 +171,7 @@ public class PostController {
 		PostDTO dto = postService.getData(users_idx, offset);
 		return dto;
 	}
+	
+	
 	
 }
