@@ -62,10 +62,10 @@ public class PostController {
 	public void add() {}
 	
 	@PostMapping("/add")
+	@ResponseBody
 	public String add(PostDTO dto) {
 		int row = postService.addPost(dto);		
-		System.out.println(row == 1 ? "추가 성공" : "추가 실패");
-		return "redirect:/post/list";
+		return row+"";
 	}
 	
 	@GetMapping("/like/status/{post_idx}/{users_idx}")
