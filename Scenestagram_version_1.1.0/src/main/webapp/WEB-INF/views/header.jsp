@@ -571,7 +571,9 @@ input{border-radius: 0;}
     border-radius: 30px;
     height: 100%;
 	border-radius: 30px;
-	height: 100%
+	height: 100%;
+	margin: 0;
+	
 }
 .post_add_moda_delete_btn > div:first-child{
 	color: #ed4956;
@@ -592,6 +594,7 @@ input{border-radius: 0;}
     line-height: 17px;
     border-top: 1px solid #888;
     line-height: 3;
+    margin: 0;
 }
 .post_add_moda_delete_btn > div:nth-child(2) {
 	border-bottom-right-radius: 30px;
@@ -599,12 +602,12 @@ input{border-radius: 0;}
 }
 .post_add_moda_delete_btn{
 	margin-top: 35px;
-    border-radius: 30px;
+    border-radius: 30px;	
 }
 .post_add_modal_delete_modal_background >div{
 	position: absolute;
     right: 42px;
-    top: 20px;
+    top: 31px;
     cursor: pointer;
 } 
 /*--------------사이드바 포스트 추가 스타일 end-----------------*/
