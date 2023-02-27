@@ -18,7 +18,7 @@
 * {margin:0; padding:0; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; word-break: keep-all;color: #fff;}
 html,body{max-width: 100%; min-height: 100%;}
 html{overflow-x: hidden; -webkit-text-size-adjust: none;background-color: #000;}
-body{-webkit-print-color-adjust:exact; background: #0f0f0f; font-family: 'Jost', 'Noto Sans KR', sans-serif; font-style: normal; font-size: 16px; font-weight: 300; color: #333; line-height: 1.5; letter-spacing: -0.5px;}
+body{-webkit-print-color-adjust:exact; font-family: 'Jost', 'Noto Sans KR', sans-serif; font-style: normal; font-size: 16px; font-weight: 300; color: #333; line-height: 1.5; letter-spacing: -0.5px;}
 ul, li, dl,dt,dd {margin:0;padding:0;list-style:none}
 a{color:#333;text-decoration:none;}
 img {border: 0; font-size: 0; max-width: 100%;}
@@ -43,6 +43,8 @@ button{color: black;}
     background-color: #000;
     margin-left: 100px;
     margin-bottom: 110px;
+    
+    
 }
   	.main_wrap{
 		width: 100%;
@@ -52,10 +54,7 @@ button{color: black;}
 	  	padding: 30px 0 30px 0;
 	} 
 	
-	.hidden{
-		display: none;
-	}
-	
+
   .foot{
 	position: absolute;
     bottom: -85px;
@@ -265,7 +264,8 @@ button{color: black;}
     }
 
     .hidden {
-        visibility: hidden;
+  	 	display: none;
+   	    visibility: hidden;
     }
     
     form select {
@@ -380,7 +380,7 @@ select option {
 	z-index: 110;
 	opacity: 0.5;
 	width: 100%;
-	height: 100%;
+    height: 100vh;
     position: absolute;
 }
 .post_add_modal_delete{
@@ -388,7 +388,7 @@ select option {
 	z-index: 111;
 	opacity: 0.5;
 	width: 100%;
-	height: 100%;
+	height: 100vh;
     position: absolute;
 }
 .post_add_modal_wrap{
@@ -1198,42 +1198,3 @@ searchBar.onkeyup = searchHandler
 
 </script>
 
-<!-- 검색 input 포커스빠질때 -->
-<script>
-	const focus = document.getElementById('searchValue')
-	const esc = document.querySelector('.esc')
-	console.log(focus)
-	console.log(esc)
-	function escAdHandler(){
-	    // input 창안에 focus가 들어올때  event
-	    esc.classList.remove('hidden')
-		      
-	}
-	focus.onfocus = escAdHandler 
-	
-
-	 
-	function escRmHandler(){
-	    // input 창밖으로 focus가 나갈때  event
-	    
-	    setTimeout(function() {
-	    	const esc = document.querySelector('.esc')
-	    	esc.classList.add('hidden')
-	    },150)
-	    
-	}
-	// focus가 onblur처리(포커스아웃)될 때 esc가 hidden 클래스가 추가되서 esc를 클릭하기 전에 
-	// hidden처리 되어버려서 esc를 클릭할 수 없게 된다.
-	// 그래서 focus가 onblur처리될 떄 esc에 hidden클래스를 0.1초 정도 늦게 적용을 해서 esc.onclick이 가능하게 만듦.
-	focus.onblur = escRmHandler
-	
-	
-	function escClickHandler(event){
-	console.log(event.target)
-		focus.value = ''
-		esc.classList.add('hidden')
-		root.innerHTML = ''
-	}
-	
-	esc.onclick = escClickHandler
-</script>
