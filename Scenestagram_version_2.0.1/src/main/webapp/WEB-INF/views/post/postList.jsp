@@ -101,7 +101,49 @@
 .top_right > div:nth-child(3):hover {
 	background-color: #1877f2
 }
-	
+.item img{
+	height: 10%;
+	min-width: 300px;
+	max-width: 0;
+}
+
+   .items {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -10px;
+   }
+   .item {
+      margin-bottom: 20px;
+      margin-left: 10px;
+      margin-right: 10px;
+   }
+   
+   .list > .items > .item img {
+   width: 300px;
+   height: 300px;
+   object-fit: cover;
+   }
+
+/*    .item p { */
+/*       margin-top: 10px; */
+/*       text-align: center; */
+/*    } */
+   
+   
+   .list > .items {
+   width: 1000px;
+   display: flex;
+   flex-wrap: wrap;
+   margin: auto;
+   }
+   
+   .main_wrap {
+      overflow-y: scroll;
+      height: 1000px;
+   }
+   .main_wrap::-webkit-scrollbar {display: none;}
+
+
 </style>
 		
 		

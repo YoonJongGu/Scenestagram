@@ -195,20 +195,24 @@ public class AjaxController {
 	}
 
 	// 뷰디테일 페이지의 작성자 게시물을 가져오는 브링포스트 . 대상의 idx를 가져와서 사진의 이름을 돌려줄 것
-	   @GetMapping("/bringPost/{idx}")
-	   public List<ImageDTO> bringPost(@PathVariable("idx") int idx) {
-	      List<ImageDTO> list = postService.bringPost(idx);
-	      
-	      System.out.println(list);
-	      list.forEach(dto -> {
-	         String fileName = dto.getFile_name();
-	         fileName = fileName.split(",")[0];
-	         dto.setFile_name(fileName);
-	         System.out.println(fileName);
-	      });
-	      
-	      return list;
-	   }
+    @GetMapping("/bringPost/{idx}/{offset}")
+    public List<ImageDTO> bringPost(@PathVariable("idx") int idx, @PathVariable("offset") int offset) {
+      HashMap<String, Object> idxOff = new HashMap<String, Object>();
+      idxOff.put("idx", idx);
+      idxOff.put("offset", offset);
+      
+       List<ImageDTO> list = postService.bringPost(idxOff);
+       
+       System.out.println(list);
+       list.forEach(dto -> {
+          String fileName = dto.getFile_name();
+          fileName = fileName.split(",")[0];
+          dto.setFile_name(fileName);
+          System.out.println(fileName);
+       });
+       
+       return list;
+    }
 
 	// 메인 온로드 될 때 추천친구 받아올 함수.   로그인의 idx를 같이 받아옴
     @GetMapping("/recommend/{idx}")
@@ -259,7 +263,13 @@ public class AjaxController {
     	System.out.println(row);
     	return row;
     }
-    
+    // 뷰 디테일 페이지의 포스트 수 반환
+    @GetMapping("/countPost/{idx}")
+    public int countPost(@PathVariable("idx") int idx) {
+       int row = postService.countPost(idx);
+       System.out.println(row);
+       
+       return row;
 }
 
 

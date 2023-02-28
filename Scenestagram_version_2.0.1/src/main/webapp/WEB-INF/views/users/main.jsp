@@ -567,6 +567,14 @@ li.insta-post-item-reply-li:hover {
 .hidden {
 	display: none;
 }
+
+
+
+
+
+
+ 
+
 </style>
 <script>
 	const cpath = '${cpath}'
@@ -577,7 +585,7 @@ li.insta-post-item-reply-li:hover {
 <div class="screen" offset="0">
 
 
-        <!-- 가운데 메인 -->
+   <!-- 가운데 메인 -->
    <div class="all_wrap">
     	<div class="main_wrap">    
         <div class="home_main">
@@ -638,6 +646,7 @@ li.insta-post-item-reply-li:hover {
         </div>
 	</div>
 </div>
+
 
 <div id="modal">	
 	<div class="modal_content">

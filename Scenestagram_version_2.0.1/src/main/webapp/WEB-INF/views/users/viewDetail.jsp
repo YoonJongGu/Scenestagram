@@ -501,14 +501,112 @@ div.main{
     border-top: 1px solid #aaa;
     padding-top: 20px;
 }
+
+
+
+.post-modal {
+	position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.post-modal_backgound{
+	background-color: #000;
+    opacity: 0.1;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: 4;
+}
+.post-modal_content{
+	width: 86%;
+    height: 90%;
+    z-index: 5;
+    position: absolute;
+    display: flex;
+    background-color: #000;
+}
+.post-modal_content_left_img > img{
+	width: 100%;
+	height: 100%;
+} 
+.post-modal_content_left_img{
+	width: 60%;
+}
+.post-modal_content_right_top{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px;
+    padding-left: 20px;
+    padding-top: 12px;
+    height: 8%;
+}
+.post-modal_content_right_top img{
+	width: 32px;
+	border-radius: 80px;
+}
+.post-modal_content_right{
+	height: 100%;
+    width: 40%;
+}
+.post-modal_content_right_bottom_1 > div:first-child {
+	display: flex;
+    margin-top: 14px;
+    margin-bottom: 6px;
+}
+.post-modal_content_right_cmt{
+	height: 50%;
+    border-top: 1px solid #888;
+    border-bottom: 1px solid #888;
+}
+.post-modal_content_right_bottom_1 > div div{
+	margin-left: 15px;
+}
+.post-modal_content_right_cmt_write textarea {
+    width: auto;
+    resize: none;
+    width: 100%;
+    border: none;
+    background-color: #000;
+    outline: none;
+    height: 30px;
+}
+.post-modal_content_right_cmt_write > div:first-child {
+	width: 86%;
+	
+}
+.post-modal_content_right_bottom_1 > div:nth-child(2) {
+	margin-left: 15px;	
+}
+.post-modal_content_right_cmt_write{
+    display: flex;
+    border-top: 1px solid #888;
+    padding: 0px;
+    padding-left: 16px;
+    padding-top: 16px;
+}
+.post-modal_content_right_bottom_1{
+	margin-bottom: 16px;
+}
+.scroll::-webkit-scrollbar{
+	display: none;
+}
+
 </style>
 </head>
-<body onload="followCntHandler(); checkFollowHandler(); bringPostHandler(); optionCheckHandler();">
+<body onload="followCntHandler(); checkFollowHandler(); optionCheckHandler(); scrollHandler();">
 <div class="all_wrap">
 	<div class="main_wrap">
 		<div class="screen">
 	        <!-- 가운데 메인 -->
-	        <div class="home-main">
+	        <div class="home-main" offset="0">
 	            <div class="main">
 	                <div>
 	                    <div class="mypage">
@@ -543,7 +641,9 @@ div.main{
 	                            <div class="wrap_middle">
 	                                게시물
 	                            </div>
-	                            <div id="imgLine" class="flex">
+	                            	<div class="list">
+		                            	<div class="flex items">
+		                                </div>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -553,7 +653,50 @@ div.main{
 	   </div>
    </div>
  </div>
-        
+      <!-- post디테일 모달 -->
+
+<div class="post-modal">
+	<div class="post-modal_backgound"></div>
+
+   	<div class="post-modal_content">
+   	
+   			<!-- 좌측 사진칸 -->
+	       <div class="post-modal_content_left_img"><img src="${cpath }/resources/img/test2.png"></div>
+	       
+	       <!-- 우측 컨텐츠 -->
+	       <div class="post-modal_content_right">
+	       		<!-- 우측 컨텐츠  탑-->
+	       		<div class="post-modal_content_right_top" >
+			          <div><img src="${cpath }/resources/img/userImg.jpg"></div>
+			          <div><svg aria-label="옵션 더 보기" class="_ab6-" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg></div>
+	       	   </div>
+	       	  <!-- 우측 컨텐츠  탑 end-->
+		
+			   <div class="post-modal_content_right_cmt">
+		             <div>
+	                
+		             </div>		
+	           </div>
+	           
+	           
+		       <div class="post-modal_content_right_bottom_1">
+		       		<div>
+			          <div><svg class="post_like" aria-label="좋아요" class="_ab6-" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"></path></svg></div>
+			          <div><svg aria-label="댓글 달기" class="_ab6-" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg></div>
+			        </div>
+			        <div>좋아요 ${likeCount }개</div>
+			        <div></div>
+		       </div>
+	           
+              <div class="post-modal_content_right_cmt_write">
+	          		<div><textarea class="scroll" placeholder="댓글 달기..."></textarea></div>
+	          		<div>게시</div>
+	          </div>
+          </div>
+          <!-- 우측 컨텐츠 end -->
+    </div>
+</div>
+<!-- post디테일 모달 end-->  
 	<!-- 모달 -->           
 	<div class="modal hidden">
          <div class="bg"></div>
@@ -565,6 +708,42 @@ div.main{
              <div class="closeBtn">취소</div>
          </div>
     </div>
+    
+    <!-- 스크롤 -->
+<script>
+   const items = document.querySelector('.items')
+   const main_wrap = document.querySelector('.main_wrap')
+
+   function scrollHandler() {   
+      const offset = +main_wrap.getAttribute('offset')
+      const cur = main_wrap.scrollTop + main_wrap.clientHeight
+      console.log(main_wrap.scrollTop, main_wrap.clientHeight)
+      const flag = (main_wrap.scrollHeight * 0.95 <= cur && cur <= main_wrap.scrollHeight * 1.05) || offset == 0
+      console.log(cur, flag)
+      if(flag) {
+         fetch('${cpath}/bringPost/${dto.idx}/' + offset)
+         .then(resp => resp.json())
+         .then(json => {
+            json.forEach(dto => {
+               let tag = ''
+               tag += '<div class="item">'
+               tag += '<a href="${cpath }/post/detail/' + dto.post_idx + '">'
+               tag += '<img src="${cpath}/upload/' + dto.file_name + '">'
+               tag += '</a>'
+               tag += '</div>'
+               items.innerHTML += tag
+               main_wrap.setAttribute('offset', offset + 12)
+            })
+         })
+      }
+   }
+
+   
+// window.onload = scrollHandler
+main_wrap.onscroll = scrollHandler
+
+
+</script>
     
     <script>
     const imgLine = document.getElementById('imgLine') // 게시물의 1번째 이미지가 보여질 게시글 장소
@@ -604,18 +783,24 @@ div.main{
     }
     
     function followCntHandler(event) {
-       fetch('${cpath}/countFollowing/${dto.idx}')
-       .then(resp => resp.text())
-       .then(text => {
-          followingCnt.innerText = text
-       })
-       
-       fetch('${cpath}/countFollower/${dto.idx}')
-       .then(resp => resp.text())
-       .then(text => {
-          followerCnt.innerText = text
-       })
-    }
+        fetch('${cpath}/countFollowing/${dto.idx}')
+        .then(resp => resp.text())
+        .then(text => {
+           followingCnt.innerText = text
+        })
+        
+        fetch('${cpath}/countFollower/${dto.idx}')
+        .then(resp => resp.text())
+        .then(text => {
+           followerCnt.innerText = text
+        })
+        // 게시물 수 체크
+        fetch('${cpath}/countPost/${dto.idx}')
+        .then(resp => resp.text())
+        .then(text => {
+         postCnt.innerText = text  
+        })
+     }
     
     function followHandler(event) {
        console.log(event.target.value)
@@ -649,20 +834,10 @@ div.main{
     }
     
     function bringPostHandler() {
-       let postsu = 0
        fetch('${cpath}/bringPost/${dto.idx}')
        .then(resp => resp.json())
        .then(json => {
-//           console.log(json)
-         
          json.forEach(dto => {
-//             console.log(dto.file_name)
-
-//                         <div class="insta-post-item-middle">
-//                                    <div class="img-box">
-//                                        <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
-//                                    </div>
-//                              </div>
 
             let imgTag = ''
             imgTag += '<div class="insta-post-item-middle">'
@@ -672,8 +847,6 @@ div.main{
             imgTag += '</div>'
             imgLine.innerHTML += imgTag
             
-            postsu += 1
-            postCnt.innerText = postsu
          })
        })
     }

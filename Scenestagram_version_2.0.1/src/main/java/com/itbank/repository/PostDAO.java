@@ -60,7 +60,7 @@ public interface PostDAO {
 	// 타임라인 게시글 스크롤
 	List<HashMap<String, Object>> getScroll(HashMap<String, Object> param);
 
-	List<ImageDTO> bringPost(int idx);
+	List<ImageDTO> bringPost(HashMap<String, Object> idxOff);
 
 	HashMap<String, Object> selectData(HashMap<String, Object> map);
 
@@ -70,4 +70,6 @@ public interface PostDAO {
 	
 	// 해시요청에 대한 리스트페이지의 게시글 카운트
 	int resultCount(String hashtag);
+
+	int countPost(int idx);
 }
