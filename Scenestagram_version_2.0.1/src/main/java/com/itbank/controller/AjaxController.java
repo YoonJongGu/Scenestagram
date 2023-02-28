@@ -195,13 +195,9 @@ public class AjaxController {
 	}
 
 	// 뷰디테일 페이지의 작성자 게시물을 가져오는 브링포스트 . 대상의 idx를 가져와서 사진의 이름을 돌려줄 것
-	   @GetMapping("/bringPost/{idx}/{offset}")
-	   public List<ImageDTO> bringPost(@PathVariable("idx") int idx, @PathVariable("offset") int offset) {
-		  HashMap<String, Object> idxOff = new HashMap<String, Object>();
-		  idxOff.put("idx", idx);
-		  idxOff.put("offset", offset);
-		  
-	      List<ImageDTO> list = postService.bringPost(idxOff);
+	   @GetMapping("/bringPost/{idx}")
+	   public List<ImageDTO> bringPost(@PathVariable("idx") int idx) {
+	      List<ImageDTO> list = postService.bringPost(idx);
 	      
 	      System.out.println(list);
 	      list.forEach(dto -> {
@@ -256,21 +252,12 @@ public class AjaxController {
        return list;
     }
     
-    // 검색결과에 대한 게시글의 카운트 개수 반환
+ // 검색결과에 대한 게시글의 카운트 개수 반환
     @GetMapping("/resultCount/{hashtag}")
     public int resultCount(@PathVariable("hashtag") String hashtag) {
-       int row = postService.resultCount(hashtag);
-       System.out.println(row);
-       return row;
-    }
-    
-    // 뷰 디테일 페이지의 포스트 수 반환
-    @GetMapping("/countPost/{idx}")
-    public int countPost(@PathVariable("idx") int idx) {
-       int row = postService.countPost(idx);
-       System.out.println(row);
-       
-       return row;
+    	int row = postService.resultCount(hashtag);
+    	System.out.println(row);
+    	return row;
     }
     
 }

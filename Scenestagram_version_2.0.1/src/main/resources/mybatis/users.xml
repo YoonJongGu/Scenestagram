@@ -113,111 +113,25 @@
 
 	<!-- 메인에서 유저 추천(메인이 온로드 될 때) -->
    <select id="recommend" parameterType="int" resultType="users">
-		select distinct * from 
-		(
-		    select U.*, (select count(*) from follow where follower_idx=U.idx) as count from users U
-		        where
-		            U.idx != #{idx}
-		        and
-		            U.idx not in (
-		                            select follower_idx from follow where following_idx=#{idx}
-		                         )
-		        and
-		            U.idx not in (
-		                            select distinct A.idx from users A 
-		                                join
-		                                    (
-		                                        select follower_idx from follow
-		                                            where 
-		                                                following_idx in 
-		                                                (
-		                                                    select follower_idx from follow
-		                                                        where following_idx=#{idx}
-		                                                )
-		                                            and follower_idx != #{idx}
-		                                            and follower_idx not in
-		                                                (
-		                                                    select follower_idx from follow
-		                                                        where following_idx=#{idx}
-		                                                )
-		                                    ) B
-		                                on A.idx = B.follower_idx
-		                        )                
-		    union
-		    select distinct A.*, (select 999999999 from dual) as count from users A
-		        join
-		            (
-		                select follower_idx from follow
-		                    where
-		                        following_idx in
-		                        (
-		                            select follower_idx from follow
-		                                where following_idx=#{idx}
-		                        )
-		                    and follower_idx != #{idx}
-		                    and follower_idx not in
-		                        (
-		                            select follower_idx from follow
-		                                where following_idx=#{idx}
-		                        )
-		                ) B
-		        on A.idx = B.follower_idx
-		)
-		order by count desc, idx desc
+      select distinct * from users A join
+        (select follower_idx from follow
+        where following_idx in
+            (select follower_idx from follow
+                where following_idx=#{idx})
+        and follower_idx != #{idx}
+        and follower_idx not in
+            (select follower_idx from follow
+                where following_idx=#{idx})) B
+                on A.idx = B.follower_idx
+                order by idx
    </select>
    
    <!-- 유명인 추천 (팔로잉 0인 사람이 로그인 했을 때 팔로워가 가장 많은 사람을 추천해줌)-->
    <select id="recommendFamous" parameterType="int" resultType="users">
-		select distinct * from 
-		(
-		    select U.*, (select count(*) from follow where follower_idx=U.idx) as count from users U
-		        where
-		            U.idx != #{idx}
-		        and
-		            U.idx not in (
-		                            select follower_idx from follow where following_idx=#{idx}
-		                         )
-		        and
-		            U.idx not in (
-		                            select distinct A.idx from users A 
-		                                join
-		                                    (
-		                                        select follower_idx from follow
-		                                            where 
-		                                                following_idx in 
-		                                                (
-		                                                    select follower_idx from follow
-		                                                        where following_idx=#{idx}
-		                                                )
-		                                            and follower_idx != #{idx}
-		                                            and follower_idx not in
-		                                                (
-		                                                    select follower_idx from follow
-		                                                        where following_idx=#{idx}
-		                                                )
-		                                    ) B
-		                                on A.idx = B.follower_idx
-		                        )                
-		    union
-		    select distinct A.*, (select 999999999 from dual) as count from users A
-		        join
-		            (
-		                select follower_idx from follow
-		                    where
-		                        following_idx in
-		                        (
-		                            select follower_idx from follow
-		                                where following_idx=#{idx}
-		                        )
-		                    and follower_idx != #{idx}
-		                    and follower_idx not in
-		                        (
-		                            select follower_idx from follow
-		                                where following_idx=#{idx}
-		                        )
-		                ) B
-		        on A.idx = B.follower_idx
-		)
-		order by count desc, idx desc;
+      select U.*, 
+    (select count(*) from follow where follower_idx=U.idx) as count
+    from users U
+        where U.idx != #{idx}
+    order by count desc, U.idx desc
    </select>
 </mapper>
