@@ -366,8 +366,8 @@ public class PostService {
 		return postDAO.getScroll(param);
 	}
 
-	public List<ImageDTO> bringPost(HashMap<String, Object> idxOff) {
-		return postDAO.bringPost(idxOff);
+	public List<ImageDTO> bringPost(int idx) {
+		return postDAO.bringPost(idx);
 	}
 
 	public List<ImageDTO> explore(int offset) {
@@ -385,12 +385,8 @@ public class PostService {
 		return postDAO.selectDetailData(post_idx);
 	}
 	
-    public int resultCount(String hashtag) {
-	    return postDAO.resultCount(hashtag);
-    }
-
-	public int countPost(int idx) {
-		return postDAO.countPost(idx);
+	public int resultCount(String hashtag) {
+		return postDAO.resultCount(hashtag);
 	}
 
 }

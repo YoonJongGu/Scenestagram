@@ -146,7 +146,7 @@
 			)
 		order by idx desc
 		offset #{offset} rows   
-		fetch first 12 rows only
+		fetch first 10 rows only
 	</select>
 	
 	<!-- 타임라인 게시글 스크롤  -->
@@ -173,7 +173,7 @@
 			fetch first 3 rows only
 	</select>
 
-	<select id="bringPost" parameterType="hashmap" resultType="image">
+	<select id="bringPost" parameterType="int" resultType="image">
       		select A.* from image A
    			join
   			 (
@@ -184,8 +184,6 @@
    			) B
    			on A.post_idx = B.idx
    		order by A.post_idx desc
-		offset #{offset} rows   
-		fetch first 12 rows only
    	</select>
    	
    	<select id="selectDetailData" parameterType="int" resultType="hashmap">
@@ -222,17 +220,9 @@
 		fetch first 12 rows only
    	</select>
    	
-      <!-- 탐색 결과에 대한 게시글의 카운트 -->
-      <select id="resultCount" parameterType="string" resultType="int">
-       select count(*) from post where content like '%' || #{hashtag} || '%'
-     </select>
-     
-     <!-- 뷰디테일의 포스트 개수를 반환하는 countPost -->
-   <select id="countPost" parameterType="int" resultType="int">
-      select count(*) from post P 
-         join users U
-         on p.users_idx = U.idx
-       where U.idx = #{idx}
-   </select>
+   	<!-- 탐색 결과에 대한 게시글의 카운트 -->
+   	<select id="resultCount" parameterType="string" resultType="int">
+    	select count(*) from post where content like '%' || #{hashtag} || '%'
+  	</select>
 
 </mapper>
