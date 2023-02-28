@@ -76,11 +76,15 @@
     </style>
 </head>
 <body>
-<div class="container">
-<div id="center">
-   <div style="font-weight: bold">추천</div>
-    <div id="recommend-friend"></div>
-    </div>
+<div class="all_wrap">
+	<div class="main_wrap">
+		<div class="container">
+		<div id="center">
+		   <div style="font-weight: bold">추천</div>
+		    <div id="recommend-friend"></div>
+		    </div>
+		</div>
+	</div>
 </div>
 
 
@@ -130,7 +134,6 @@
    }
    
    function recommendHandler() {
-	  let friend20Cut = 0;      // 20명만 보여주게 할 것
       const url = '${cpath}/recommendAll/${login.idx}'
       fetch(url)
       .then(resp => resp.json())
@@ -140,7 +143,6 @@
          json.forEach(dto => {
             console.log(dto.nick_name)
             console.log(dto.idx)
-            if(friend20Cut != 20) {
                let tag = ''
                tag += '<div class="flex">'
                tag += '<div id="fflex"><a href="${cpath}/users/viewDetail/' + dto.idx + '"><div class="img-box">'
@@ -151,8 +153,7 @@
                tag += '<div class="followBtn" idx=' + dto.idx + '><button>팔로우</button></div>'
                tag += '</div>'
                recofri.innerHTML += tag
-               friend20Cut += 1
-            }         
+   
          })
          const followBtnList = document.querySelectorAll('div.followBtn')
             console.log(followBtnList)
