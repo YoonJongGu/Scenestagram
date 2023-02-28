@@ -270,6 +270,7 @@ public class AjaxController {
        System.out.println(row);
        
        return row;
+    }
 }
 
 
