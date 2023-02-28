@@ -88,6 +88,31 @@ div.img-box .img {
 }
 
 /* 전체 화면 */
+div.screen {
+    display: flex;
+}
+
+
+div.home-main {
+    /* position: relative; */
+    display: flex;            
+
+    /* 나중에 수정
+    background-color: lightpink; */
+    
+}
+
+
+
+div.main{
+    display: block;
+    margin-left: 333px;
+    min-height: auto;
+    min-width: auto;
+    
+    /* max-width: 853px; */
+    
+}
 
 div.home-feed {
     display: flex;
@@ -296,6 +321,13 @@ div.flex > .img-box {
     position: relative;
     
 }
+div.flex > .img-box > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
 
 div.account-change {
 
@@ -327,7 +359,8 @@ div.left-bottom-menu >div > * {
 }
 
 div.mypage {
-	width: 100%;
+    max-width: 935px;
+    width: 935px;
 }
 
 div.insta-post-item-middle > * {
@@ -336,6 +369,10 @@ div.insta-post-item-middle > * {
     
 }
 
+#imgLine {
+   flex-flow: wrap;
+   width: 1200px;
+}
 
 /* 사이드 프로필 미니 프사*/ 
 .miniImg-box {
@@ -394,156 +431,74 @@ div.insta-post-item-middle > * {
             cursor: pointer;
         }
 
-
-#imgLine {
-   flex-flow: wrap;
-   width: 100%
-}
-
-div.home-main {
-    display: flex;            
-    width: 100%;
-}
-div.screen {
-    display: flex;
-    width: 83%;
-}
-
-.all_wrap{
-	display: flex;
-    justify-content: end;
-    background-color: #000;
-    margin-bottom: 110px;
-    margin: 0;
-}
-.main_wrap{
-    width: 80%;
-    display: flex;
-    color: white;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-}
-div.main{
-   	width: 100%;
-    min-height: auto;
-    min-width: auto;
-}
-.view_detail_top{
-	width: 100%;
-}
-
-.top_profile_img > img{
-	width: 150px;
-    border-radius: 80px;
-} 
-.top_profile_img{
-	width: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.view_detail_top_right_box{
-	width: 70%;
-}
-.right_top{
-	display: flex;
-	align-items: center;
-	
-}
-.right_top_middle{
-	display: flex;
-	
-}
-.text-box{
-	font-size: 20px;
-    margin-right: 24px;
-    font-weight: 500;
-    padding-top: 14px;
-}
-#followBtn{
-	height: 32px;
-    width: 98px;
-    border-radius: 11px;
-    margin-right: 10px;
-    font-weight: 600;
-    color: #fff;
-    background-color: #1877f2;
-}
-.go_chat{
-	background-color: #fff;
-    color: #000;
-    width: 120px;
-    height: 30px;
-    border-radius: 9px;
-    text-align: center;
-    padding: 3px;
-    margin: 0;
-    font-weight: 600;
-}
-.right_top_middle *{
-	font-size: 16px;
-	font-weight: 500;
-}
-.right_top_middle > div{
-	margin-right: 47px;
-}
-.right_top_name{
-	font-weight: 500;
-}
-.right_top_content{
-	font-weight: 100;
-    font-size: 14px;
-}
-.wrap_middle{
-	text-align: center;
-    border-top: 1px solid #aaa;
-    padding-top: 20px;
-}
 </style>
 </head>
 <body onload="followCntHandler(); checkFollowHandler(); bringPostHandler(); optionCheckHandler();">
 <div class="all_wrap">
 	<div class="main_wrap">
 		<div class="screen">
+	
 	        <!-- 가운데 메인 -->
 	        <div class="home-main">
-	            <div class="main">
+	            <div class="main" style="display: block;">
 	                <div>
 	                    <div class="mypage">
 	                        <div>
 	                            <!-- mypage 프로필 -->
-	                            <div class="flex view_detail_top">
+	                            <div class="flex" style="justify-content: flex-end;">
+	                                <div class="flex">
 	                                    <!--mapge 프로필사진-->
-	                                    <div class="top_profile_img">
-                                             <img src="${cpath}/resources/img/insta-profile.jpg">
-                                        </div>
-                                         <div class="view_detail_top_right_box">
-                                         	<div class="right_top">
-                                                 <div class="text-box">${dto.nick_name }</div>
-                                                 <button id="followBtn"></button>
-                                                 <div class="go_chat">메시지 보내기</div>
-                                                 <div>
-		                                              <span class="option hidden">
-		                                                 <svg aria-label="옵션" class="_ab6-" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
-		                                             </span>
-                                        		 </div>
-                                        	</div>
-                                             <div class="right_top_middle">
-                                                 <div><span>게시물</span><span id="postCnt"></span></div>
-                                                 <div><span>팔로워</span><span id="followerCnt"></span></div>
-                                                 <div><span>팔로잉</span><span id="followingCnt"></span></div>
-                                             </div>
-                                             <div class="right_top_name">${dto.name }</div>
-                                             <div class="right_top_content">${dto.introduce }</div>
-                                         </div>
+	                                    <div class="flex insta-main-top-ul-li"  style="justify-content: space-between;">
+	                                        <div class="flex insta-main-top-ul-item" style="flex-direction: row;">
+	                                            <div class="img-box" style="margin-right: 60px;">
+	                                                <img src="${cpath}/resources/img/insta-profile.jpg" alt="">
+	                                            </div>
+	                                            <div class="flex" style="flex-direction: column;">
+	                                                <div class="flex" style="flex-direction: row; justify-content: space-between;">
+	                                                    <div class="text-box">${dto.nick_name }</div>
+	                                                    <button id="followBtn"></button>
+	                                                    <div>
+	                                                  <span class="option hidden">
+	                                                     <svg aria-label="옵션" class="_ab6-" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+	                                                 </span>
+	                                            </div>
+	                                                </div>
+	                            <!-- 모달 -->           <div class="modal hidden">
+	                                            <div class="bg"></div>
+	                                            <div class="modalBox">
+	                                                <a href="${cpath }/users/infoModify_replacePw"><div>비밀번호 변경</div></a>
+	                                                <hr>
+	                                                <a href="${cpath }/users/logout"><div>로그아웃</div></a>
+	                                                <hr>
+	                                                <div class="closeBtn">취소</div>
+	                                            </div>
+	                                        </div>
+	                                                <div class="flex" style="flex-direction: row;">
+	
+	                                                    <div><span>게시물</span><span id="postCnt"></span></div>
+	                                                    <div><span>팔로워</span><span id="followerCnt"></span></div>
+	                                                    <div><span>팔로잉</span><span id="followingCnt"></span></div>
+	                                                </div>
+	                                                
+	                                                <div>${dto.name }</div>
+	                                                <div style="color: #606770;">${dto.introduce }</div>
+	
+	                                            </div>
+	
+	                                        </div>
+	                                    </div>
+	
+	                                </div>
 	                            </div>
-	                           	<!-- mypage 프로필 end-->
-	                            <div class="wrap_middle">
+	                            <div style="text-align: center;">
 	                                게시물
 	                            </div>
 	                            <div id="imgLine" class="flex">
+	<!--                                     <div class="insta-post-item-middle"> -->
+	<!--                                         <div class="img-box"> -->
+	<%--                                             <img src="${cpath}/resources/img/insta-profile.jpg" alt=""> --%>
+	<!--                                         </div> -->
+	<!--                                     </div> -->
 	                                </div>
 	                            </div>
 	                        </div>
@@ -554,17 +509,7 @@ div.main{
    </div>
  </div>
         
-	<!-- 모달 -->           
-	<div class="modal hidden">
-         <div class="bg"></div>
-       	 <div class="modalBox">
-             <a href="${cpath }/users/infoModify_replacePw"><div>비밀번호 변경</div></a>
-             <hr>
-             <a href="${cpath }/users/logout"><div>로그아웃</div></a>
-             <hr>
-             <div class="closeBtn">취소</div>
-         </div>
-    </div>
+
     
     <script>
     const imgLine = document.getElementById('imgLine') // 게시물의 1번째 이미지가 보여질 게시글 장소

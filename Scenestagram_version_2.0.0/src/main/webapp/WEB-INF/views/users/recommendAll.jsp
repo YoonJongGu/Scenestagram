@@ -76,15 +76,11 @@
     </style>
 </head>
 <body>
-<div class="all_wrap">
-	<div class="main_wrap">
-		<div class="container">
-		<div id="center">
-		   <div style="font-weight: bold">추천</div>
-		    <div id="recommend-friend"></div>
-		    </div>
-		</div>
-	</div>
+<div class="container">
+<div id="center">
+   <div style="font-weight: bold">추천</div>
+    <div id="recommend-friend"></div>
+    </div>
 </div>
 
 

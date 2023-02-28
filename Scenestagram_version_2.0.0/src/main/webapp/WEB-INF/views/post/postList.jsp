@@ -14,11 +14,6 @@
       margin-right: 10px;
    }
    
-   .hidden{
-  	 	display: none;
-   	    visibility: hidden;
-   }
-   
    .list > .items > .item img {
    width: 300px;
    height: 300px;
@@ -39,94 +34,57 @@
 	}
 	
 	.main_wrap {
-	   	display: flex;
-	    overflow-y: scroll;
-	    height: 100vh;
-	    justify-content: end;
-	    padding: 0;
-    	width: 94%;
+		overflow-y: scroll;
+		height: 1000px;
 	}
 	.main_wrap::-webkit-scrollbar {display: none;}
 	
 	#postListHeader > #align {
-		height: 29%;
-	    display: flex;
-	    align-items: center;
+		display: flex;
+    	justify-content: center;
 	}
-	.all_wrap{
+	
+	div.img-box .img {
 	    position: absolute;
-	    left: 0;
-	    top: 0;
-	    margin-left: 36px;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
 	    width: 100%;
-	    display: flex;
-	    justify-content: center;
-
 	}
-	
-	
-.img-box {
-	width: 20%;
-   	margin-left: 99px;
-}
-.img-box > img{
-    margin-right: 60px;
-   	width: 152px;
-   	display: block;
-   	border-radius: 80px;
-}
-
-#postListHeader{
-	width: 85%;
-}
-.top_right{
- 	width: 62%;
-}
-.top_right > div:first-child {
-	font-size: 30px;
-}
-.top_right > div:nth-child(2) *{
-	font-size: 16px;
-}
-.top_right > div:nth-child(3){
-	margin-top: 25px;
-    font-weight: bold;
-    background-color: #0095f6;
-    height: 32px;
-    border-radius: 8px;
-    text-align: center;
-	padding: 3px;
-    cursor: pointer;
-}	
-.top_right > div:nth-child(3):hover {
-	background-color: #1877f2
-}
 	
 </style>
-		
-		
-	<div class="all_wrap" onload = "resultCountHandler(); scrollHandler();">
-	   <div class="main_wrap" offset="0">
-	   		<div id="postListHeader">
-	   			<div id="align">
-	   				<div class="img-box">
-						<img src="${cpath}/resources/img/userImg.jpg">
-					</div>
-					<div class="top_right">
-						<div id="result">${hashtag }</div>
-						<div><span>게시물 </span><span id="resultCount"></span></div>
-						<div>팔로우</div>
-					</div>
+<body onload = "resultCountHandler(); scrollHandler();">
+
+<!-- <div id="postListHeader"> -->
+<!-- 	<div id="flex"> -->
+<!-- 		<div>이미지자리</div> -->
+<!-- 		<div> -->
+<%-- 			<div id="result">${hashtag }</div> --%>
+<!-- 			<div>게시물</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
+
+<div class="all_wrap">
+   <div class="main_wrap" offset="0">
+   		<div id="postListHeader">
+   			<div id="align">
+   				<div class="img-box" style="margin-right: 60px;">
+					<img src="${cpath}/upload/${dto.file_name}">
 				</div>
-	      	<div class="list">
-	         	<div class="items">
-					<!-- 여기에 박힘 -->
-	         	</div>
-	      	</div>
-	      </div>
-	   </div>
-	</div>		
-	</body>
+				<div>
+					<div id="result">${hashtag }</div>
+					<div><span>게시물 </span><span id="resultCount"></span></div>
+				</div>
+			</div>
+      	<div class="list">
+         	<div class="items">
+				<!-- 여기에 박힘 -->
+         	</div>
+      	</div>
+      </div>
+   </div>
+</div>
 
 <!-- 스크롤 -->
 <script>
@@ -139,12 +97,14 @@
    
    <!-- 게시글 개수 반환 -->
    function resultCountHandler() {
+// 		const url = '${cpath}/resultCount/' + hashtag
 		fetch('${cpath}/resultCount/' + hashtag)
 		.then(resp => resp.text())
 		.then(text => {
 			resultCount.innerText += text
 		})
 	}
+   
    
    function scrollHandler() {	
 		const offset = +main_wrap.getAttribute('offset')
@@ -169,6 +129,11 @@
 			})
 		}
 	}
-	main_wrap.onscroll = scrollHandler
+   
+// window.onload = resultCountHandler
+// window.onload = scrollHandler
+main_wrap.onscroll = scrollHandler
 </script>
+
+</body>
 </html>
