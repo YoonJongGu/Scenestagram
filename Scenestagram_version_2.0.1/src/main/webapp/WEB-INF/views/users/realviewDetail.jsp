@@ -62,7 +62,7 @@
 		const flag = (main_wrap.scrollHeight * 0.95 <= cur && cur <= main_wrap.scrollHeight * 1.05) || offset == 0
 		console.log(cur, flag)
 		if(flag) {
-			fetch('${cpath}/explore/' + offset)
+			fetch('${cpath}/bringPost/${dto.idx}/' + offset)
 			.then(resp => resp.json())
 			.then(json => {
 				json.forEach(dto => {

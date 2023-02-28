@@ -51,13 +51,12 @@ div.img-box .img {
     width: 100%;
 }
 
+/* 전체 화면 */
 div.screen {
-	width:100%;
     display: flex;
     height: 100vh;
-    overflow-y: scroll;
+	overflow-y:scroll;
     flex-flow: column;
-    overflow-x:hidden;
 }
 /*푸터*/
 .footer{
