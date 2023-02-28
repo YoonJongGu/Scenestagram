@@ -655,7 +655,7 @@ div.main{
  </div>
       <!-- post디테일 모달 -->
 
-<div class="post-modal">
+<div class="post-modal hidden">
 	<div class="post-modal_backgound"></div>
 
    	<div class="post-modal_content">
